@@ -1,0 +1,9 @@
+pandas
+plotly
+matplotlib
+statsmodels
+scipy
+sklearn
+tqdm
+seaborn
+pyramid-arima
