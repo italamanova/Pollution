@@ -2,8 +2,8 @@ pandas
 plotly
 matplotlib
 statsmodels
-scipy
+scipy==1.2
 sklearn
 tqdm
 seaborn
-pyramid-arima
+pmdarima

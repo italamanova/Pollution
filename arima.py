@@ -9,16 +9,16 @@ from plotly.plotly import plot_mpl
 from sklearn.cluster import KMeans
 from statsmodels.tsa.seasonal import seasonal_decompose
 import seaborn as sns
-# from pyramid.arima import auto_arima
+from pmdarima.arima import auto_arima
 
-# plotly.tools.set_credentials_file(username='talamash', api_key='NVqgaGN3OpMYcqXncLOw')
+plotly.tools.set_credentials_file(username='talamash', api_key='NVqgaGN3OpMYcqXncLOw')
 
 # prepare data
 
 # df = pd.read_csv('pollution_backup.csv')
 # df.drop('SystemCodeNumber', axis=1, inplace=True)
 # df.to_csv('pollution.csv', index=False)
-from helpers import detect_outlier, plotMovingAverage
+# from helpers import detect_outlier, plotMovingAverage
 
 data = pd.read_csv('./data/pollution2.csv', index_col=0)
 # data[data <= 0] = 0.01
@@ -60,19 +60,19 @@ filtering_rule_2 = data.apply(
 
 dataframe = data[~(filtering_rule_2).any(axis=1)]
 
-# dataframe.plot()
-# plt.xlabel('Date time')
-# plt.ylabel('PM10')
-# plt.title('After Filtering Time Series of PM10 by date time')
-# plt.show()
+dataframe.plot()
+plt.xlabel('Date time')
+plt.ylabel('PM10')
+plt.title('After Filtering Time Series of PM10 by date time')
+plt.show()
 
 '''
 ARIMA seasonal decomposition
 '''
 
-result = seasonal_decompose(dataframe, model='multiplicative', freq=30)
-fig = result.plot()
-plot_mpl(fig)
+# result = seasonal_decompose(dataframe, model='multiplicative', freq=30)
+# fig = result.plot()
+# plot_mpl(fig)
 
 # building trend
 # plotMovingAverage(dataframe, 24)
