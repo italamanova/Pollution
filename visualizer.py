@@ -17,12 +17,3 @@ def scatter_plot(dataset, xlabel='DateTime', ylabel='Value', title='Plot',
     plt.ylabel(ylabel)
     plt.title(title)
     plt.show()
-
-
-# data1 = pd.DataFrame([[1, 34],
-#                       [2, 30],
-#                       [3, 16]])
-# data2 = pd.DataFrame([[1, 1],
-#                       [2, 2],
-#                       [3, 3]])
-# plot(pd.concat([data1, data2], axis=1))
