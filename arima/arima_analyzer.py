@@ -1,16 +1,10 @@
 import glob
 import os
 
-from visualizer import plot
-import statsmodels.api as sm
-import plotly.plotly as py
-from plotly.graph_objs import *
-import plotly
-import plotly.plotly as py
-import plotly.graph_objs as go
-import plotly.figure_factory as FF
-
 import pandas as pd
+import plotly
+
+from visualizer import plot
 
 plotly.tools.set_credentials_file(username='talamash', api_key='NVqgaGN3OpMYcqXncLOw')
 
@@ -40,8 +34,3 @@ def plot_one_file(file, start='2008-01-01', end='2018-03-09'):
     plot(data, ylabel=data.columns[0], title=file)
     print('%s description' % file, data[data.columns[0]].describe())
     print(len(data))
-
-
-# plot_all_data('../pollution_data/new_data')
-plot_one_file('../pollution_data/new_data/Centar_CO.csv', start='2013-03-01', end='2013-03-02')
-# plot_to_plotly('../pollution_data/new_data')
