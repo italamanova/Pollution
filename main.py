@@ -1,4 +1,4 @@
-from arima.arima_analyzer import plot_one_file, plot_all_data
+from helpers.analyzer import plot_one_file
 from pathlib import Path
 
 path = Path(__file__).parent
