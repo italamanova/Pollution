@@ -4,7 +4,7 @@ import os
 import pandas as pd
 import plotly
 
-from visualizer import plot
+from helpers.visualizer import plot
 
 plotly.tools.set_credentials_file(username='talamash', api_key='NVqgaGN3OpMYcqXncLOw')
 

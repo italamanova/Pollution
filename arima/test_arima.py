@@ -1,8 +1,4 @@
-from pmdarima.arima import auto_arima
-import plotly.plotly as ply
-from plotly.plotly import plot_mpl
-from statsmodels.tsa.seasonal import seasonal_decompose
-from visualizer import plot
+from helpers.visualizer import plot
 import statsmodels.api as sm
 
 import pandas as pd

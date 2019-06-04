@@ -1,4 +1,8 @@
 from arima.arima_analyzer import plot_one_file, plot_all_data
+from pathlib import Path
+
+path = Path(__file__).parent
+path_to_file = '%s/pollution_data/new_data' % path
 
 # plot_all_data('../pollution_data/new_data')
-plot_one_file('../pollution_data/new_data/Centar_CO.csv', start='2013-03-01', end='2013-03-02')
+plot_one_file('%s/Centar_CO.csv' % path_to_file, start='2013-03-01', end='2013-03-02')
