@@ -10,7 +10,8 @@ def plot(dataset, xlabel='DateTime', ylabel='Value', title='Plot'):
     plt.title(title)
     # plt.show()
     now = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    plt.savefig('C:\\Users\\Asus\\PycharmProjects\\Pollution\\plots\\plot_%s.png' % now)
+    plt.savefig('../plots/plot_%s.png' % now)
+
 
 
 def scatter_plot(dataset, xlabel='DateTime', ylabel='Value', title='Plot',
