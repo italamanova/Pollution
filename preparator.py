@@ -16,7 +16,6 @@ def split_csv(folder_path):
         filename = file[:-4]
         for column in df.columns:
             if column != 'time':
-
                 new_df = df.loc[:, ['time', column]].copy()
                 new_df = new_df.rename(columns={column: filename})
                 new_df.to_csv('./new_data/%s_%s' % (column, file), index=False, encoding='utf-8-sig')
@@ -43,8 +42,6 @@ def combine_csv(folder_path):
             print(result_dataframe.head())
     print(result_dataframe.head())
     result_dataframe.to_csv('./concat.csv', index=False, encoding='utf-8-sig')
-
-
 
 
 def remove_outliers(dataset):
