@@ -34,3 +34,4 @@ def plot_one_file(file, start='2008-01-01', end='2018-03-09'):
     plot(data, ylabel=data.columns[0], title=file)
     print('%s description' % file, data[data.columns[0]].describe())
     print(len(data))
+

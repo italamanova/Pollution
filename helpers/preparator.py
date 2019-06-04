@@ -1,8 +1,9 @@
 import os
 import glob
 import pandas as pd
-import csv
-import itertools as IT
+from pathlib import Path
+
+parent_dir_path = Path(__file__).parents[1]
 
 
 def split_csv(folder_path):
@@ -42,6 +43,16 @@ def split_csv(folder_path):
 #             print(result_dataframe.head())
 #     print(result_dataframe.head())
 #     result_dataframe.to_csv('./concat.csv', index=False, encoding='utf-8-sig')
+
+
+def cut_csv(file, start='2008-01-01 00:00:00', end='2018-03-09 00:00:00'):
+    filename_w_ext = os.path.basename(file)
+    filename, file_extension = os.path.splitext(filename_w_ext)
+
+    df = pd.read_csv(file, index_col=0)
+    new_df = df.loc[start:end]
+    new_file_name = '%s/pollution_data/cut_data/%s_%s_%s.csv' % (parent_dir_path, filename, start[:-9], end[:-9])
+    new_df.to_csv(new_file_name, encoding='utf-8-sig')
 
 
 def remove_outliers(dataset):
