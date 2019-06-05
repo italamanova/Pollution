@@ -6,15 +6,18 @@ from pmdarima import auto_arima
 from statsmodels.tsa.seasonal import seasonal_decompose
 from pandas import Series
 from matplotlib import pyplot
+from statsmodels.tsa.stattools import adfuller
 
 import statsmodels.api as sm
+from statsmodels.graphics.tsaplots import plot_acf
+from statsmodels.graphics.tsaplots import plot_pacf
 
 from helpers.visualizer import plot, simple_plot
 
 parent_dir_path = Path(__file__).parents[1]
 
 
-def check_seasonality(file, start_date,  end_date):
+def check_seasonality(file, start_date, end_date):
     series = Series.from_csv(file, header=0)
     series = series.loc[start_date:end_date]
     resample = series.resample('D')
@@ -24,53 +27,109 @@ def check_seasonality(file, start_date,  end_date):
     pyplot.show()
 
 
-def arima(file, start, end):
+def get_data(file, start, end):
     df = pd.read_csv(file, index_col=0)
-
     df.index = pd.to_datetime(df.index)
-    # df = df.asfreq(freq='H')
+
     data = df.loc[start:end]
-    data = data.fillna(0.01)
-    print(data.index.freq)
+    data.fillna(method='ffill', inplace=True)
+    return data
+
+
+def plot_average(data, col_name):
+    weekly = data.resample('M').sum()
+    plot(weekly, ylabel='%s_weekly' % col_name, title='Air pollution')
+
+
+def plot_rolling_average(data, col_name):
+    rolling = data.rolling(window=5040)
+    rolling_mean = rolling.mean()
+    data.plot()
+    rolling_mean.plot(color='red')
+    pyplot.show()
+
+
+def plot_distribution(data, col_name):
+    pyplot.figure(1)
+    pyplot.subplot(211)
+    data[col_name].hist()
+    pyplot.subplot(212)
+    data[col_name].plot(kind='kde')
+    pyplot.show()
+
+
+def check_adfuller(data, col_name):
+    X = data[col_name].values
+    result = adfuller(X)
+    print('ADF Statistic: %f' % result[0])
+    print('p-value: %f' % result[1])
+    print('Critical Values:')
+    for key, value in result[4].items():
+        print('\t%s: %.3f' % (key, value))
+
+
+def check_autocorrelation(data):
+    pyplot.figure()
+    pyplot.subplot(211)
+    plot_acf(data, ax=pyplot.gca())
+    pyplot.subplot(212)
+    plot_pacf(data, ax=pyplot.gca())
+    pyplot.show()
+
+
+def analyze_data(file, start, end):
+    data = get_data(file, start, end)
+    col_name = data.columns.values[0]
+
+    # plot_average(data, col_name)
+    # plot_rolling_average(data, col_name)
+
+    data = data.last('4W')
+    # plot_distribution(data, col_name)
+
+    # check_adfuller(data, col_name)
+
+    check_autocorrelation(data)
+
+
+def arima(file, start, end):
+    data = get_data(file, start, end)
 
     col_name = data.columns.values[0]
-    count_nan = data.isnull().sum(axis=0)
-    print('count_nan', count_nan)
 
     # plot(data, ylabel=col_name, title='Air pollution')
     print('Description', data[col_name].describe())
-    print(len(data))
 
-    result = seasonal_decompose(data, freq=24*30)
-    fig = result.plot()
-    plot_mpl(fig)
+    data = data.last('4W')
+
+    train = data['2018-02-04': '2018-02-26']
+    test = data['2018-02-26': '2018-02-28']
+
+    print(len(train))
+    print(len(test))
+
+    # result = seasonal_decompose(data, freq=24*30)
+    # fig = result.plot()
+    # plot_mpl(fig)
 
     # stepwise_model = auto_arima(data, start_p=1, start_q=1,
-    #                             max_p=3, max_q=3, m=24*7*52,
+    #                             max_p=3, max_q=3, m=52,
     #                             start_P=0, seasonal=True,
     #                             d=1, D=1, trace=True,
     #                             error_action='ignore',
     #                             suppress_warnings=True,
     #                             stepwise=True)
-
-    stepwise_model = auto_arima(data, start_p=1, start_q=1,
-                                max_p=3, max_q=3, m=52,
-                                start_P=0, seasonal=True,
-                                d=1, D=1, trace=True,
-                                error_action='ignore',
-                                suppress_warnings=True,
-                                stepwise=True)
-
-    print(stepwise_model.aic())
-
+    #
     # print(stepwise_model.aic())
-    train = data.loc['2017-12-01 00:00:00':'2018-01-01 00:00:00']
-    test = data.loc['2018-01-01 00:00:00':]
-    # print('test', len(test))
-    stepwise_model.fit(train)
-
-    future_forecast = stepwise_model.predict(n_periods=25)
-    print(future_forecast)
-
-    future_forecast = pd.DataFrame(future_forecast, index=test.index, columns=['Prediction'])
-    simple_plot(pd.concat([test, future_forecast], axis=1))
+    #
+    # # print(stepwise_model.aic())
+    # train = data.loc['2017-12-01 00:00:00':'2018-01-01 00:00:00']
+    # test = data.loc['2018-01-01 00:00:00':]
+    # # print('test', len(test))
+    # stepwise_model.fit(train)
+    #
+    # future_forecast = stepwise_model.predict(n_periods=25)
+    # print(future_forecast)
+    #
+    # future_forecast = pd.DataFrame(future_forecast, index=test.index, columns=['Prediction'])
+    # simple_plot(pd.concat([test, future_forecast], axis=1))
