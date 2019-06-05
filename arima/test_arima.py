@@ -1,3 +1,5 @@
+from statsmodels.tsa.seasonal import seasonal_decompose
+
 from helpers.visualizer import plot
 import statsmodels.api as sm
 
@@ -14,10 +16,10 @@ plot(data, ylabel='Energy consumption', title='Energy consumption')
 print('PM10 description', data['Energy Production'].describe())
 print(len(data))
 
-# result = seasonal_decompose(data, model='multiplicative')
-# fig = result.plot()
-# # plot_mpl(fig)
-#
+result = seasonal_decompose(data, model='multiplicative')
+fig = result.plot()
+# plot_mpl(fig)
+
 # stepwise_model = auto_arima(data, start_p=1, start_q=1,
 #                             max_p=3, max_q=3, m=12,
 #                             start_P=0, seasonal=True,
@@ -25,7 +27,7 @@ print(len(data))
 #                             error_action='ignore',
 #                             suppress_warnings=True,
 #                             stepwise=True)
-#
+
 # print(stepwise_model.aic())
 train = data.loc['1985-01-01':'2016-12-01']
 test = data.loc['2017-01-01':]

@@ -20,10 +20,7 @@ def plot_all_data(folder_path):
         data = dataset
 
         data.index = pd.to_datetime(data.index)
-
         plot(data, ylabel=data.columns[0], title=file)
-        print('%s description' % file, data[data.columns[0]].describe())
-        print(len(data))
 
 
 def plot_one_file(file, start='2008-01-01', end='2018-03-09'):
@@ -32,6 +29,3 @@ def plot_one_file(file, start='2008-01-01', end='2018-03-09'):
     data = dataset[start:end]
 
     plot(data, ylabel=data.columns[0], title=file)
-    print('%s description' % file, data[data.columns[0]].describe())
-    print(len(data))
-
