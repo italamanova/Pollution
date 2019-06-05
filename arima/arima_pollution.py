@@ -1,8 +1,11 @@
 from pathlib import Path
 
 import pandas as pd
+from math import sqrt
 from plotly.offline import plot_mpl
 from pmdarima import auto_arima
+from sklearn.metrics import mean_squared_error
+from statsmodels.tsa.arima_model import ARIMA
 from statsmodels.tsa.seasonal import seasonal_decompose
 from pandas import Series
 from matplotlib import pyplot
@@ -70,9 +73,12 @@ def check_adfuller(data, col_name):
 
 def check_autocorrelation(data):
     pyplot.figure()
+
     pyplot.subplot(211)
+    pyplot.axis([-1, 40, 0, 1.0])
     plot_acf(data, ax=pyplot.gca())
     pyplot.subplot(212)
+    pyplot.axis([0, 40, 0, 1])
     plot_pacf(data, ax=pyplot.gca())
     pyplot.show()
 
@@ -92,7 +98,7 @@ def analyze_data(file, start, end):
     check_autocorrelation(data)
 
 
-def arima(file, start, end):
+def my_auto_arima(file, start, end):
     data = get_data(file, start, end)
 
     col_name = data.columns.values[0]
@@ -105,31 +111,59 @@ def arima(file, start, end):
     train = data['2018-02-04': '2018-02-26']
     test = data['2018-02-26': '2018-02-28']
 
-    print(len(train))
-    print(len(test))
-
-    # result = seasonal_decompose(data, freq=24*30)
+    # result = seasonal_decompose(data, freq=24)
     # fig = result.plot()
     # plot_mpl(fig)
 
-    # stepwise_model = auto_arima(data, start_p=1, start_q=1,
-    #                             max_p=3, max_q=3, m=52,
-    #                             start_P=0, seasonal=True,
-    #                             d=1, D=1, trace=True,
-    #                             error_action='ignore',
-    #                             suppress_warnings=True,
-    #                             stepwise=True)
-    #
-    # print(stepwise_model.aic())
-    #
-    # # print(stepwise_model.aic())
-    # train = data.loc['2017-12-01 00:00:00':'2018-01-01 00:00:00']
-    # test = data.loc['2018-01-01 00:00:00':]
-    # # print('test', len(test))
-    # stepwise_model.fit(train)
-    #
-    # future_forecast = stepwise_model.predict(n_periods=25)
-    # print(future_forecast)
-    #
-    # future_forecast = pd.DataFrame(future_forecast, index=test.index, columns=['Prediction'])
-    # simple_plot(pd.concat([test, future_forecast], axis=1))
+    stepwise_model = auto_arima(data, start_p=1, start_q=1,
+                                 m=1,
+                                seasonal=False,
+                                d=1, trace=True,
+                                error_action='ignore',
+                                suppress_warnings=True,
+                                stepwise=True)
+
+    print(stepwise_model.aic())
+
+    stepwise_model.fit(train)
+
+    future_forecast = stepwise_model.predict(n_periods=72)
+    print(future_forecast)
+
+    future_forecast = pd.DataFrame(future_forecast, index=test.index, columns=['Prediction'])
+    simple_plot(pd.concat([test, future_forecast], axis=1))
+
+
+def pure_arima(file, start, end):
+    data = get_data(file, start, end)
+
+    col_name = data.columns.values[0]
+
+    # plot(data, ylabel=col_name, title='Air pollution')
+    print('Description', data[col_name].describe())
+
+    data = data.last('4W')
+
+    train = data['2018-02-04': '2018-02-26'][col_name]
+    test = data['2018-02-26': '2018-02-28'][col_name]
+
+    history = [x for x in train]
+    predictions = list()
+    for i in range(len(test)):
+        # predict
+        model = ARIMA(history, order=(1, 1, 1))
+        model_fit = model.fit(disp=0)
+        yhat = model_fit.forecast()[0]
+        predictions.append(yhat[0])
+        # observation
+        obs = test[i]
+        history.append(obs)
+        print('>Predicted=%.3f, Expected=%.3f' % (yhat, obs))
+    # report performance
+    mse = mean_squared_error(test, predictions)
+    # rmse = sqrt(mse)
+    print('MSE: %.3f' % mse)
+
+    print(predictions)
+    future_forecast = pd.DataFrame(predictions, index=test.index, columns=['Prediction'])
+    simple_plot(pd.concat([test, future_forecast], axis=1))
