@@ -12,8 +12,8 @@ end_date = '2018-03-01 00:00:00'
 
 # plot_all_data(path)
 # plot_one_file(path_to_file, start=start_date, end=end_date)
-# cut_csv(path_to_file, start=start_date, end=end_date)
+cut_csv(path_to_file, start=start_date, end=end_date)
 
-analyze_data(path_to_file, start=start_date, end=end_date)
+# analyze_data(path_to_file, start=start_date, end=end_date)
 # arima(path_to_file, start=start_date, end=end_date)
 # check_seasonality(path_to_file, start_date, end_date)
