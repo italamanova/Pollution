@@ -1,6 +1,7 @@
 from pathlib import Path
 
 import pandas as pd
+import seaborn
 from math import sqrt
 from plotly.offline import plot_mpl
 from pmdarima import auto_arima
@@ -61,6 +62,11 @@ def plot_distribution(data, col_name):
     pyplot.show()
 
 
+def plot_boxplot(data):
+    data.boxplot()
+    pyplot.show()
+
+
 def check_adfuller(data, col_name):
     X = data[col_name].values
     result = adfuller(X)
@@ -95,7 +101,8 @@ def analyze_data(file, start, end):
 
     # check_adfuller(data, col_name)
 
-    check_autocorrelation(data)
+    # check_autocorrelation(data)
+    plot_boxplot(data)
 
 
 def my_auto_arima(file, start, end):
@@ -116,7 +123,7 @@ def my_auto_arima(file, start, end):
     # plot_mpl(fig)
 
     stepwise_model = auto_arima(data, start_p=1, start_q=1,
-                                 m=1,
+                                m=1,
                                 seasonal=False,
                                 d=1, trace=True,
                                 error_action='ignore',
@@ -149,9 +156,10 @@ def pure_arima(file, start, end):
 
     history = [x for x in train]
     predictions = list()
+
     for i in range(len(test)):
         # predict
-        model = ARIMA(history, order=(1, 1, 1))
+        model = ARIMA(history, order=(2, 1, 1))
         model_fit = model.fit(disp=0)
         yhat = model_fit.forecast()[0]
         predictions.append(yhat[0])

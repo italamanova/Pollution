@@ -3,6 +3,8 @@ import glob
 import pandas as pd
 from pathlib import Path
 
+from helpers.visualizer import simple_plot
+
 parent_dir_path = Path(__file__).parents[1]
 
 
@@ -58,6 +60,21 @@ def fill_nan(file, out_file_name, method, start=None, end=None):
     df.fillna(method=method, inplace=True)
     filled_data = df.dropna(how='any', inplace=False)
     filled_data.to_csv(out_file_name, encoding='utf-8-sig')
+
+
+def fill_nan_rolling_mean(file, out_file_name, window, start=None, end=None):
+    df = pd.read_csv(file, index_col=0)
+    simple_plot(df, title='Initial dataset')
+    col_name = df.columns[0]
+    df['rollmean'] = df[col_name].rolling(window, center=True, min_periods=1).mean()
+
+    df['update'] = df['rollmean']
+    # df['update'].update(df[col_name])
+    print(df)
+    simple_plot(df, title='Rolling mean')
+    df.to_csv(out_file_name, encoding='utf-8-sig')
+
+
 
 
 def cut_last(file, out_file_name, last_parameter):
