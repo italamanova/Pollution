@@ -55,13 +55,21 @@ def cut_csv(file, start='2008-01-01 00:00:00', end='2018-03-09 00:00:00'):
     new_df.to_csv(new_file_name, encoding='utf-8-sig')
 
 
-def remove_outliers(dataset):
-    lower_bound = .25
-    upper_bound = .75
-    quant_df = dataset.quantile([lower_bound, upper_bound])
+def fill_nan(file, method):
+    filename_w_ext = os.path.basename(file)
+    filename, file_extension = os.path.splitext(filename_w_ext)
 
-    filtering_rule_2 = dataset.apply(
-        lambda x: (x < quant_df.loc[lower_bound, x.name]) | (x > quant_df.loc[upper_bound, x.name]), axis=0)
+    df = pd.read_csv(file, index_col=0)
+    df.fillna(method=method, inplace=True)
+    new_file_name = '%s/pollution_data/cut_data/%s_%s_filled.csv' % (parent_dir_path, filename)
+    df.to_csv(new_file_name, encoding='utf-8-sig')
 
-    dataframe = dataset[~(filtering_rule_2).any(axis=1)]
-    return dataframe
+
+def cut_last(file, last_parameter):
+    filename_w_ext = os.path.basename(file)
+    filename, file_extension = os.path.splitext(filename_w_ext)
+
+    df = pd.read_csv(file, index_col=0)
+    new_df = df.last(last_parameter)
+    new_file_name = '%s/pollution_data/cut_data/%s_%s_%s.csv' % (parent_dir_path, filename, last_parameter)
+    new_df.to_csv(new_file_name, encoding='utf-8-sig')
