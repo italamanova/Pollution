@@ -45,30 +45,30 @@ def split_csv(folder_path):
 #     result_dataframe.to_csv('./concat.csv', index=False, encoding='utf-8-sig')
 
 
-def cut_csv(file, start, end):
-    filename_w_ext = os.path.basename(file)
-    filename, file_extension = os.path.splitext(filename_w_ext)
+def cut_csv(file, out_file_name, start, end):
+    # filename_w_ext = os.path.basename(file)
+    # filename, file_extension = os.path.splitext(filename_w_ext)
 
     df = pd.read_csv(file, index_col=0)
     new_df = df.loc[start:end]
-    new_file_name = '%s/pollution_data/cut_data/%s_%s_%s.csv' % (parent_dir_path, filename, start[:-9], end[:-9])
-    new_df.to_csv(new_file_name, encoding='utf-8-sig')
+    # new_file_name = '%s/pollution_data/cut_data/%s_%s_%s.csv' % (parent_dir_path, filename, start[:-9], end[:-9])
+    new_df.to_csv(out_file_name, encoding='utf-8-sig')
 
 
-def fill_nan(file, method, start=None, end=None):
-    filename_w_ext = os.path.basename(file)
-    filename, file_extension = os.path.splitext(filename_w_ext)
+def fill_nan(file, out_file_name, method, start=None, end=None):
+    # filename_w_ext = os.path.basename(file)
+    # filename, file_extension = os.path.splitext(filename_w_ext)
 
     df = pd.read_csv(file, index_col=0)
     if start and end:
         df = df.loc[start:end]
     df.fillna(method=method, inplace=True)
     filled_data = df.dropna(how='any', inplace=False)
-    new_file_name = '%s/pollution_data/cut_data/%s_filled.csv' % (parent_dir_path, filename)
-    filled_data.to_csv(new_file_name, encoding='utf-8-sig')
+    # new_file_name = '%s/pollution_data/cut_data/%s_filled.csv' % (parent_dir_path, filename)
+    filled_data.to_csv(out_file_name, encoding='utf-8-sig')
 
 
-def cut_last(file, last_parameter):
+def cut_last(file, out_file_name, last_parameter):
     filename_w_ext = os.path.basename(file)
     filename, file_extension = os.path.splitext(filename_w_ext)
 
@@ -76,5 +76,5 @@ def cut_last(file, last_parameter):
     df.index = pd.to_datetime(df.index)
 
     new_df = df.last(last_parameter)
-    new_file_name = '%s/pollution_data/cut_data/%s_%s.csv' % (parent_dir_path, filename, last_parameter)
-    new_df.to_csv(new_file_name, encoding='utf-8-sig')
+    # new_file_name = '%s/pollution_data/cut_data/%s_%s.csv' % (parent_dir_path, filename, last_parameter)
+    new_df.to_csv(out_file_name, encoding='utf-8-sig')
