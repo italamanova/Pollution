@@ -28,9 +28,9 @@ out_file = get_autosave_path(path_to_file, 'fill_mean')
 # cut_last(path_to_file, out_file, '6M')
 # fill_nan_rolling_mean(path_to_file, out_file, 12)
 
-analyze_data(path_to_file)
+# analyze_data(path_to_file)
 # my_auto_arima(path_to_file, start=start_date, end=end_date)
 # pure_arima(path_to_file, start=start_date, end=end_date)
 # check_seasonality(path_to_file, start_date, end_date)
 
-# my_lstm(path_to_file)
+my_lstm(path_to_file)
