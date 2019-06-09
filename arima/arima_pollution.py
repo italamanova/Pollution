@@ -31,12 +31,15 @@ def check_seasonality(file, start_date, end_date):
     pyplot.show()
 
 
-def get_data(file, start, end):
+def get_data(file, start=None, end=None):
     df = pd.read_csv(file, index_col=0)
     df.index = pd.to_datetime(df.index)
 
-    data = df.loc[start:end]
-    data.fillna(method='ffill', inplace=True)
+    if start and end:
+        data = df.loc[start:end]
+    else:
+        data = df
+    # data.fillna(method='ffill', inplace=True)
     return data
 
 
@@ -81,27 +84,27 @@ def check_autocorrelation(data):
     pyplot.figure()
 
     pyplot.subplot(211)
-    pyplot.axis([-1, 40, 0, 1.0])
+    # pyplot.axis([-1, 40, 0, 1.0])
     plot_acf(data, ax=pyplot.gca())
     pyplot.subplot(212)
-    pyplot.axis([0, 40, 0, 1])
+    # pyplot.axis([0, 40, 0, 1])
     plot_pacf(data, ax=pyplot.gca())
     pyplot.show()
 
 
-def analyze_data(file, start, end):
+def analyze_data(file, start=None, end=None):
     data = get_data(file, start, end)
     col_name = data.columns.values[0]
 
     # plot_average(data, col_name)
     # plot_rolling_average(data, col_name)
 
-    data = data.last('4W')
+    # data = data.last('4W')
     # plot_distribution(data, col_name)
-
+    #
     # check_adfuller(data, col_name)
 
-    # check_autocorrelation(data)
+    check_autocorrelation(data)
     plot_boxplot(data)
 
 
@@ -146,13 +149,17 @@ def pure_arima(file, start, end):
 
     col_name = data.columns.values[0]
 
-    # plot(data, ylabel=col_name, title='Air pollution')
-    print('Description', data[col_name].describe())
-
     data = data.last('4W')
 
-    train = data['2018-02-04': '2018-02-26'][col_name]
-    test = data['2018-02-26': '2018-02-28'][col_name]
+    plot(data, ylabel=col_name, title='Air pollution')
+    print('Description', data[col_name].describe())
+
+    train_size = int(len(data) * 0.8)
+    train_copy = data[0:train_size].copy()
+    test_copy = data[train_size:len(data)].copy()
+
+    train = train_copy[col_name]
+    test = test_copy[col_name]
 
     history = [x for x in train]
     predictions = list()
@@ -169,8 +176,8 @@ def pure_arima(file, start, end):
         print('>Predicted=%.3f, Expected=%.3f' % (yhat, obs))
     # report performance
     mse = mean_squared_error(test, predictions)
-    # rmse = sqrt(mse)
-    print('MSE: %.3f' % mse)
+    rmse = sqrt(mse)
+    print('RMSE: %.3f' % rmse)
 
     print(predictions)
     future_forecast = pd.DataFrame(predictions, index=test.index, columns=['Prediction'])

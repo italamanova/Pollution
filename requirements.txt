@@ -7,3 +7,7 @@ sklearn
 tqdm
 seaborn
 pmdarima
+numpy
+keras
+tensorflow
+patsy

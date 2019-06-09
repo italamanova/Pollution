@@ -69,12 +69,10 @@ def fill_nan_rolling_mean(file, out_file_name, window, start=None, end=None):
     df['rollmean'] = df[col_name].rolling(window, center=True, min_periods=1).mean()
 
     df['update'] = df['rollmean']
-    # df['update'].update(df[col_name])
-    print(df)
-    simple_plot(df, title='Rolling mean')
-    df.to_csv(out_file_name, encoding='utf-8-sig')
-
-
+    df['update'].update(df[col_name])
+    filled_data = df.dropna(how='any', inplace=False)
+    simple_plot(filled_data, title='Rolling mean')
+    filled_data.to_csv(out_file_name, columns=[filled_data.columns[0]], index=True,  encoding='utf-8-sig')
 
 
 def cut_last(file, out_file_name, last_parameter):

@@ -4,7 +4,6 @@ import os
 import pandas as pd
 import plotly
 
-
 from helpers.visualizer import plot, simple_plot
 
 plotly.tools.set_credentials_file(username='talamash', api_key='NVqgaGN3OpMYcqXncLOw')
@@ -25,12 +24,11 @@ def plot_all_data(folder_path):
         simple_plot(data, ylabel=data.columns[0], title=file)
 
 
-def plot_one_file(file, start='2008-01-01', end='2018-03-09'):
+def plot_one_file(file, start=None, end=None):
     dataset = pd.read_csv(file, index_col=0)
     dataset.index = pd.to_datetime(dataset.index)
-    data = dataset[start:end]
+    if start and end:
+        data = dataset[start:end]
+    else:
+        data = dataset
     plot(data, ylabel=data.columns[0], title=file)
-
-
-
-
