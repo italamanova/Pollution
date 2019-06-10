@@ -51,7 +51,7 @@ def my_lstm(file):
     model.add(LSTM(16, input_shape=(1, look_back)))
     model.add(Dense(1))
     model.compile(loss='mean_squared_error', optimizer='adam')
-    model.fit(trainX, trainY, epochs=500, batch_size=1, verbose=2)
+    model.fit(trainX, trainY, epochs=10, batch_size=1, verbose=2)
     # make predictions
     trainPredict = model.predict(trainX)
     testPredict = model.predict(testX)

@@ -108,7 +108,7 @@ def analyze_data(file, start=None, end=None):
     plot_boxplot(data)
 
 
-def my_auto_arima(file, start, end):
+def my_auto_arima(file, start=None, end=None):
     data = get_data(file, start, end)
 
     col_name = data.columns.values[0]
@@ -116,28 +116,26 @@ def my_auto_arima(file, start, end):
     # plot(data, ylabel=col_name, title='Air pollution')
     print('Description', data[col_name].describe())
 
-    data = data.last('4W')
+    train_size = int(len(data) * 0.8)
+    test_size = len(data) - train_size
+    train_copy = data[0:train_size].copy()
+    test_copy = data[train_size:len(data)].copy()
 
-    train = data['2018-02-04': '2018-02-26']
-    test = data['2018-02-26': '2018-02-28']
+    train = train_copy[col_name]
+    test = test_copy[col_name]
 
-    # result = seasonal_decompose(data, freq=24)
-    # fig = result.plot()
-    # plot_mpl(fig)
+    result = seasonal_decompose(data, freq=24)
+    fig = result.plot()
+    plot_mpl(fig)
 
-    stepwise_model = auto_arima(data, start_p=1, start_q=1,
-                                m=1,
-                                seasonal=False,
-                                d=1, trace=True,
-                                error_action='ignore',
-                                suppress_warnings=True,
-                                stepwise=True)
+    stepwise_model = auto_arima(train, error_action='ignore', trace=1,
+                                seasonal=False)
 
     print(stepwise_model.aic())
 
     stepwise_model.fit(train)
 
-    future_forecast = stepwise_model.predict(n_periods=72)
+    future_forecast = stepwise_model.predict(n_periods=test_size)
     print(future_forecast)
 
     future_forecast = pd.DataFrame(future_forecast, index=test.index, columns=['Prediction'])
