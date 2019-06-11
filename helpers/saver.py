@@ -12,6 +12,6 @@ def get_autosave_path(file, params):
     return new_file_name
 
 
-#TODO 
+#TODO
 def output_to_file(out_file):
     pass

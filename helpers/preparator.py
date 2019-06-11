@@ -3,6 +3,7 @@ import glob
 import pandas as pd
 from pathlib import Path
 
+from analysis.analyzer import get_data
 from helpers.visualizer import simple_plot
 
 parent_dir_path = Path(__file__).parents[1]
@@ -83,3 +84,15 @@ def cut_last(file, out_file_name, last_parameter):
 
     new_df = df.last(last_parameter)
     new_df.to_csv(out_file_name, encoding='utf-8-sig')
+
+
+def generate_features(file,  out_file_name):
+    df = pd.read_csv(file, index_col=0)
+    df.index = pd.to_datetime(df.index)
+
+    df['month'] = [df.index[i].month for i in range(len(df))]
+    df['year'] = [df.index[i].year for i in range(len(df))]
+    df.to_csv(out_file_name, encoding='utf-8-sig')
+
+
+

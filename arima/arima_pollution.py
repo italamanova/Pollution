@@ -16,6 +16,7 @@ import statsmodels.api as sm
 from statsmodels.graphics.tsaplots import plot_acf
 from statsmodels.graphics.tsaplots import plot_pacf
 
+from analysis.analyzer import check_adfuller, plot_autocorrelation
 from helpers.visualizer import plot, simple_plot
 
 parent_dir_path = Path(__file__).parents[1]
@@ -70,28 +71,6 @@ def plot_boxplot(data):
     pyplot.show()
 
 
-def check_adfuller(data, col_name):
-    X = data[col_name].values
-    result = adfuller(X)
-    print('ADF Statistic: %f' % result[0])
-    print('p-value: %f' % result[1])
-    print('Critical Values:')
-    for key, value in result[4].items():
-        print('\t%s: %.3f' % (key, value))
-
-
-def check_autocorrelation(data):
-    pyplot.figure()
-
-    pyplot.subplot(211)
-    # pyplot.axis([-1, 40, 0, 1.0])
-    plot_acf(data, ax=pyplot.gca())
-    pyplot.subplot(212)
-    # pyplot.axis([0, 40, 0, 1])
-    plot_pacf(data, ax=pyplot.gca())
-    pyplot.show()
-
-
 def analyze_data(file, start=None, end=None):
     data = get_data(file, start, end)
     col_name = data.columns.values[0]
@@ -102,9 +81,9 @@ def analyze_data(file, start=None, end=None):
     # data = data.last('4W')
     # plot_distribution(data, col_name)
     #
-    # check_adfuller(data, col_name)
+    check_adfuller(data, col_name)
 
-    check_autocorrelation(data)
+    plot_autocorrelation(data)
     plot_boxplot(data)
 
 

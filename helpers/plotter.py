@@ -31,4 +31,4 @@ def plot_one_file(file, start=None, end=None):
         data = dataset[start:end]
     else:
         data = dataset
-    plot(data, ylabel=data.columns[0], title=file)
+    simple_plot(data, ylabel=data.columns[0], title=file)
