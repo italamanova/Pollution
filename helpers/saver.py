@@ -10,3 +10,8 @@ def get_autosave_path(file, params):
 
     new_file_name = '%s/pollution_data/cut_data/%s_%s.csv' % (parent_dir_path, filename, params)
     return new_file_name
+
+
+#TODO 
+def output_to_file(out_file):
+    pass

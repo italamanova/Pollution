@@ -66,6 +66,8 @@ def fill_nan_rolling_mean(file, out_file_name, window, start=None, end=None):
     df = pd.read_csv(file, index_col=0)
     simple_plot(df, title='Initial dataset')
     col_name = df.columns[0]
+    if start and end:
+        df = df.loc[start:end]
     df['rollmean'] = df[col_name].rolling(window, center=True, min_periods=1).mean()
 
     df['update'] = df['rollmean']
