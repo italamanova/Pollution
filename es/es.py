@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from statsmodels.tsa.holtwinters import ExponentialSmoothing
+from statsmodels.tsa.holtwinters import ExponentialSmoothing, Holt
 
 from analysis.analyzer import get_data
 
@@ -19,10 +19,12 @@ def exponential_smoothing(file):
     # print(type(test.index[0]))
 
     # model = ExponentialSmoothing(train, trend="add", seasonal="add", seasonal_periods=24)
-    model = ExponentialSmoothing(train, seasonal='add', seasonal_periods=24*365)
+    # model = ExponentialSmoothing(train, trend='add')
+    model = Holt(train)
     # model2 = ExponentialSmoothing(train, trend="add", seasonal="add", seasonal_periods=24*365, damped=True)
-    fit = model.fit()
-    pred = fit.predict(start=0, end=len(test)-1)
+    fit = model.fit(smoothing_level=0.7, smoothing_slope=0.3, optimized=False)
+    print(model.params)
+    pred = fit.forecast(len(test))
     # fit2 = model2.fit()
     # pred2 = fit2.forecast(24)
 

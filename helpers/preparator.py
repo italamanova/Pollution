@@ -94,5 +94,10 @@ def generate_features(file,  out_file_name):
     df['year'] = [df.index[i].year for i in range(len(df))]
     df.to_csv(out_file_name, encoding='utf-8-sig')
 
+def remove_duplicates(file):
+    df = get_data(file)
+    new_df = df.loc[~df.index.duplicated(keep='first')]
+    return new_df
+
 
 

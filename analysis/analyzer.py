@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 from matplotlib import pyplot
@@ -9,7 +10,8 @@ from helpers.visualizer import simple_plot
 
 
 def get_data(file):
-    df = pd.read_csv(file, index_col=0)
+    df = pd.read_csv(file)
+    df = df.set_index('time')
     df.index = pd.to_datetime(df.index)
     return df
 
@@ -42,8 +44,15 @@ def plot_average(data):
     return resampled
 
 
+
+
 def analyze_average(file):
     df = get_data(file)
+    df1 = df.loc['2016-01-01 00:00:00':'2017-01-01 00:00:00']
+    print(len(df1))
+    new_df = df1.loc[~df1.index.duplicated(keep='first')]
+    print(len(new_df))
+
     # reasmpled = plot_average(df)
-    check_adfuller(df)
+    # check_adfuller(df)
     # plot_autocorrelation(df)

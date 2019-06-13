@@ -1,7 +1,8 @@
 import matplotlib.pyplot as plt
+from matplotlib import pyplot
 from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
+from statsmodels.tsa.seasonal import seasonal_decompose
 import seaborn as sns
-
 
 from analysis.analyzer import get_data
 
@@ -56,4 +57,10 @@ def box_plot(file):
     plt.show()
 
 
+def check_seasonal_decomposition(file):
+    df = get_data(file)
+    col_name = df.columns[0]
 
+    result = seasonal_decompose(df, model='additive', freq=24*365)
+    result.plot()
+    pyplot.show()
