@@ -44,6 +44,6 @@ def plot_average(data):
 
 def analyze_average(file):
     df = get_data(file)
-    reasmpled = plot_average(df)
-    check_adfuller(reasmpled)
-    plot_autocorrelation(df)
+    # reasmpled = plot_average(df)
+    check_adfuller(df)
+    # plot_autocorrelation(df)
