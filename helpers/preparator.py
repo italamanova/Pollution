@@ -4,6 +4,7 @@ import pandas as pd
 from pathlib import Path
 
 from analysis.analyzer import get_data
+from helpers.saver import df_to_csv
 from helpers.visualizer import simple_plot
 
 parent_dir_path = Path(__file__).parents[1]
@@ -75,7 +76,7 @@ def fill_nan_rolling_mean(file, out_file_name, window, start=None, end=None):
     df['update'].update(df[col_name])
     filled_data = df.dropna(how='any', inplace=False)
     simple_plot(filled_data, title='Rolling mean')
-    filled_data.to_csv(out_file_name, columns=[filled_data.columns[0]], index=True,  encoding='utf-8-sig')
+    filled_data.to_csv(out_file_name, columns=[filled_data.columns[0]], index=True, encoding='utf-8-sig')
 
 
 def cut_last(file, out_file_name, last_parameter):
@@ -86,7 +87,7 @@ def cut_last(file, out_file_name, last_parameter):
     new_df.to_csv(out_file_name, encoding='utf-8-sig')
 
 
-def generate_features(file,  out_file_name):
+def generate_features(file, out_file_name):
     df = pd.read_csv(file, index_col=0)
     df.index = pd.to_datetime(df.index)
 
@@ -94,10 +95,9 @@ def generate_features(file,  out_file_name):
     df['year'] = [df.index[i].year for i in range(len(df))]
     df.to_csv(out_file_name, encoding='utf-8-sig')
 
-def remove_duplicates(file):
+
+def remove_duplicates(file, out_file):
     df = get_data(file)
     new_df = df.loc[~df.index.duplicated(keep='first')]
+    df_to_csv(new_df, out_file)
     return new_df
-
-
-

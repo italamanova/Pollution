@@ -12,6 +12,6 @@ def get_autosave_path(file, params):
     return new_file_name
 
 
-#TODO
-def output_to_file(out_file):
-    pass
+def df_to_csv(df, out_file):
+    path = '%s/pollution_data/df_data' % parent_dir_path
+    df.to_csv('%s/%s' % (path, out_file), encoding='utf-8-sig')

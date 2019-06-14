@@ -44,13 +44,9 @@ def plot_average(data):
     return resampled
 
 
-
-
-def analyze_average(file):
+def analyze(file):
     df = get_data(file)
-    df1 = df.loc['2016-01-01 00:00:00':'2017-01-01 00:00:00']
-    print(len(df1))
-    new_df = df1.loc[~df1.index.duplicated(keep='first')]
+    new_df = df.loc['2016-01-01 00:00:00':'2017-01-01 00:00:00']
     print(len(new_df))
 
     # reasmpled = plot_average(df)

@@ -61,6 +61,6 @@ def check_seasonal_decomposition(file):
     df = get_data(file)
     col_name = df.columns[0]
 
-    result = seasonal_decompose(df, model='additive', freq=24*365)
+    result = seasonal_decompose(df, model='additive', freq=24)
     result.plot()
     pyplot.show()

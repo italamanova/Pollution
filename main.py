@@ -1,12 +1,13 @@
-from analysis.analyzer import analyze_average
+from analysis.analyzer import analyze
 
-from analysis.trend_seasonality_checker import box_plot
+from analysis.trend_seasonality_checker import box_plot, check_seasonal_decomposition
 from arima.arima_pollution import check_seasonality, analyze_data, my_auto_arima, pure_arima
+from es.des import manual_es
 from es.es import exponential_smoothing
 from helpers.plotter import plot_one_file, plot_all_data
 from pathlib import Path
 
-from helpers.preparator import cut_csv, fill_nan, cut_last, fill_nan_rolling_mean, generate_features
+from helpers.preparator import cut_csv, fill_nan, cut_last, fill_nan_rolling_mean, generate_features, remove_duplicates
 from helpers.saver import get_autosave_path
 
 # path = '%s/pollution_data/cut_data' % Path(__file__).parent
@@ -15,12 +16,12 @@ from helpers.visualizer import simple_plot
 from lstm.lstm import my_lstm
 from lstm.lstm_rolling_window import exp_lstm
 
-# path = '%s/pollution_data/cut_data' % Path(__file__).parent
-# path_to_file = '%s/Centar_PM25_4W_fill_mean.csv' % path
-
-
 path = '%s/pollution_data/cut_data' % Path(__file__).parent
-path_to_file = '%s/Rektorat_CO_2015-01-01__2018-03-01.csv' % path
+path_to_file = '%s/Centar_PM25_4W_fill_mean.csv' % path
+
+
+# path = '%s/pollution_data/df_data' % Path(__file__).parent
+# path_to_file = '%s/Rektorat_CO_no_dupl.csv' % path
 
 # path = '%s/data' % Path(__file__).parent
 # path_to_file = '%s/pas.csv' % path
@@ -49,8 +50,12 @@ out_file = get_autosave_path(path_to_file, '2015-01-01__2018-03-01')
 # exp_lstm(lstm_path_to_file)
 
 # box_plot(path_to_file)
-analyze_average(path_to_file)
+# analyze(path_to_file)
 
-# check_decomposition(path_to_file)
+# check_seasonal_decomposition(path_to_file)
 
 # exponential_smoothing(path_to_file)
+
+# remove_duplicates(path_to_file)
+
+manual_es(path_to_file)
