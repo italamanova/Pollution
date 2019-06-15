@@ -25,10 +25,13 @@ def plot_all_data(folder_path):
 
 
 def plot_one_file(file, start=None, end=None):
+    filename_w_ext = os.path.basename(file)
+    filename, file_extension = os.path.splitext(filename_w_ext)
+
     dataset = pd.read_csv(file, index_col=0)
     dataset.index = pd.to_datetime(dataset.index)
     if start and end:
         data = dataset[start:end]
     else:
         data = dataset
-    simple_plot(data, ylabel=data.columns[0], title=file)
+    simple_plot(data, ylabel=data.columns[0], title=filename)

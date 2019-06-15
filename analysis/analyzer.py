@@ -6,14 +6,9 @@ from matplotlib import pyplot
 from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
 from statsmodels.tsa.stattools import adfuller
 
+from analysis.trend_seasonality_checker import check_polyfit, check_seasonal_decomposition
+from helpers.preparator import delete_outliers, get_data
 from helpers.visualizer import simple_plot
-
-
-def get_data(file):
-    df = pd.read_csv(file)
-    df = df.set_index('time')
-    df.index = pd.to_datetime(df.index)
-    return df
 
 
 def check_adfuller(data):
@@ -55,9 +50,19 @@ def plot_average(data):
 
 def analyze(file):
     df = get_data(file)
-    new_df = df.loc['2016-01-01 00:00:00':'2017-01-01 00:00:00']
+    col_name = df.columns[0]
+    new_df = df
+    # new_df = df.loc['2016-01-01 00:00:00':'2017-01-01 00:00:00']
     print(len(new_df))
+    # simple_plot(new_df)
+    # plot_distribution(new_df, col_name)
+    # df_no_outliers = delete_outliers(new_df)
+    # plot_distribution(df_no_outliers, col_name)
+    # simple_plot(df_no_outliers)
+
+    check_polyfit(df)
 
     # reasmpled = plot_average(df)
     # check_adfuller(df)
-    # plot_autocorrelation(df)
+    # check_seasonal_decomposition(df_no_outliers)
+    # plot_autocorrelation(df_no_outliers)

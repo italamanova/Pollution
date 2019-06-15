@@ -1,10 +1,10 @@
 import matplotlib.pyplot as plt
-from matplotlib import pyplot
+from numpy import polyfit
 from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
 from statsmodels.tsa.seasonal import seasonal_decompose
 import seaborn as sns
 
-from analysis.analyzer import get_data
+from helpers.preparator import get_data
 
 
 def plot_rolling(df):
@@ -57,10 +57,30 @@ def box_plot(file):
     plt.show()
 
 
-def check_seasonal_decomposition(file):
-    df = get_data(file)
+def check_seasonal_decomposition(df):
     col_name = df.columns[0]
 
     result = seasonal_decompose(df, model='additive', freq=24)
     result.plot()
-    pyplot.show()
+    plt.show()
+
+
+def check_polyfit(df):
+    col_name = df.columns[0]
+
+    X = [i % 365 for i in range(0, len(df))]
+    y = df[col_name].values
+    degree = 4
+    coef = polyfit(X, y, degree)
+    print('Coefficients: %s' % coef)
+    # create curve
+    curve = list()
+    for i in range(len(X)):
+        value = coef[-1]
+        for d in range(degree):
+            value += X[i] ** (degree - d) * coef[d]
+        curve.append(value)
+    # plot curve over original data
+    plt.plot(df[col_name].values)
+    plt.plot(curve, color='red', linewidth=3)
+    plt.show()

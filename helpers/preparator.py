@@ -2,12 +2,20 @@ import os
 import glob
 import pandas as pd
 from pathlib import Path
+import numpy as np
+from scipy.stats import stats
 
-from analysis.analyzer import get_data
 from helpers.saver import df_to_csv
 from helpers.visualizer import simple_plot
 
 parent_dir_path = Path(__file__).parents[1]
+
+
+def get_data(file):
+    df = pd.read_csv(file)
+    df = df.set_index('time')
+    df.index = pd.to_datetime(df.index)
+    return df
 
 
 def split_csv(folder_path):
@@ -79,5 +87,7 @@ def remove_duplicates(file, out_file):
     df_to_csv(new_df, out_file)
     return new_df
 
-def reject_outliers(data, m=2):
-    return data[abs(data - np.mean(data)) < m * np.std(data)]
+
+def delete_outliers(df, m=3):
+    new_df = df[(np.abs(stats.zscore(df)) < m).all(axis=1)]
+    return new_df
