@@ -16,7 +16,7 @@ import statsmodels.api as sm
 from statsmodels.graphics.tsaplots import plot_acf
 from statsmodels.graphics.tsaplots import plot_pacf
 
-from analysis.analyzer import check_adfuller, plot_autocorrelation
+from analysis.analyzer import check_adfuller, plot_autocorrelation, plot_distribution
 from helpers.visualizer import plot, simple_plot
 
 parent_dir_path = Path(__file__).parents[1]
@@ -57,15 +57,6 @@ def plot_rolling_average(data, col_name):
     pyplot.show()
 
 
-def plot_distribution(data, col_name):
-    pyplot.figure(1)
-    pyplot.subplot(211)
-    data[col_name].hist()
-    pyplot.subplot(212)
-    data[col_name].plot(kind='kde')
-    pyplot.show()
-
-
 def plot_boxplot(data):
     data.boxplot()
     pyplot.show()
@@ -79,12 +70,12 @@ def analyze_data(file, start=None, end=None):
     # plot_rolling_average(data, col_name)
 
     # data = data.last('4W')
-    # plot_distribution(data, col_name)
+    plot_distribution(data, col_name)
     #
-    check_adfuller(data, col_name)
-
-    plot_autocorrelation(data)
-    plot_boxplot(data)
+    # check_adfuller(data, col_name)
+    #
+    # plot_autocorrelation(data)
+    # plot_boxplot(data)
 
 
 def my_auto_arima(file, start=None, end=None):

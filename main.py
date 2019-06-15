@@ -17,7 +17,7 @@ from lstm.lstm import my_lstm
 from lstm.lstm_rolling_window import exp_lstm
 
 path = '%s/pollution_data/cut_data' % Path(__file__).parent
-path_to_file = '%s/Centar_PM25_4W_fill_mean.csv' % path
+path_to_file = '%s/Centar_PM25_2016-03-01__2018-03-01.csv' % path
 
 
 # path = '%s/pollution_data/df_data' % Path(__file__).parent
@@ -40,7 +40,7 @@ out_file = get_autosave_path(path_to_file, '2015-01-01__2018-03-01')
 # cut_last(path_to_file, out_file, '6M')
 # fill_nan_rolling_mean(path_to_file, out_file, 12, start=start_date, end=end_date)
 
-# analyze_data(path_to_file)
+analyze_data(path_to_file)
 # my_auto_arima(path_to_file)
 # pure_arima(path_to_file, start=start_date, end=end_date)
 # check_seasonality(path_to_file, start_date, end_date)
@@ -58,4 +58,4 @@ out_file = get_autosave_path(path_to_file, '2015-01-01__2018-03-01')
 
 # remove_duplicates(path_to_file)
 
-manual_es(path_to_file)
+# manual_es(path_to_file)

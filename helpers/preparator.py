@@ -26,29 +26,6 @@ def split_csv(folder_path):
                 new_df.to_csv('./new_data/%s_%s' % (column, file), index=False, encoding='utf-8-sig')
 
 
-# def combine_csv(folder_path):
-#     os.chdir(folder_path)
-#     extension = 'csv'
-#     all_filenames = [i for i in glob.glob('Centar_*.{}'.format(extension))]
-#     handles = [open(filename, 'r') for filename in all_filenames]
-#
-#     result_dataframe = pd.DataFrame()
-#
-#     for file in all_filenames:
-#         df = pd.read_csv(file, index_col=0)
-#         print()
-#         if result_dataframe.empty:
-#             result_dataframe = result_dataframe.append(df)
-#             result_dataframe.set_index('time')
-#             print(result_dataframe.head())
-#         else:
-#             new_df = df.loc[:, df.columns[0]].copy()
-#             result_dataframe = result_dataframe.append(new_df)
-#             print(result_dataframe.head())
-#     print(result_dataframe.head())
-#     result_dataframe.to_csv('./concat.csv', index=False, encoding='utf-8-sig')
-
-
 def cut_csv(file, out_file_name, start, end):
     df = pd.read_csv(file, index_col=0)
     new_df = df.loc[start:end]
@@ -101,3 +78,6 @@ def remove_duplicates(file, out_file):
     new_df = df.loc[~df.index.duplicated(keep='first')]
     df_to_csv(new_df, out_file)
     return new_df
+
+def reject_outliers(data, m=2):
+    return data[abs(data - np.mean(data)) < m * np.std(data)]

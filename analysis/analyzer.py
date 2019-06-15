@@ -38,6 +38,15 @@ def plot_autocorrelation(data):
     pyplot.show()
 
 
+def plot_distribution(data, col_name):
+    pyplot.figure(1)
+    pyplot.subplot(211)
+    data[col_name].hist()
+    pyplot.subplot(212)
+    data[col_name].plot(kind='kde')
+    pyplot.show()
+
+
 def plot_average(data):
     resampled = data.resample('M').sum()
     # simple_plot(resampled, title='Air pollution')

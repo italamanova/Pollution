@@ -59,8 +59,8 @@ def manual_es(file):
     print("Next observation = %s" % (pt + (1 * bt)))
     print("Real value = %f" % db[len(db) - 1])
 
-    # forecast
-    # forecast = np.zeros(len(db) + 1)
+    # # forecast
+    # forecast = np.zeros(len(db) + 10)
     # pt = db[0]
     # bt = db[1] - db[0]
     # forecast[0] = pt
@@ -70,7 +70,7 @@ def manual_es(file):
     #     pt = temp_pt
     #     forecast[i] = pt
     # forecast[-1] = pt + (1 * bt)
-    # plt.plot(db,label = 'real data')
-    # plt.plot(forecast, label = 'forecast')
+    # plt.plot(db, label='real data')
+    # plt.plot(forecast, label='forecast')
     # plt.legend()
     # plt.show()
