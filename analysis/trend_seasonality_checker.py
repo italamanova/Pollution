@@ -1,3 +1,4 @@
+import dates as dates
 import matplotlib.pyplot as plt
 from numpy import polyfit
 from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
@@ -65,12 +66,11 @@ def check_seasonal_decomposition(df):
     plt.show()
 
 
-def check_polyfit(df):
+def check_polyfit(df, degree):
     col_name = df.columns[0]
 
     X = [i % 365 for i in range(0, len(df))]
     y = df[col_name].values
-    degree = 4
     coef = polyfit(X, y, degree)
     print('Coefficients: %s' % coef)
     # create curve
@@ -81,6 +81,6 @@ def check_polyfit(df):
             value += X[i] ** (degree - d) * coef[d]
         curve.append(value)
     # plot curve over original data
-    plt.plot(df[col_name].values)
-    plt.plot(curve, color='red', linewidth=3)
+    plt.plot(df.values)
+    plt.plot(curve, color='red', linewidth=2)
     plt.show()

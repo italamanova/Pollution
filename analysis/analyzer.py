@@ -1,4 +1,5 @@
 import pandas as pd
+import statsmodels.formula.api as smf
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
@@ -42,31 +43,37 @@ def plot_distribution(data, col_name):
     pyplot.show()
 
 
-def plot_average(data):
-    resampled = data.resample('M').sum()
-    # simple_plot(resampled, title='Air pollution')
+def get_resampled(df, period_name):
+    resampled = df.resample(period_name).sum()
     return resampled
+
+
+# def polynomial_regression(df):
+#     col_name = df.columns[0]
+#     X = [i % 365 for i in range(0, len(df))]
+#     y = df[col_name].values
+#
+#     weights = np.polyfit(X, y, 20)
+#
+#     model = np.poly1d(weights)
+#     results = smf.ols(formula='y ~ model(X)', data=df).fit()
+#
+#     print(results.summary())
 
 
 def analyze(file):
     df = get_data(file)
     col_name = df.columns[0]
-    new_df = df
+    period_name = 'D'
+    degree = 1
     # new_df = df.loc['2016-01-01 00:00:00':'2017-01-01 00:00:00']
-    print(len(new_df))
-    print(new_df[col_name].isnull().sum())
-    simple_plot(new_df)
-    plot_distribution(new_df, col_name)
-    df_no_outliers = delete_outliers(new_df)
-    print(len(df_no_outliers))
-    print(df_no_outliers[col_name].isnull().sum())
+    # simple_plot(df)
+    # plot_distribution(df, col_name)
 
-    plot_distribution(df_no_outliers, col_name)
-    simple_plot(df_no_outliers)
-
-    # check_polyfit(df)
+    resampled = get_resampled(df, period_name)
+    check_polyfit(resampled, degree)
 
     # reasmpled = plot_average(df)
     # check_adfuller(df)
     # check_seasonal_decomposition(df_no_outliers)
-    # plot_autocorrelation(df_no_outliers)
+    # plot_autocorrelation(df)

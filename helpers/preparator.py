@@ -3,7 +3,7 @@ import glob
 import pandas as pd
 from pathlib import Path
 import numpy as np
-from scipy.stats import stats
+from scipy import stats
 
 from helpers.saver import df_to_csv
 from helpers.visualizer import simple_plot
@@ -71,7 +71,7 @@ def interpolate_nan(file, out_file_name, start=None, end=None):
     col_name = df.columns[0]
     if start and end:
         df = df.loc[start:end]
-    interpolated_data = df.interpolate(method='spline', order=5)
+    interpolated_data = df.interpolate(method='linear')
     simple_plot(interpolated_data, title='Interpolated')
     interpolated_data.to_csv(out_file_name, columns=[col_name], index=True, encoding='utf-8-sig')
 
@@ -107,6 +107,9 @@ def replace(group, stds):
     return group
 
 
-def delete_outliers(df, m=2):
-    new_df = df.mask(df.sub(df.mean()).div(df.std()).abs().gt(m))
+def delete_outliers(file, out_file, m=2):
+    df = get_data(file)
+    mask = (df - df.mean()).abs() > m * df.std()
+    new_df = df.mask(mask)
+    df_to_csv(new_df, out_file)
     return new_df
