@@ -54,13 +54,17 @@ def analyze(file):
     new_df = df
     # new_df = df.loc['2016-01-01 00:00:00':'2017-01-01 00:00:00']
     print(len(new_df))
-    # simple_plot(new_df)
-    # plot_distribution(new_df, col_name)
-    # df_no_outliers = delete_outliers(new_df)
-    # plot_distribution(df_no_outliers, col_name)
-    # simple_plot(df_no_outliers)
+    print(new_df[col_name].isnull().sum())
+    simple_plot(new_df)
+    plot_distribution(new_df, col_name)
+    df_no_outliers = delete_outliers(new_df)
+    print(len(df_no_outliers))
+    print(df_no_outliers[col_name].isnull().sum())
 
-    check_polyfit(df)
+    plot_distribution(df_no_outliers, col_name)
+    simple_plot(df_no_outliers)
+
+    # check_polyfit(df)
 
     # reasmpled = plot_average(df)
     # check_adfuller(df)

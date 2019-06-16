@@ -64,6 +64,18 @@ def fill_nan_rolling_mean(file, out_file_name, window, start=None, end=None):
     filled_data.to_csv(out_file_name, columns=[filled_data.columns[0]], index=True, encoding='utf-8-sig')
 
 
+def interpolate_nan(file, out_file_name, start=None, end=None):
+    df = get_data(file)
+    print(df.index.freq)
+    simple_plot(df, title='Initial dataset')
+    col_name = df.columns[0]
+    if start and end:
+        df = df.loc[start:end]
+    interpolated_data = df.interpolate(method='spline', order=5)
+    simple_plot(interpolated_data, title='Interpolated')
+    interpolated_data.to_csv(out_file_name, columns=[col_name], index=True, encoding='utf-8-sig')
+
+
 def cut_last(file, out_file_name, last_parameter):
     df = pd.read_csv(file, index_col=0)
     df.index = pd.to_datetime(df.index)
@@ -83,11 +95,17 @@ def generate_features(file, out_file_name):
 
 def remove_duplicates(file, out_file):
     df = get_data(file)
+    print(len(df))
     new_df = df.loc[~df.index.duplicated(keep='first')]
+    print(len(new_df))
     df_to_csv(new_df, out_file)
     return new_df
 
 
 def delete_outliers(df, m=3):
-    new_df = df[(np.abs(stats.zscore(df)) < m).all(axis=1)]
+    # v = df.values
+    # mask = np.abs((v - v.mean(0)) / v.std(0)) > 2
+    # new_df = pd.DataFrame(np.where(mask, np.nan, v), df.index, df.columns)
+    new_df = df.mask(df.sub(df.mean()).div(df.std()).abs().gt(m))
+
     return new_df
