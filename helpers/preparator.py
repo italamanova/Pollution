@@ -102,10 +102,11 @@ def remove_duplicates(file, out_file):
     return new_df
 
 
-def delete_outliers(df, m=3):
-    # v = df.values
-    # mask = np.abs((v - v.mean(0)) / v.std(0)) > 2
-    # new_df = pd.DataFrame(np.where(mask, np.nan, v), df.index, df.columns)
-    new_df = df.mask(df.sub(df.mean()).div(df.std()).abs().gt(m))
+def replace(group, stds):
+    group[np.abs(group - group.mean()) > stds * group.std()] = np.nan
+    return group
 
+
+def delete_outliers(df, m=2):
+    new_df = df.mask(df.sub(df.mean()).div(df.std()).abs().gt(m))
     return new_df
