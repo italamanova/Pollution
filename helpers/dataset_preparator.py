@@ -11,9 +11,7 @@ def prepare_dataframe(df, start=None, end=None, period_hours=None, sigma=2):
     else:
         raise Exception('There should be end or period_hours')
     df = remove_duplicates(df)
-    print(df.dtypes)
     df = sdd_missing_dates(df)
-    print(df.dtypes)
     df = delete_outliers(df, m=sigma)
     df = cut_dataframe(df, start, end)
     df = interpolate_nan(df)
