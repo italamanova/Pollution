@@ -16,7 +16,6 @@ def prepare_dataframe(df, start=None, end=None, period_hours=None, sigma=2):
 
 def prepare_csv(file, out_file, start=None, end=None, period_hours=None, sigma=2):
     df = get_data(file)
-    col_name = df.columns[0]
     df = prepare_dataframe(df, start=start, end=end, period_hours=period_hours, sigma=sigma)
-    df.to_csv(out_file, columns=[col_name], index=True, encoding='utf-8-sig')
+    df.to_csv(out_file, index=True, encoding='utf-8-sig')
     return df

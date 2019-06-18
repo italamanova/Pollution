@@ -80,7 +80,6 @@ def fill_nan_rolling_mean(df, window, start=None, end=None):
 def interpolate_nan(df):
     simple_plot(df, title='Initial dataset')
     interpolated_data = df.interpolate(method='linear')
-    simple_plot(interpolated_data, title='Interpolated')
     return interpolated_data
 
 
