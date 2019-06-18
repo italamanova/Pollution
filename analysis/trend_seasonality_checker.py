@@ -61,7 +61,7 @@ def box_plot(file):
 def check_seasonal_decomposition(df):
     col_name = df.columns[0]
 
-    result = seasonal_decompose(df, model='additive', freq=24)
+    result = seasonal_decompose(df, model='multiplicative', extrapolate_trend='freq')
     result.plot()
     plt.show()
 

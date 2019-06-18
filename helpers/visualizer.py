@@ -6,10 +6,11 @@ from pathlib import Path
 parent_dir_path = Path(__file__).parents[1]
 
 
-def simple_plot(dataset, xlabel='DateTime', ylabel='Value'):
+def simple_plot(dataset, xlabel='DateTime', ylabel='Value', title=''):
     dataset.plot()
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
+    plt.title(title)
     plt.show()
 
 

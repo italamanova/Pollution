@@ -17,50 +17,49 @@ from helpers.visualizer import simple_plot
 from lstm.lstm import my_lstm
 from lstm.lstm_rolling_window import exp_lstm
 
-path = '%s/pollution_data/cut_data' % Path(__file__).parent
-path_to_file = '%s/Centar_PM25_2012-01-01__2018-03-01_no_duplicates_no_outliers_inter.csv' % path
-# path_to_file = '%s/Centar_PM25_2012-01-01__2018-03-01_no_duplicates_no_outliers.csv' % path
-
+path = '%s/pollution_data/experiment_data' % Path(__file__).parent
+path_to_file = '%s/Centar_PM25_2012-01-01__2018-03-01_no_duplicates_no_outliers_inter_3D.csv' % path
 
 # path = '%s/pollution_data/cut_data' % Path(__file__).parent
 # path_to_file = '%s/Centar_PM25_4W_fill_mean.csv' % path
 
-# path = '%s/data' % Path(__file__).parent
-# path_to_file = '%s/pas.csv' % path
 
 start_date = '2012-01-01 00:00:00'
 end_date = '2018-03-01 00:00:00'
 
-out_file = get_autosave_path(path_to_file, 'inter')
+out_folder = 'experiment_data'
+out_file = get_autosave_path(path_to_file, out_folder, '3D')
+
+# ANALYSIS
 # remove_duplicates(path_to_file, out_file)
 # delete_outliers(path_to_file, out_file)
 # interpolate_nan(path_to_file, out_file, start=start_date, end=end_date)
-
+# cut_last(path_to_file, out_file, '2W')
 analyze(path_to_file)
 
 
+# METHODS
 
+# ES
+# exponential_smoothing(path_to_file)
+# manual_es(path_to_file)
 
-# cut_csv(path_to_file, out_file, start=start_date, end=end_date)
-
-
-# plot_all_data(path)
-# plot_one_file(path_to_file)
-# fill_nan(path_to_file, out_file 'ffill')
-# cut_last(path_to_file, out_file, '6M')
-# fill_nan_rolling_mean(path_to_file, out_file, 12, start=start_date, end=end_date)
-
+# ARIMA
 # my_auto_arima(path_to_file)
-# pure_arima(path_to_file, start=start_date, end=end_date)
-# check_seasonality(path_to_file, start_date, end_date)
+# pure_arima(path_to_file)
 
+# LSTM
 # my_lstm(path_to_file)
 # lstm_path_to_file = '%s/pollution_data/cut_data/Centar_PM25_fill_mean_year.csv' % Path(__file__).parent
 # exp_lstm(lstm_path_to_file)
 
+# ADDITIONAL
+plot_one_file(path_to_file)
+
+# HELPERS
+# cut_csv(path_to_file, out_file, start=start_date, end=end_date)
+# plot_all_data(path)
+# fill_nan(path_to_file, out_file 'ffill')
+# fill_nan_rolling_mean(path_to_file, out_file, 12, start=start_date, end=end_date)
+# check_seasonality(path_to_file, start_date, end_date)
 # box_plot(path_to_file)
-
-# exponential_smoothing(path_to_file)
-
-
-# manual_es(path_to_file)

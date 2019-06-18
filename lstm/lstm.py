@@ -11,6 +11,7 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_squared_error
 
 from arima.arima_pollution import get_data
+from helpers.performance import measure_performance
 
 numpy.random.seed(7)
 
@@ -85,3 +86,4 @@ def my_lstm(file):
     trainPredict, testPredict = lstm_predict(dataset, look_back)
 
     show_plot(dataset, look_back, trainPredict, testPredict)
+

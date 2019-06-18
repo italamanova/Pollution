@@ -7,6 +7,7 @@ from plotly.offline import plot_mpl
 from pmdarima import auto_arima
 from sklearn.metrics import mean_squared_error
 from statsmodels.tsa.arima_model import ARIMA
+from statsmodels.tsa.statespace.sarimax import SARIMAX
 from statsmodels.tsa.seasonal import seasonal_decompose
 from pandas import Series
 from matplotlib import pyplot
@@ -17,6 +18,7 @@ from statsmodels.graphics.tsaplots import plot_acf
 from statsmodels.graphics.tsaplots import plot_pacf
 
 from analysis.analyzer import check_adfuller, plot_autocorrelation, plot_distribution
+from helpers.performance import measure_performance
 from helpers.visualizer import plot, simple_plot
 
 parent_dir_path = Path(__file__).parents[1]
@@ -94,12 +96,17 @@ def my_auto_arima(file, start=None, end=None):
     train = train_copy[col_name]
     test = test_copy[col_name]
 
-    result = seasonal_decompose(data, freq=24)
-    fig = result.plot()
-    plot_mpl(fig)
+    # result = seasonal_decompose(data, freq=24)
+    # fig = result.plot()
+    # plot_mpl(fig)
 
-    stepwise_model = auto_arima(train, error_action='ignore', trace=1,
-                                seasonal=False)
+    stepwise_model = auto_arima(data, start_p=1, start_q=1,
+                                max_p=5, max_q=5,
+                                seasonal=False,
+                                d=1, trace=True,
+                                error_action='ignore',
+                                suppress_warnings=True,
+                                stepwise=True)
 
     print(stepwise_model.aic())
 
@@ -110,10 +117,10 @@ def my_auto_arima(file, start=None, end=None):
 
     future_forecast = pd.DataFrame(future_forecast, index=test.index, columns=['Prediction'])
     simple_plot(pd.concat([test, future_forecast], axis=1))
+    rmse = measure_performance(test, future_forecast)
 
-
-def pure_arima(file, start, end):
-    data = get_data(file, start, end)
+def pure_arima(file):
+    data = get_data(file)
 
     col_name = data.columns.values[0]
 
@@ -129,24 +136,13 @@ def pure_arima(file, start, end):
     train = train_copy[col_name]
     test = test_copy[col_name]
 
-    history = [x for x in train]
-    predictions = list()
 
-    for i in range(len(test)):
-        # predict
-        model = ARIMA(history, order=(2, 1, 1))
-        model_fit = model.fit(disp=0)
-        yhat = model_fit.forecast()[0]
-        predictions.append(yhat[0])
-        # observation
-        obs = test[i]
-        history.append(obs)
-        print('>Predicted=%.3f, Expected=%.3f' % (yhat, obs))
+    model = ARIMA(train, order=(5, 1, 1))
+    model_fit = model.fit(disp=0)
+    future_forecast = model_fit.forecast(steps=len(test))[0]
+    # observation
     # report performance
-    mse = mean_squared_error(test, predictions)
-    rmse = sqrt(mse)
-    print('RMSE: %.3f' % rmse)
+    rmse = measure_performance(test, future_forecast)
 
-    print(predictions)
-    future_forecast = pd.DataFrame(predictions, index=test.index, columns=['Prediction'])
+    future_forecast = pd.DataFrame(future_forecast, index=test.index, columns=['Prediction'])
     simple_plot(pd.concat([test, future_forecast], axis=1))
