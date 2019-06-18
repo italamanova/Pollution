@@ -1,15 +1,21 @@
+import datetime
+
 from helpers.preparator import remove_duplicates, delete_outliers, cut_dataframe, interpolate_nan, \
-    cut_dataframe_by_period, get_data
+    cut_dataframe_by_period, get_data, sdd_missing_dates
 from helpers.saver import df_to_csv
 
 
 def prepare_dataframe(df, start=None, end=None, period_hours=None, sigma=2):
+    if not end:
+        end = start + datetime.timedelta(hours=period_hours)
+    else:
+        raise Exception('There should be end or period_hours')
     df = remove_duplicates(df)
+    print(df.dtypes)
+    df = sdd_missing_dates(df)
+    print(df.dtypes)
     df = delete_outliers(df, m=sigma)
-    if start and end:
-        df = cut_dataframe(df, start, end)
-    elif start and period_hours:
-        df = cut_dataframe_by_period(df, start, period_hours)
+    df = cut_dataframe(df, start, end)
     df = interpolate_nan(df)
     return df
 

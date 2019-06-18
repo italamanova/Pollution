@@ -78,7 +78,7 @@ def fill_nan_rolling_mean(df, window, start=None, end=None):
 
 
 def interpolate_nan(df):
-    simple_plot(df, title='Initial dataset')
+    print(df.dtypes)
     interpolated_data = df.interpolate(method='linear')
     return interpolated_data
 
@@ -103,4 +103,10 @@ def replace(group, stds):
 def delete_outliers(df, m=2):
     mask = (df - df.mean()).abs() > m * df.std()
     new_df = df.mask(mask)
+    return new_df
+
+
+def sdd_missing_dates(df):
+    df_date_range = pd.date_range(start=df.index[0], end=df.index[-1], freq='H')
+    new_df = df.reindex(df_date_range).rename_axis('time')
     return new_df

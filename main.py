@@ -40,7 +40,7 @@ out_file = get_autosave_path(path_to_file, out_folder, 'NEW1')
 
 # analyze(path_to_file)
 
-prepare_csv(path_to_file, out_file, start=start_datetime, period_hours=8000)
+# prepare_csv(path_to_file, out_file, start=start_datetime, period_hours=8000)
 
 
 # METHODS
