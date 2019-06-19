@@ -7,9 +7,10 @@ from helpers.saver import df_to_csv
 
 def prepare_dataframe(df, start=None, end=None, period_hours=None, sigma=2):
     if not end:
-        end = start + datetime.timedelta(hours=period_hours)
-    else:
-        raise Exception('There should be end or period_hours')
+        if period_hours:
+            end = start + datetime.timedelta(hours=period_hours)
+        else:
+            raise Exception('There should be end or period_hours')
     df = remove_duplicates(df)
     df = sdd_missing_dates(df)
     df = delete_outliers(df, m=sigma)
