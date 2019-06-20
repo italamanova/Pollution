@@ -79,6 +79,7 @@ def fill_nan_rolling_mean(df, window, start=None, end=None):
 
 def interpolate_nan(df):
     interpolated_data = df.interpolate(method='linear')
+    interpolated_data = interpolated_data.dropna(how='any', inplace=False)
     return interpolated_data
 
 

@@ -38,7 +38,7 @@ end_datetime = str_to_datetime(end)
 out_folder = 'centar'
 out_file = get_autosave_path(path_to_file, out_folder, 'prepared')
 
-# prepare_csv(path_to_file, out_file, start=start_datetime, end=end_datetime)
+prepare_csv(path_to_file, out_file, start=start_datetime, end=end_datetime)
 # analyze(path_to_file_prepared)
 
 # METHODS
