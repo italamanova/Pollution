@@ -1,4 +1,5 @@
 from analysis.analyzer import analyze
+from analysis.batch_analysis import analyze_batch
 
 from analysis.trend_seasonality_checker import box_plot, check_seasonal_decomposition
 from arima.arima_pollution import check_seasonality, analyze_data, my_auto_arima, pure_arima
@@ -19,29 +20,26 @@ from helpers.visualizer import simple_plot
 from lstm.lstm import my_lstm
 from lstm.lstm_rolling_window import exp_lstm
 
-path = '%s/pollution_data/experiment_data' % Path(__file__).parent
-path_to_file = '%s/Centar_PM25_NEW1.csv' % path
+# path = '%s/pollution_data/experiment_data' % Path(__file__).parent
+# path_to_file = '%s/Centar_PM25_NEW1.csv' % path
 
-# path = '%s/pollution_data/cut_data' % Path(__file__).parent
-# path_to_file = '%s/Centar_PM25_4W_fill_mean.csv' % path
+path = '%s/pollution_data/every_station_data' % Path(__file__).parent
+path_to_file = '%s/Centar_CO.csv' % path
 
+path_prepared = '%s/pollution_data/centar' % Path(__file__).parent
+path_to_file_prepared = '%s/Centar_PM25_prepared.csv' % path_prepared
 
-start = '2012-01-01 00:00:00'
-end = '2018-03-01 00:00:00'
-
+start = '2011-09-14 00:00:00'
+end = '2018-03-09 00:00:00'
 
 start_datetime = str_to_datetime(start)
 end_datetime = str_to_datetime(end)
 
-out_folder = 'experiment_data'
-out_file = get_autosave_path(path_to_file, out_folder, 'NEW1')
-
-
-
-# analyze(path_to_file)
+out_folder = 'centar'
+out_file = get_autosave_path(path_to_file, out_folder, 'prepared')
 
 # prepare_csv(path_to_file, out_file, start=start_datetime, end=end_datetime)
-
+# analyze(path_to_file_prepared)
 
 # METHODS
 
@@ -60,6 +58,7 @@ out_file = get_autosave_path(path_to_file, out_folder, 'NEW1')
 
 # ADDITIONAL
 plot_one_file(path_to_file)
+# plot_one_file(path_to_file_prepared)
 
 # HELPERS
 # cut_csv(path_to_file, out_file, start=start_date, end=end_date)
@@ -68,3 +67,5 @@ plot_one_file(path_to_file)
 # fill_nan_rolling_mean(path_to_file, out_file, 12, start=start_date, end=end_date)
 # check_seasonality(path_to_file, start_date, end_date)
 # box_plot(path_to_file)
+
+# analyze_batch(path_prepared)

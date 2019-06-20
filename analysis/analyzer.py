@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import pandas as pd
 import statsmodels.formula.api as smf
 import numpy as np
@@ -10,6 +12,8 @@ from statsmodels.tsa.stattools import adfuller
 from analysis.trend_seasonality_checker import check_polyfit, check_seasonal_decomposition
 from helpers.preparator import delete_outliers, get_data
 from helpers.visualizer import simple_plot
+
+parent_dir_path = Path(__file__).parents[1]
 
 
 def check_adfuller(data):
@@ -40,7 +44,7 @@ def plot_distribution(data, col_name):
     data[col_name].hist()
     pyplot.subplot(212)
     data[col_name].plot(kind='kde')
-    pyplot.show()
+    pyplot.savefig('%s/plots/%s_distribution.png' % (parent_dir_path, col_name))
 
 
 def get_resampled(df, period_name):
@@ -62,18 +66,22 @@ def get_resampled(df, period_name):
 
 
 def analyze(file):
+    print(file)
     df = get_data(file)
     col_name = df.columns[0]
     period_name = 'M'
     degree = 1
-    # new_df = df.loc['2016-01-01 00:00:00':'2017-01-01 00:00:00']
+
+    df = df.loc['2014-11-07 00:00:00':'2014-11-10 00:00:00']
     # simple_plot(df)
-    # plot_distribution(df, col_name)
+    # df = df.diff().fillna(0)
+    simple_plot(df)
+    plot_distribution(df, col_name)
 
     # resampled = get_resampled(df, period_name)
-    check_polyfit(df, degree)
+    # check_polyfit(df, degree)
 
     # reasmpled = plot_average(df)
-    check_adfuller(df)
+    # check_adfuller(df)
     check_seasonal_decomposition(df)
     # plot_autocorrelation(df)

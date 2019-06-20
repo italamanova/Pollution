@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import dates as dates
 import matplotlib.pyplot as plt
 from numpy import polyfit
@@ -6,6 +8,7 @@ from statsmodels.tsa.seasonal import seasonal_decompose
 import seaborn as sns
 
 from helpers.preparator import get_data
+from helpers.visualizer import plot_to_file
 
 
 def plot_rolling(df):
@@ -62,8 +65,7 @@ def check_seasonal_decomposition(df):
     col_name = df.columns[0]
 
     result = seasonal_decompose(df, model='multiplicative', extrapolate_trend='freq')
-    result.plot()
-    plt.show()
+    plot_to_file(result, title=col_name, out_file_name='%s_seasonal_decompose' % col_name)
 
 
 def check_polyfit(df, degree):

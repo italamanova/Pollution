@@ -1,0 +1,41 @@
+================= max=6-23
+normaRektorat_CO.csv max=15 2015- -2018 = rCO.csv(2014-09-01  -  2018-02-26)
+normaCentar_CO.csv  max = 12 2012-2015
+normaGaziBaba_CO.csv max=8 2016+-1028+
+normaKarpos_CO.csv max=8 2012-2016?
+normaLisice_CO.csv max=23 2013-2018
+normaMiladinovci_CO.csv max=6 2009-2012+ , 2016+-2018
+================= max=100-350
+normaCentar_NO2.csv max=200 2014-2016
+normaGaziBaba_NO2.csv max=350 2013-2015
+normaKarpos_NO2.csv max=150 2012-2016
+normaMiladinovci_NO2.csv max=100 2016+ - 2018
+normaRektorat_NO2.csv max=250 2016+ - 2017+
+================= max=120-300
+normaCentar_O3.csv max=200 2014 -2018
+normaKarpos_O3.csv mzx=300 2012-2016?
+normaLisice_O3.csv max=150 2011-2018
+normaMiladinovci_O3.csv max=150 2014+-2018
+normaRektorat_O3.csv max=120 2013-2018
+================= max=500-1200
+normaCentar_PM10.csv max=1000 2014-2018
+normaKarpos_PM10.csv max=1200 2012-2018
+normaGaziBaba_PM10.csv max=500 2015?-2018
+normaLisice_PM10.csv max=1000 2011-2018
+normaMiladinovci_PM10.csv max=700 2014-2018
+normaRektorat_PM10.csv max=1000 2012-2018
+================= max=650-700
+normaCentar_PM25.csv max=700 2014-2018
+normaKarpos_PM25.csv max=650 2015-2018
+=======================================
+normaLisice_NO2.csv ???????????
+normaGaziBaba_O3.csv -----------
+normaGaziBaba_PM25.csv --------------
+normaLisice_PM25.csv -----------------
+normaMiladinovci_PM25.csv ----------------
+normaMobile_CO.csv --------------------
+normaMobile_NO2.csv ------------------
+normaMobile_O3.csv ------------------
+normaMobile_PM10.csv ----------------
+normaMobile_PM25.csv ----------------
+2normaRektorat_PM25.csv --------------

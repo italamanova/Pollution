@@ -14,14 +14,17 @@ def simple_plot(dataset, xlabel='DateTime', ylabel='Value', title=''):
     plt.show()
 
 
-def plot(dataset, xlabel='DateTime', ylabel='Value', title='Plot'):
+def plot_to_file(dataset, xlabel='DateTime', ylabel='Value', title='', out_file_name=None):
     dataset.plot()
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     plt.title(title)
     # plt.show()
     now = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    plt.savefig('%s/plots/plot_%s.png' % (parent_dir_path, now))
+    if out_file_name:
+        plt.savefig('%s/plots/%s.png' % (parent_dir_path, out_file_name))
+    else:
+        plt.savefig('%s/plots/plot_%s.png' % (parent_dir_path, now))
 
 
 def scatter_plot(dataset, xlabel='DateTime', ylabel='Value', title='Plot',

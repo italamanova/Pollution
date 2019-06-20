@@ -4,7 +4,7 @@ import os
 import pandas as pd
 import plotly
 
-from helpers.visualizer import plot, simple_plot
+from helpers.visualizer import plot_to_file, simple_plot
 
 plotly.tools.set_credentials_file(username='talamash', api_key='NVqgaGN3OpMYcqXncLOw')
 
@@ -13,7 +13,7 @@ def plot_all_data(folder_path):
     os.chdir(folder_path)
 
     extension = 'csv'
-    all_filenames = [i for i in glob.glob('*.{}'.format(extension))]
+    all_filenames = [i for i in glob.glob('Rektorat*.{}'.format(extension))]
 
     for file in all_filenames:
         print(file)
@@ -35,3 +35,5 @@ def plot_one_file(file, start=None, end=None):
     else:
         data = dataset
     simple_plot(data, ylabel=data.columns[0])
+
+

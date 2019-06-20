@@ -31,7 +31,7 @@ def split_csv(folder_path):
             if column != 'time':
                 new_df = df.loc[:, ['time', column]].copy()
                 new_df = new_df.rename(columns={column: filename})
-                new_df.to_csv('./new_data/%s_%s' % (column, file), index=False, encoding='utf-8-sig')
+                new_df.to_csv('./every_station_data/%s_%s' % (column, file), index=False, encoding='utf-8-sig')
 
 
 def cut_csv(file, out_file, start, end):
@@ -109,3 +109,7 @@ def sdd_missing_dates(df):
     df_date_range = pd.date_range(start=df.index[0], end=df.index[-1], freq='H')
     new_df = df.reindex(df_date_range).rename_axis('time')
     return new_df
+
+
+def differencing(df):
+    pass

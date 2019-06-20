@@ -19,7 +19,7 @@ from statsmodels.graphics.tsaplots import plot_pacf
 
 from analysis.analyzer import check_adfuller, plot_autocorrelation, plot_distribution
 from helpers.performance import measure_performance
-from helpers.visualizer import plot, simple_plot
+from helpers.visualizer import plot_to_file, simple_plot
 
 parent_dir_path = Path(__file__).parents[1]
 
@@ -48,7 +48,7 @@ def get_data(file, start=None, end=None):
 
 def plot_average(data, col_name):
     weekly = data.resample('M').sum()
-    plot(weekly, ylabel='%s_weekly' % col_name, title='Air pollution')
+    plot_to_file(weekly, ylabel='%s_weekly' % col_name, title='Air pollution')
 
 
 def plot_rolling_average(data, col_name):
@@ -126,7 +126,7 @@ def pure_arima(file):
 
     data = data.last('4W')
 
-    plot(data, ylabel=col_name, title='Air pollution')
+    plot_to_file(data, ylabel=col_name, title='Air pollution')
     print('Description', data[col_name].describe())
 
     train_size = int(len(data) * 0.8)
