@@ -24,13 +24,13 @@ from lstm.lstm_rolling_window import exp_lstm
 # path_to_file = '%s/Centar_PM25_NEW1.csv' % path
 
 path = '%s/pollution_data/every_station_data' % Path(__file__).parent
-path_to_file = '%s/Centar_CO.csv' % path
+path_to_file = '%s/Centar_PM25.csv' % path
 
 path_prepared = '%s/pollution_data/centar' % Path(__file__).parent
-path_to_file_prepared = '%s/Centar_CO_prepared.csv' % path_prepared
+path_to_file_prepared = '%s/Centar_PM25_prepared.csv' % path_prepared
 
-start = '2013-07-08 00:00:00'
-end = '2015-07-08 00:00:00'
+start = '2013-07-10 00:00:00'
+end = '2018-03-09 00:00:00'
 
 start_datetime = str_to_datetime(start)
 end_datetime = str_to_datetime(end)
