@@ -27,10 +27,10 @@ path = '%s/pollution_data/every_station_data' % Path(__file__).parent
 path_to_file = '%s/Centar_CO.csv' % path
 
 path_prepared = '%s/pollution_data/centar' % Path(__file__).parent
-path_to_file_prepared = '%s/Centar_PM25_prepared.csv' % path_prepared
+path_to_file_prepared = '%s/Centar_CO_prepared.csv' % path_prepared
 
-start = '2011-09-14 00:00:00'
-end = '2018-03-09 00:00:00'
+start = '2013-07-08 00:00:00'
+end = '2015-07-08 00:00:00'
 
 start_datetime = str_to_datetime(start)
 end_datetime = str_to_datetime(end)
@@ -57,8 +57,8 @@ out_file = get_autosave_path(path_to_file, out_folder, 'prepared')
 # exp_lstm(lstm_path_to_file)
 
 # ADDITIONAL
-plot_one_file(path_to_file)
-# plot_one_file(path_to_file_prepared)
+# plot_one_file(path_to_file)
+plot_one_file(path_to_file_prepared)
 
 # HELPERS
 # cut_csv(path_to_file, out_file, start=start_date, end=end_date)
