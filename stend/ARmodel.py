@@ -1,4 +1,4 @@
-#from https://machinelearningmastery.com/autoregression-models-time-series-forecasting-python/
+# from https://machinelearningmastery.com/autoregression-models-time-series-forecasting-python/
 import numpy
 from time import time
 from pandas import Series
@@ -6,7 +6,8 @@ from matplotlib import pyplot
 from statsmodels.tsa.ar_model import AR
 from sklearn.metrics import mean_squared_error
 import pandas as pd
-#series = Series.from_csv('daily-minimum-temperatures.csv', header=0)
+
+# series = Series.from_csv('daily-minimum-temperatures.csv', header=0)
 '''
 series = Series.from_csv('d2018_2.csv', header=0)
 # split dataset
@@ -27,16 +28,16 @@ test = data.loc[fstart:fend]
 t0 = time()
 model = AR(train.CO)
 t1 = time()
-print('build model %f' % (t1-t0))
+print('build model %f' % (t1 - t0))
 model_fit = model.fit(maxlag=None, ic='aic')
 t2 = time()
-print('fit model %f' % (t2-t1))
+print('fit model %f' % (t2 - t1))
 print('Lag: %s' % model_fit.k_ar)
 print('Coefficients: %s' % model_fit.params)
 # make predictions
-predictions = model_fit.predict(start=len(train), end=len(train)+len(test)-1, dynamic=False)
+predictions = model_fit.predict(start=len(train), end=len(train) + len(test) - 1, dynamic=False)
 t3 = time()
-print('predict model %f' % (t3-t2))
+print('predict model %f' % (t3 - t2))
 '''
 for i in range(len(predictions)):
 	print('predicted=%f, expected=%f' % (predictions[i], test[i]))
