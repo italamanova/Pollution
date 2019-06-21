@@ -11,7 +11,7 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_squared_error
 
 from arima.arima_pollution import get_data
-from helpers.performance import measure_performance
+from helpers.accuracy import measure_accuracy
 
 numpy.random.seed(7)
 
@@ -57,6 +57,8 @@ def lstm_predict(dataset, look_back):
     print('Train Score: %.2f RMSE' % (trainScore))
     testScore = math.sqrt(mean_squared_error(testY[0], testPredict[:, 0]))
     print('Test Score: %.2f RMSE' % (testScore))
+
+    measure_accuracy(testY[0], testPredict[:, 0])
     return trainPredict, testPredict
 
 
@@ -71,6 +73,7 @@ def show_plot(dataset, look_back, trainPredict, testPredict):
     testPredictPlot[len(trainPredict) + (look_back * 2) + 1:len(dataset) - 1, :] = testPredict
     # plot baseline and predictions
     plt.plot(dataset)
+    plt.title('LSTM')
     plt.plot(trainPredictPlot)
     plt.plot(testPredictPlot)
     plt.show()

@@ -23,42 +23,50 @@ from lstm.lstm_rolling_window import exp_lstm
 # path = '%s/pollution_data/experiment_data' % Path(__file__).parent
 # path_to_file = '%s/Centar_PM25_NEW1.csv' % path
 
-path = '%s/pollution_data/every_station_data' % Path(__file__).parent
-path_to_file = '%s/Centar_PM25.csv' % path
+# path = '%s/pollution_data/every_station_data' % Path(__file__).parent
+# path_to_file = '%s/Centar_PM25.csv' % path
+
+path = '%s/pollution_data/candidates_checking' % Path(__file__).parent
+path_to_file = '%s/Centar_PM25_prepared_cut.csv' % path
 
 path_prepared = '%s/pollution_data/centar' % Path(__file__).parent
 path_to_file_prepared = '%s/Centar_PM25_prepared.csv' % path_prepared
 
-start = '2013-07-10 00:00:00'
-end = '2018-03-09 00:00:00'
+start = '2017-02-18 00:00:00'
+end = '2017-02-23 00:00:00'
 
 start_datetime = str_to_datetime(start)
 end_datetime = str_to_datetime(end)
 
-out_folder = 'centar'
-out_file = get_autosave_path(path_to_file, out_folder, 'prepared')
+out_folder = 'candidates_checking'
+out_file = get_autosave_path(path_to_file_prepared, out_folder, 'cut')
 
-prepare_csv(path_to_file, out_file, start=start_datetime, end=end_datetime)
+# prepare_csv(path_to_file, out_file, start=start_datetime, end=end_datetime)
 # analyze(path_to_file_prepared)
+cut_csv(path_to_file_prepared, out_file, start=start, end=end)
+
 
 # METHODS
 
 # ES
-# exponential_smoothing(path_to_file)
+print('\n ES')
+exponential_smoothing(path_to_file)
 # manual_es(path_to_file)
 
-# ARIMA
-# my_auto_arima(path_to_file)
-# pure_arima(path_to_file)
-
-# LSTM
+# # ARIMA
+print('\n ARIMA')
+my_auto_arima(path_to_file)
+# # pure_arima(path_to_file_prepared)
+#
+# # LSTM
+# print('\n LSTM')
 # my_lstm(path_to_file)
 # lstm_path_to_file = '%s/pollution_data/cut_data/Centar_PM25_fill_mean_year.csv' % Path(__file__).parent
 # exp_lstm(lstm_path_to_file)
 
 # ADDITIONAL
 # plot_one_file(path_to_file)
-plot_one_file(path_to_file_prepared)
+# plot_one_file(path_to_file_prepared)
 
 # HELPERS
 # cut_csv(path_to_file, out_file, start=start_date, end=end_date)

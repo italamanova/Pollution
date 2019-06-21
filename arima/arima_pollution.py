@@ -12,14 +12,18 @@ from statsmodels.tsa.seasonal import seasonal_decompose
 from pandas import Series
 from matplotlib import pyplot
 from statsmodels.tsa.stattools import adfuller
+import numpy as np
 
 import statsmodels.api as sm
 from statsmodels.graphics.tsaplots import plot_acf
 from statsmodels.graphics.tsaplots import plot_pacf
 
 from analysis.analyzer import check_adfuller, plot_autocorrelation, plot_distribution
-from helpers.performance import measure_performance
-from helpers.visualizer import plot_to_file, simple_plot
+from analysis.trend_seasonality_checker import check_seasonal_decomposition
+from helpers.decorators import timeit
+from helpers.accuracy import measure_accuracy
+from helpers.preparator import cut_dataframe
+from helpers.visualizer import plot_to_file, simple_plot, plot_prediction
 
 parent_dir_path = Path(__file__).parents[1]
 
@@ -80,8 +84,16 @@ def analyze_data(file, start=None, end=None):
     # plot_boxplot(data)
 
 
+@timeit
 def my_auto_arima(file, start=None, end=None):
     data = get_data(file, start, end)
+    print(data[data.isna().any(axis=1)])
+
+    # start = '2018-01-10 00:00:00'
+    # end = '2018-02-10 00:00:00'
+    #
+    # data = cut_dataframe(data, start, end)
+    # data = data.last('2W')
 
     col_name = data.columns.values[0]
 
@@ -96,19 +108,24 @@ def my_auto_arima(file, start=None, end=None):
     train = train_copy[col_name]
     test = test_copy[col_name]
 
-    # result = seasonal_decompose(data, freq=24)
-    # fig = result.plot()
-    # plot_mpl(fig)
+    # check_seasonal_decomposition(data)
 
-    stepwise_model = auto_arima(data, start_p=1, start_q=1,
-                                max_p=5, max_q=5,
-                                seasonal=False,
-                                d=1, trace=True,
+    stepwise_model = auto_arima(train, start_p=0, max_p=3,
+                                start_q=0, max_q=3,
+                                start_P=0, max_P=2,
+                                start_Q=0, max_Q=2,
+                                seasonal=True, m=24,
+                                # d=1,
+                                # D=0, max_D=1,
+                                max_order=None,
+                                trace=True,
                                 error_action='ignore',
                                 suppress_warnings=True,
-                                stepwise=True)
+                                stepwise=True  # True
+                                )
 
     print(stepwise_model.aic())
+    print(stepwise_model.__dict__)
 
     stepwise_model.fit(train)
 
@@ -116,15 +133,19 @@ def my_auto_arima(file, start=None, end=None):
     print(future_forecast)
 
     future_forecast = pd.DataFrame(future_forecast, index=test.index, columns=['Prediction'])
-    simple_plot(pd.concat([test, future_forecast], axis=1))
-    rmse = measure_performance(test, future_forecast)
+    plot_prediction(train, test, future_forecast, title='ARIMA')
+    measure_accuracy(test, future_forecast)
+
 
 def pure_arima(file):
     data = get_data(file)
 
     col_name = data.columns.values[0]
 
-    data = data.last('4W')
+    # start = '2018-01-10 00:00:00'
+    # end = '2018-02-10 00:00:00'
+    #
+    # data = cut_dataframe(data, start, end)
 
     plot_to_file(data, ylabel=col_name, title='Air pollution')
     print('Description', data[col_name].describe())
@@ -136,13 +157,11 @@ def pure_arima(file):
     train = train_copy[col_name]
     test = test_copy[col_name]
 
-
     model = ARIMA(train, order=(5, 1, 1))
     model_fit = model.fit(disp=0)
     future_forecast = model_fit.forecast(steps=len(test))[0]
     # observation
     # report performance
-    rmse = measure_performance(test, future_forecast)
 
     future_forecast = pd.DataFrame(future_forecast, index=test.index, columns=['Prediction'])
-    simple_plot(pd.concat([test, future_forecast], axis=1))
+    plot_prediction(train, test, future_forecast)
