@@ -2,7 +2,7 @@ from analysis.analyzer import analyze
 from analysis.batch_analysis import analyze_batch
 
 from analysis.trend_seasonality_checker import box_plot, check_seasonal_decomposition
-from arima.arima_pollution import check_seasonality, analyze_data, my_auto_arima, pure_arima
+from arima.arima import check_seasonality, analyze_data, my_auto_arima, pure_arima
 from es.des import manual_es
 from es.es import exponential_smoothing
 from helpers.converter import str_to_datetime
@@ -25,47 +25,53 @@ from lstm.lstm_rolling_window import exp_lstm
 
 # path = '%s/pollution_data/every_station_data' % Path(__file__).parent
 # path_to_file = '%s/Centar_PM25.csv' % path
-
+#
 path = '%s/pollution_data/candidates_checking' % Path(__file__).parent
-path_to_file = '%s/Centar_PM25_prepared_cut.csv' % path
+path_to_file = '%s/Centar_PM25_prepared_experiment_5_days.csv' % path
 
 path_prepared = '%s/pollution_data/centar' % Path(__file__).parent
 path_to_file_prepared = '%s/Centar_PM25_prepared.csv' % path_prepared
 
-start = '2017-02-18 00:00:00'
-end = '2017-02-23 00:00:00'
+start = '2018-02-20 00:00:00'
+end = '2018-02-24 23:00:00'
 
 start_datetime = str_to_datetime(start)
 end_datetime = str_to_datetime(end)
 
 out_folder = 'candidates_checking'
-out_file = get_autosave_path(path_to_file_prepared, out_folder, 'cut')
+out_file = get_autosave_path(path_to_file_prepared, out_folder, 'experiment_5_days')
 
 # prepare_csv(path_to_file, out_file, start=start_datetime, end=end_datetime)
-# analyze(path_to_file_prepared)
-cut_csv(path_to_file_prepared, out_file, start=start, end=end)
+# cut_csv(path_to_file_prepared, out_file, start=start, end=end)
+#
+analyze(path_to_file_prepared)
+
 
 
 # METHODS
 
-# ES
-print('\n ES')
-exponential_smoothing(path_to_file)
-# manual_es(path_to_file)
-
-# # ARIMA
-print('\n ARIMA')
-my_auto_arima(path_to_file)
-# # pure_arima(path_to_file_prepared)
-#
-# # LSTM
+# print('\n ES')
+# exponential_smoothing(path_to_file)
+# print('\n ARIMA')
+# my_auto_arima(path_to_file)
 # print('\n LSTM')
 # my_lstm(path_to_file)
+
+# ES
+
+# manual_es(path_to_file)
+
+# ARIMA
+
+# pure_arima(path_to_file_prepared)
+
+# LSTM
+
 # lstm_path_to_file = '%s/pollution_data/cut_data/Centar_PM25_fill_mean_year.csv' % Path(__file__).parent
 # exp_lstm(lstm_path_to_file)
 
 # ADDITIONAL
-# plot_one_file(path_to_file)
+# plot_one_file(path_to_file, title='Amount of PM25 in Skopje from 2008 to 2018')
 # plot_one_file(path_to_file_prepared)
 
 # HELPERS

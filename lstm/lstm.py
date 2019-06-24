@@ -10,7 +10,7 @@ from keras.layers import LSTM
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_squared_error
 
-from arima.arima_pollution import get_data
+from arima.arima import get_data
 from helpers.accuracy import measure_accuracy
 
 numpy.random.seed(7)

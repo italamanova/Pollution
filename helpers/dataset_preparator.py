@@ -14,8 +14,8 @@ def prepare_dataframe(df, start=None, end=None, period_hours=None, sigma=2):
     df = cut_dataframe(df, start, end)
     df = remove_duplicates(df)
     df = sdd_missing_dates(df)
-    df = delete_outliers(df, m=sigma)
-    df = interpolate_nan(df)
+    # df = delete_outliers(df, m=sigma)
+    # df = interpolate_nan(df)
     return df
 
 

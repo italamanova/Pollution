@@ -24,7 +24,7 @@ def plot_all_data(folder_path):
         simple_plot(data, ylabel=data.columns[0], title=file)
 
 
-def plot_one_file(file, start=None, end=None):
+def plot_one_file(file, start=None, end=None, title=''):
     filename_w_ext = os.path.basename(file)
     filename, file_extension = os.path.splitext(filename_w_ext)
 
@@ -34,6 +34,6 @@ def plot_one_file(file, start=None, end=None):
         data = dataset[start:end]
     else:
         data = dataset
-    simple_plot(data, ylabel=data.columns[0])
+    simple_plot(data, ylabel=data.columns[0], title=title)
 
 

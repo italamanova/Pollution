@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 from matplotlib import pyplot
 from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
-from statsmodels.tsa.stattools import adfuller
+from statsmodels.tsa.stattools import adfuller, kpss
 
 from analysis.trend_seasonality_checker import check_polyfit, check_seasonal_decomposition
 from helpers.preparator import delete_outliers, get_data
@@ -17,13 +17,24 @@ parent_dir_path = Path(__file__).parents[1]
 
 
 def check_adfuller(data):
-    X = data[data.columns[0]].values
-    result = adfuller(X)
-    print('ADF Statistic: %f' % result[0])
-    print('p-value: %f' % result[1])
-    print('Critical Values:')
-    for key, value in result[4].items():
-        print('\t%s: %.3f' % (key, value))
+    series = data[data.columns[0]].values
+    print('Results of Dickey-Fuller Test:')
+    dftest = adfuller(series, autolag='AIC')
+    dfoutput = pd.Series(dftest[0:4],
+                         index=['Test Statistic', 'p-value', '#Lags Used', 'Number of Observations Used'])
+    for key, value in dftest[4].items():
+        dfoutput['Critical Value (%s)' % key] = value
+    print(dfoutput)
+
+
+def check_kpss(data):
+    print('Results of KPSS Test:')
+    series = data[data.columns[0]].values
+    kpsstest = kpss(series, regression='c')
+    kpss_output = pd.Series(kpsstest[0:3], index=['Test Statistic', 'p-value', 'Lags Used'])
+    for key, value in kpsstest[3].items():
+        kpss_output['Critical Value (%s)' % key] = value
+    print(kpss_output)
 
 
 def plot_autocorrelation(data):
@@ -66,22 +77,21 @@ def get_resampled(df, period_name):
 
 
 def analyze(file):
-    print(file)
     df = get_data(file)
     col_name = df.columns[0]
     period_name = 'M'
     degree = 1
 
-    df = df.loc['2014-11-07 00:00:00':'2014-11-10 00:00:00']
+    # df = df.loc['2014-11-07 00:00:00':'2014-11-10 00:00:00']
     # simple_plot(df)
     # df = df.diff().fillna(0)
-    simple_plot(df)
-    plot_distribution(df, col_name)
+    # simple_plot(df)
+    # plot_distribution(df, col_name)
 
     # resampled = get_resampled(df, period_name)
     # check_polyfit(df, degree)
 
-    # reasmpled = plot_average(df)
-    # check_adfuller(df)
-    check_seasonal_decomposition(df)
+    check_adfuller(df)
+    check_kpss(df)
+    # check_seasonal_decomposition(df)
     # plot_autocorrelation(df)
