@@ -45,17 +45,17 @@ model = auto_arima(train, start_p=0, max_p=3,
                    suppress_warnings=True,
                    stepwise=False  # True
                    )
-with open('arima.pkl', 'wb') as pkl:
+with open('myarima.pkl', 'wb') as pkl:
     pickle.dump(model, pkl)
 '''
 # Or maybe joblib tickles your fancy
 from sklearn.externals import joblib
-joblib.dump(arima, 'arima.pkl')
-joblib_preds = joblib.load('arima.pkl').predict(n_periods=5)
+joblib.dump(myarima, 'myarima.pkl')
+joblib_preds = joblib.load('myarima.pkl').predict(n_periods=5)
 '''
 
 # Now read it back and make a prediction
-# with open('arima.pkl', 'rb') as pkl:
+# with open('myarima.pkl', 'rb') as pkl:
 #    pickle_preds = pickle.load(pkl).predict(n_periods=5)
 
 print('best aic=%f' % model.aic())

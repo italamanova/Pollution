@@ -40,6 +40,12 @@ def cut_csv(file, out_file, start, end):
     new_df.to_csv(out_file, encoding='utf-8-sig')
 
 
+def cut_csv_by_period(file, out_file, start, period):
+    df = get_data(file)
+    new_df = cut_dataframe_by_period(df, start, period)
+    new_df.to_csv(out_file, encoding='utf-8-sig')
+
+
 def cut_last(df, last_parameter):
     df.index = pd.to_datetime(df.index)
     new_df = df.last(last_parameter)

@@ -13,4 +13,4 @@ def measure_accuracy(test_data, predictions):
     rmse = sqrt(mse)
     mape = mean_absolute_percentage_error(test_data, predictions)
     print('\nMSE: %.3f \nRMSE: %.3f \nMAPE: %.3f' % (mse, rmse, mape))
-    return rmse
+    return {'mse': '%.3f' % mse, 'rmse': '%.3f' % rmse, 'mape': '%.3f' % mape}

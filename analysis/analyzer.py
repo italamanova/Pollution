@@ -41,10 +41,10 @@ def plot_autocorrelation(data):
     pyplot.figure()
 
     pyplot.subplot(211)
-    pyplot.axis([0, 50, -1, 1])
+    # pyplot.axis([0, 50, -1, 1])
     plot_acf(data, ax=pyplot.gca())
     pyplot.subplot(212)
-    pyplot.axis([0, 50, -1, 1])
+    # pyplot.axis([0, 50, -1, 1])
     plot_pacf(data, ax=pyplot.gca())
     pyplot.show()
 
@@ -79,19 +79,18 @@ def get_resampled(df, period_name):
 def analyze(file):
     df = get_data(file)
     col_name = df.columns[0]
-    period_name = 'M'
+    period_name = 'D'
     degree = 1
 
     # df = df.loc['2014-11-07 00:00:00':'2014-11-10 00:00:00']
     # simple_plot(df)
-    # df = df.diff().fillna(0)
     # simple_plot(df)
     # plot_distribution(df, col_name)
 
-    # resampled = get_resampled(df, period_name)
+    df = get_resampled(df, period_name)
     # check_polyfit(df, degree)
 
-    check_adfuller(df)
-    check_kpss(df)
-    # check_seasonal_decomposition(df)
-    # plot_autocorrelation(df)
+    # check_adfuller(df)
+    # check_kpss(df)
+    check_seasonal_decomposition(df)
+    plot_autocorrelation(df)

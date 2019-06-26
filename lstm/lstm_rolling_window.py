@@ -10,7 +10,7 @@ from keras.layers import LSTM
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_squared_error
 
-from arima.arima import get_data
+from myarima.arima import get_data
 from lstm.lstm import lstm_predict, show_plot
 
 
