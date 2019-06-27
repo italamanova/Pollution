@@ -85,7 +85,7 @@ def analyze_data(file, start=None, end=None):
 
 
 @timeit
-def my_auto_arima(file, start=None, end=None):
+def my_auto_arima(file, test_size, start=None, end=None):
     data = get_data(file, start, end)
     print(data[data.isna().any(axis=1)])
 
@@ -100,8 +100,9 @@ def my_auto_arima(file, start=None, end=None):
     # plot(data, ylabel=col_name, title='Air pollution')
     print('Description', data[col_name].describe())
 
-    train_size = int(len(data) * 0.8)
-    test_size = len(data) - train_size
+    test_size = test_size
+    train_size = len(data) - test_size
+
     train_copy = data[0:train_size].copy()
     test_copy = data[train_size:len(data)].copy()
 

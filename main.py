@@ -26,25 +26,25 @@ from lstm.lstm_rolling_window import exp_lstm
 # path = '%s/pollution_data/every_station_data' % Path(__file__).parent
 # path_to_file = '%s/Centar_PM25.csv' % path
 #
-# path = '%s/pollution_data/candidates_checking' % Path(__file__).parent
-# path_to_file = '%s/Centar_PM25_prepared_cut.csv' % path
+path = '%s/pollution_data/cut_data' % Path(__file__).parent
+path_to_file = '%s/Centar_PM25_prepared_test.csv' % path
 
 path_prepared = '%s/pollution_data/centar' % Path(__file__).parent
 path_to_file_prepared = '%s/Centar_PM25_prepared.csv' % path_prepared
 
-start = '2017-01-01 00:00:00'
-end = '2017-12-31 23:00:00'
+start = '2017-05-01 00:00:00'
+end = '2017-05-04 00:00:00'
 
 start_datetime = str_to_datetime(start)
 end_datetime = str_to_datetime(end)
 
 # out_folder = 'candidates_checking'
 out_folder = 'cut_data'
-out_file = get_autosave_path(path_to_file_prepared, out_folder, '1year')
+out_file = get_autosave_path(path_to_file_prepared, out_folder, 'test')
 
 # prepare_csv(path_to_file, out_file, start=start_datetime, end=end_datetime)
-# cut_csv(path_to_file_prepared, out_file, start=start, end=end)
-cut_csv_by_period(path_to_file_prepared, out_file, start=start_datetime, period=24*7*7)
+cut_csv(path_to_file_prepared, out_file, start=start, end=end)
+# cut_csv_by_period(path_to_file_prepared, out_file, start=start_datetime, period=24*7*7)
 # analyze(path_to_file)
 
 # METHODS
@@ -52,7 +52,7 @@ cut_csv_by_period(path_to_file_prepared, out_file, start=start_datetime, period=
 # print('\n ES')
 # exponential_smoothing(path_to_file)
 # print('\n ARIMA')
-# my_auto_arima(path_to_file)
+my_auto_arima(path_to_file, 5)
 # print('\n LSTM')
 # my_lstm(path_to_file)
 

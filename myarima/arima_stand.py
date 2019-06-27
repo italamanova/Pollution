@@ -28,12 +28,13 @@ path_out = '%s/pollution_data/arima_selection_results/1' % Path(__file__).parent
 # file = '%s/Centar_PM25_prepared_1year.csv' % path_prepared
 file = '%s/Centar_PM25_prepared_1year.csv' % path_prepared
 
-windows = [24*3, 24 * 7, 24 * 14, 24 * 30]
+windows = [24*5, 24 * 7, 24 * 14, 24 * 30]
 test_sizes = [4, 12, 24, 24]
 
 for i in range(0, len(windows)):
     m_window_size = windows[i]
     m_test_size = test_sizes[i]
+    print(m_window_size, m_test_size)
     m_out_file = '%s/%s_%s_%s.json' % (path_out, i, m_window_size, m_test_size)
 
     stand = AutoArimaSelection(file, m_window_size, m_test_size,

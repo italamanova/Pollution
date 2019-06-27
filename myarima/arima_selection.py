@@ -72,7 +72,6 @@ class AutoArimaSelection:
             df_part = df.iloc[i:i + self.window_size].copy()
             train_test_list.append(
                 (df_part.iloc[0:train_size].copy(), df_part.iloc[train_size:self.window_size].copy()))
-
         return train_test_list
 
     def print_to_file(self):
@@ -112,10 +111,13 @@ class AutoArimaSelection:
     def select_model(self):
         train_test_list = self.create_train_test_list()
         for train, test in train_test_list:
+
             output = {'train_start': train.index[0].strftime('%Y-%m-%d %H-%M-%S'),
                       'train_end': train.index[-1].strftime('%Y-%m-%d %H-%M-%S'),
                       'test_start': test.index[0].strftime('%Y-%m-%d %H-%M-%S'),
                       'test_end': test.index[-1].strftime('%Y-%m-%d %H-%M-%S')}
+            print('BEFORE', output)
+            print('BEFORE', len(train), len(test))
             model = self.build_model(train)
             output.update(self.output_model(model))
             metrics = self.predict_model(model, train, test)
