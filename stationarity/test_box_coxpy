@@ -1,0 +1,64 @@
+from pathlib import Path
+
+from astropy.table import Table
+from numpy.random import seed
+
+from numpy.matlib import randn
+from scipy import stats
+import matplotlib.pyplot as plt
+import numpy as np
+import seaborn as sns
+from statsmodels.graphics.gofplots import qqplot
+
+from helpers.preparator import get_data
+
+sns.set(style="darkgrid")
+
+
+def normtesttab(x):
+    nm_value, nm_p = stats.normaltest(x)
+    jb_value, jb_p = stats.jarque_bera(x)
+    alpha = 1e-3
+    nm_norm = nm_p > alpha
+    jb_norm = jb_p > alpha
+
+    data_rows = [('D’Agostino-Pearson', nm_value, nm_p, nm_norm),
+                 ('Jarque-Bera', jb_value, jb_p, jb_norm)]
+    t = Table(rows=data_rows, names=('Test name', 'Statistic', 'p-value', 'Is normal?'),
+              meta={'name': 'normal test table'},
+              dtype=('S25', 'f8', 'f8', 'b'))
+    print(t)
+
+def main(file):
+    start = '2017-01-01 00:00:00'
+    end = '2017-01-10 00:00:00'
+    x = get_data(file)
+    x = x.loc[start:end]
+    x = x[x.columns[0]].values
+    # x = stats.loggamma.rvs(5, size=500) + 5
+    sns.kdeplot(x, shade=True)
+    qqplot(x, line='s')
+    plt.show()
+    normtesttab(x)
+
+    xt, maxlog, interval = stats.boxcox(x, alpha=0.05)
+    sns.kdeplot(xt, shade=True)
+    qqplot(xt, line='s')
+    plt.show()
+    print("lambda = {:g}".format(maxlog))
+
+    normtesttab(xt)
+
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    prob = stats.boxcox_normplot(x, -19, 19, plot=ax)
+    plt.plot(prob[0], prob[1], color='b')
+    ax.axvline(maxlog, color='r')
+    ax.axvline(interval[1], color='g', ls='--')
+    ax.axvline(interval[0], color='g', ls='--')
+    plt.show()
+
+
+path_prepared = '%s/pollution_data/centar' % Path(__file__).parents[1]
+path_to_file_prepared = '%s/Centar_PM25_prepared.csv' % path_prepared
+main(path_to_file_prepared)
