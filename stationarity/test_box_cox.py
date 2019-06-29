@@ -15,9 +15,9 @@ from helpers.preparator import get_data
 sns.set(style="darkgrid")
 
 
-def normtesttab(x):
-    nm_value, nm_p = stats.normaltest(x)
-    jb_value, jb_p = stats.jarque_bera(x)
+def normtesttab(df):
+    nm_value, nm_p = stats.normaltest(df)
+    jb_value, jb_p = stats.jarque_bera(df)
     alpha = 1e-3
     nm_norm = nm_p > alpha
     jb_norm = jb_p > alpha
@@ -29,19 +29,14 @@ def normtesttab(x):
               dtype=('S25', 'f8', 'f8', 'b'))
     print(t)
 
-def main(file):
-    start = '2017-01-01 00:00:00'
-    end = '2017-01-10 00:00:00'
-    x = get_data(file)
-    x = x.loc[start:end]
-    x = x[x.columns[0]].values
-    # x = stats.loggamma.rvs(5, size=500) + 5
-    sns.kdeplot(x, shade=True)
-    qqplot(x, line='s')
-    plt.show()
-    normtesttab(x)
 
-    xt, maxlog, interval = stats.boxcox(x, alpha=0.05)
+def my_box_cox(series):
+    sns.kdeplot(series, shade=True)
+    qqplot(series, line='s')
+    plt.show()
+    normtesttab(series)
+
+    xt, maxlog, interval = stats.boxcox(series, alpha=0.05)
     sns.kdeplot(xt, shade=True)
     qqplot(xt, line='s')
     plt.show()
@@ -51,12 +46,25 @@ def main(file):
 
     fig = plt.figure()
     ax = fig.add_subplot(111)
-    prob = stats.boxcox_normplot(x, -19, 19, plot=ax)
+    prob = stats.boxcox_normplot(series, -19, 19, plot=ax)
     plt.plot(prob[0], prob[1], color='b')
     ax.axvline(maxlog, color='r')
     ax.axvline(interval[1], color='g', ls='--')
     ax.axvline(interval[0], color='g', ls='--')
     plt.show()
+
+def my_diff(series):
+    pass
+
+
+def main(file):
+    start = '2017-01-01 00:00:00'
+    end = '2017-01-10 00:00:00'
+    df = get_data(file)
+    df = df.loc[start:end]
+    series = df[df.columns[0]].values
+    # df = stats.loggamma.rvs(5, size=500) + 5
+    my_box_cox(series)
 
 
 path_prepared = '%s/pollution_data/centar' % Path(__file__).parents[1]

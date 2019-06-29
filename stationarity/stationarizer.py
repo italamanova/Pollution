@@ -1,3 +1,6 @@
+from matplotlib import pyplot
+
+
 class Stationarity:
     def __init__(self, df):
         self.df = df
@@ -16,10 +19,14 @@ class Stationarity:
         pass
 
     def make_diff(self):
-        pass
+        diff = self.df.diff()
+        pyplot.plot(diff)
+        pyplot.show()
 
     def make_sdiff(self):
-        pass
+        diff = self.df.diff(periods=24)
+        pyplot.plot(diff)
+        pyplot.show()
 
     def stationarize(self):
         df = self.df

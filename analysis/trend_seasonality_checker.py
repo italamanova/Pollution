@@ -8,7 +8,7 @@ from statsmodels.tsa.seasonal import seasonal_decompose
 import seaborn as sns
 
 from helpers.preparator import get_data
-from helpers.visualizer import plot_to_file
+from helpers.visualizer import plot_to_file, simple_plot
 
 
 def plot_rolling(df):
@@ -65,7 +65,8 @@ def check_seasonal_decomposition(df):
     col_name = df.columns[0]
 
     result = seasonal_decompose(df, model='multiplicative', extrapolate_trend='freq')
-    plot_to_file(result, title=col_name, out_file_name='%s_seasonal_decompose' % col_name)
+    # plot_to_file(result, title=col_name, out_file_name='%s_seasonal_decompose' % col_name)
+    simple_plot(result)
 
 
 def check_polyfit(df, degree):
@@ -86,3 +87,12 @@ def check_polyfit(df, degree):
     plt.plot(df.values)
     plt.plot(curve, color='red', linewidth=2)
     plt.show()
+
+#TODO
+'''
+plot data for all years resampled bu month and check seasonal decompose, see what trend is there
+plot same for month resampled by day
+plot hourly data(need smoothing)
+moving average smoothing to check the trend
+fourier transform
+'''
