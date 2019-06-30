@@ -41,7 +41,7 @@ def main(file):
     end = '2018-01-01 00:00:00'
     df = get_data(file)
     # df = df.loc[start:end]
-    # df = get_resampled(df, 'D')
+    df = get_resampled(df, 'W')
     # simple_plot(df)
     series = df[df.columns[0]]
     fourier(series, df.index)

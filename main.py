@@ -1,7 +1,7 @@
 from analysis.analyzer import analyze
 from analysis.batch_analysis import analyze_batch
 
-from analysis.trend_seasonality_checker import box_plot, check_seasonal_decomposition
+from analysis.trend_seasonality_checker import box_plot, check_seasonal_decomposition, analyze_rolling
 from myarima.arima import check_seasonality, analyze_data, my_auto_arima, pure_arima
 from es.des import manual_es
 from es.es import exponential_smoothing
@@ -20,11 +20,6 @@ from helpers.visualizer import simple_plot
 from lstm.lstm import my_lstm
 from lstm.lstm_rolling_window import exp_lstm
 
-# path = '%s/pollution_data/experiment_data' % Path(__file__).parent
-# path_to_file = '%s/Centar_PM25_NEW1.csv' % path
-
-# path = '%s/pollution_data/every_station_data' % Path(__file__).parent
-# path_to_file = '%s/Centar_PM25.csv' % path
 #
 path = '%s/pollution_data/cut_data' % Path(__file__).parent
 path_to_file = '%s/Centar_PM25_prepared_test.csv' % path
@@ -43,16 +38,16 @@ out_folder = 'cut_data'
 out_file = get_autosave_path(path_to_file_prepared, out_folder, 'test')
 
 # prepare_csv(path_to_file, out_file, start=start_datetime, end=end_datetime)
-cut_csv(path_to_file_prepared, out_file, start=start, end=end)
+# cut_csv(path_to_file_prepared, out_file, start=start, end=end)
 # cut_csv_by_period(path_to_file_prepared, out_file, start=start_datetime, period=24*7*7)
-# analyze(path_to_file)
+analyze(path_to_file_prepared)
 
 # METHODS
 
 # print('\n ES')
 # exponential_smoothing(path_to_file)
 # print('\n ARIMA')
-my_auto_arima(path_to_file, 5)
+# my_auto_arima(path_to_file, 5)
 # print('\n LSTM')
 # my_lstm(path_to_file)
 
