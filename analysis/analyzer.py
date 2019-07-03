@@ -13,8 +13,11 @@ from statsmodels.iolib import SimpleTable
 from statsmodels.stats.stattools import jarque_bera
 from statsmodels.tsa.stattools import adfuller, kpss
 
+from analysis.trend_seasonality_checker import check_seasonal_decomposition
+from helpers.converter import get_resampled
 from helpers.preparator import delete_outliers, get_data
 from helpers.visualizer import simple_plot
+from stationarity.differencing_checker import fourier
 
 parent_dir_path = Path(__file__).parents[1]
 
@@ -76,11 +79,6 @@ def plot_distribution(data, col_name):
     pyplot.show()
 
 
-def get_resampled(df, period_name):
-    resampled = df.resample(period_name).sum()
-    return resampled
-
-
 # def polynomial_regression(df):
 #     col_name = df.columns[0]
 #     X = [i % 365 for i in range(0, len(df))]
@@ -97,24 +95,25 @@ def get_resampled(df, period_name):
 def analyze(file):
     df = get_data(file)
     col_name = df.columns[0]
-    period_name = 'D'
+    period_name = 'M'
     degree = 1
 
-    # df = df.loc['2016-01-01 00:00:00':'2016-05-01 00:00:00']
+    # df = df.loc['2015-02-01 00:00:00':'2015-07-01 00:00:00']
     # simple_plot(df)
-    plot_distribution(df, col_name)
+    # plot_distribution(df, col_name)
     # df = get_resampled(df, period_name)
 
-    # scatter_lag_plot(df, 1)
-    describe_data(df)
+    # scatter_lag_plot(df, 24)
+    # describe_data(df)
     # my_autocorrelation_plot(df)
+    # fourier(df[col_name], df.index, 12)
 
     # check_polyfit(df, degree)
 
     # check_adfuller(df)
     # check_kpss(df)
     # check_seasonal_decomposition(df)
-    # plot_autocorrelation(df)
+    plot_autocorrelation(df)
 
 
 def scatter_lag_plot(df, lag=1):

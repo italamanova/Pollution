@@ -12,10 +12,10 @@ from helpers.preparator import get_data
 from helpers.visualizer import simple_plot
 
 
-def fourier(series, date):
+def fourier(series, date, period):
     temp_fft = fft(series)
     temp_psd = np.abs(temp_fft) ** 2
-    temp_fftfreq = fftfreq(len(temp_psd), 1. / 12)
+    temp_fftfreq = fftfreq(len(temp_psd), 1. / period)
     i = temp_fftfreq > 0
     fig, ax = pyplot.subplots(1, 1, figsize=(8, 4))
     ax.plot(temp_fftfreq[i], 10 * np.log10(temp_psd[i]))
@@ -36,19 +36,3 @@ def fourier(series, date):
     pyplot.show()
 
 
-def main(file):
-    start = '2017-01-01 00:00:00'
-    end = '2018-01-01 00:00:00'
-    df = get_data(file)
-    # df = df.loc[start:end]
-    df = get_resampled(df, 'W')
-    # simple_plot(df)
-    series = df[df.columns[0]]
-    fourier(series, df.index)
-    # result = seasonal_decompose(df, model='additive', extrapolate_trend='freq')
-    # simple_plot(result)
-
-
-path_prepared = '%s/pollution_data/centar' % Path(__file__).parents[1]
-path_to_file_prepared = '%s/Centar_PM25_prepared.csv' % path_prepared
-main(path_to_file_prepared)

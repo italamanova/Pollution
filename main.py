@@ -20,12 +20,15 @@ from helpers.visualizer import simple_plot
 from lstm.lstm import my_lstm
 from lstm.lstm_rolling_window import exp_lstm
 
+path = '%s/pollution_data/every_station_data' % Path(__file__).parent
+path_to_file = '%s/Centar_PM10.csv' % path
+
 #
-path = '%s/pollution_data/cut_data' % Path(__file__).parent
-path_to_file = '%s/Centar_PM25_prepared_test.csv' % path
+# path = '%s/pollution_data/cut_data' % Path(__file__).parent
+# path_to_file = '%s/Centar_PM25_prepared_test.csv' % path
 
 path_prepared = '%s/pollution_data/centar' % Path(__file__).parent
-path_to_file_prepared = '%s/Centar_PM25_prepared.csv' % path_prepared
+path_to_file_prepared = '%s/Centar_O3_prepared.csv' % path_prepared
 
 start = '2017-05-01 00:00:00'
 end = '2017-05-04 00:00:00'
@@ -62,8 +65,8 @@ analyze(path_to_file_prepared)
 # exp_lstm(lstm_path_to_file)
 
 # ADDITIONAL
-# plot_one_file(path_to_file, title='Amount of PM25 in Skopje from 2008 to 2018')
 # plot_one_file(path_to_file)
+# plot_one_file(path_to_file_prepared)
 
 # HELPERS
 # cut_csv(path_to_file, out_file, start=start_date, end=end_date)

@@ -1,6 +1,11 @@
 from datetime import datetime
 
 
+def get_resampled(df, period_name):
+    resampled = df.resample(period_name).sum()
+    return resampled
+
+
 def str_to_datetime(str_datetime):
     return datetime.strptime(str_datetime, '%Y-%m-%d %H:%M:%S')
 

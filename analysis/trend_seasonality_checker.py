@@ -7,7 +7,6 @@ from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
 from statsmodels.tsa.seasonal import seasonal_decompose
 import seaborn as sns
 
-from analysis.analyzer import get_resampled
 from helpers.preparator import get_data
 from helpers.visualizer import plot_to_file, simple_plot
 
