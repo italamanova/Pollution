@@ -15,7 +15,7 @@ from helpers.preparator import cut_csv, fill_nan, cut_last, fill_nan_rolling_mea
 from helpers.saver import get_autosave_path
 
 path = '%s/pollution_data/cut_data' % Path(__file__).parent
-path_to_file = '%s/Centar_PM25_prepared_7W.csv' % path
+path_to_file = '%s/Centar_PM25_prepared.csv' % path
 from helpers.visualizer import simple_plot
 from lstm.lstm import my_lstm
 from lstm.lstm_rolling_window import exp_lstm
@@ -28,7 +28,7 @@ path_to_file = '%s/Centar_PM10.csv' % path
 # path_to_file = '%s/Centar_PM25_prepared_test.csv' % path
 
 path_prepared = '%s/pollution_data/centar' % Path(__file__).parent
-path_to_file_prepared = '%s/Centar_O3_prepared.csv' % path_prepared
+path_to_file_prepared = '%s/Centar_PM25_prepared.csv' % path_prepared
 
 start = '2017-05-01 00:00:00'
 end = '2017-05-04 00:00:00'
@@ -38,12 +38,12 @@ end_datetime = str_to_datetime(end)
 
 # out_folder = 'candidates_checking'
 out_folder = 'cut_data'
-out_file = get_autosave_path(path_to_file_prepared, out_folder, 'test')
+out_file = get_autosave_path(path_to_file_prepared, out_folder, '540H')
 
 # prepare_csv(path_to_file, out_file, start=start_datetime, end=end_datetime)
 # cut_csv(path_to_file_prepared, out_file, start=start, end=end)
-# cut_csv_by_period(path_to_file_prepared, out_file, start=start_datetime, period=24*7*7)
-analyze(path_to_file_prepared)
+cut_csv_by_period(path_to_file_prepared, out_file, start=start_datetime, period=90*6)
+# analyze(path_to_file_prepared)
 
 # METHODS
 
@@ -77,3 +77,6 @@ analyze(path_to_file_prepared)
 # box_plot(path_to_file)
 
 # analyze_batch(path_prepared)
+
+
+

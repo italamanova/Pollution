@@ -106,14 +106,14 @@ def analyze(file):
     # scatter_lag_plot(df, 24)
     # describe_data(df)
     # my_autocorrelation_plot(df)
-    # fourier(df[col_name], df.index, 12)
+    fourier(df[col_name], df.index, 24)
 
     # check_polyfit(df, degree)
 
     # check_adfuller(df)
     # check_kpss(df)
     # check_seasonal_decomposition(df)
-    plot_autocorrelation(df)
+    # plot_autocorrelation(df)
 
 
 def scatter_lag_plot(df, lag=1):
