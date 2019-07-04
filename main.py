@@ -42,7 +42,7 @@ out_file = get_autosave_path(path_to_file_prepared, out_folder, '540H')
 
 # prepare_csv(path_to_file, out_file, start=start_datetime, end=end_datetime)
 # cut_csv(path_to_file_prepared, out_file, start=start, end=end)
-cut_csv_by_period(path_to_file_prepared, out_file, start=start_datetime, period=90*6)
+# cut_csv_by_period(path_to_file_prepared, out_file, start=start_datetime, period=90*6)
 # analyze(path_to_file_prepared)
 
 # METHODS
@@ -65,7 +65,8 @@ cut_csv_by_period(path_to_file_prepared, out_file, start=start_datetime, period=
 # exp_lstm(lstm_path_to_file)
 
 # ADDITIONAL
-# plot_one_file(path_to_file)
+plot_one_file(path_to_file)
+
 # plot_one_file(path_to_file_prepared)
 
 # HELPERS

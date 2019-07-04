@@ -98,6 +98,8 @@ def analyze(file):
     period_name = 'M'
     degree = 1
 
+    # simple_plot(df)
+
     # df = df.loc['2015-02-01 00:00:00':'2015-07-01 00:00:00']
     # simple_plot(df)
     # plot_distribution(df, col_name)
@@ -106,7 +108,7 @@ def analyze(file):
     # scatter_lag_plot(df, 24)
     # describe_data(df)
     # my_autocorrelation_plot(df)
-    fourier(df[col_name], df.index, 24)
+    # fourier(df[col_name], df.index, 24)
 
     # check_polyfit(df, degree)
 

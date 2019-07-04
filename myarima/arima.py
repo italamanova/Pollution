@@ -46,7 +46,6 @@ def get_data(file, start=None, end=None):
         data = df.loc[start:end]
     else:
         data = df
-    # data.fillna(method='ffill', inplace=True)
     return data
 
 

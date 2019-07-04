@@ -11,6 +11,7 @@ import seaborn as sns
 from statsmodels.graphics.gofplots import qqplot
 
 from helpers.preparator import get_data
+from helpers.visualizer import simple_plot
 
 sns.set(style="darkgrid")
 
@@ -30,7 +31,16 @@ def normtesttab(df):
     print(t)
 
 
-def my_box_cox(series):
+def my_box_cox(series, alpha=0.05):
+    xt, maxlog, interval = stats.boxcox(series, alpha=alpha)
+    plt.plot(xt)
+    plt.show()
+
+    print('Lambda', maxlog)
+    return xt
+
+
+def plot_my_box_cox(series):
     sns.kdeplot(series, shade=True)
     qqplot(series, line='s')
     plt.show()
@@ -53,6 +63,7 @@ def my_box_cox(series):
     ax.axvline(interval[0], color='g', ls='--')
     plt.show()
 
+
 def my_diff(series):
     pass
 
@@ -61,12 +72,16 @@ def main(file):
     start = '2017-01-01 00:00:00'
     end = '2017-01-10 00:00:00'
     df = get_data(file)
-    df = df.loc[start:end]
+    # df = df.loc[start:end]
     series = df[df.columns[0]].values
     # df = stats.loggamma.rvs(5, size=500) + 5
-    my_box_cox(series)
+    simple_plot(df)
+
+    xt = my_box_cox(series)
 
 
-path_prepared = '%s/pollution_data/centar' % Path(__file__).parents[1]
-path_to_file_prepared = '%s/Centar_PM25_prepared.csv' % path_prepared
-main(path_to_file_prepared)
+# path_prepared = '%s/pollution_data/centar' % Path(__file__).parents[1]
+# path_to_file_prepared = '%s/Centar_PM25_prepared.csv' % path_prepared
+path = '%s/pollution_data/cut_data' % Path(__file__).parents[1]
+file = '%s/Centar_PM25_prepared_270H.csv' % path
+main(file)

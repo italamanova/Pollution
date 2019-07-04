@@ -36,17 +36,17 @@ m_j_start = 0 * m_inner_window_size
 
 m_out_file = '%s/%s_%s_%s.json' % (path_out, 'parameters', m_window_size, m_inner_window_size)
 
-# stand = ArimaParamsetersSelection(file, m_window_size, m_inner_window_size,
-#                                   start_p, max_p, start_q, max_q, max_d,
-#                                   start_P, max_P, start_Q, max_Q, max_D,
-#                                   m, information_criterion,
-#                                   max_order=max_order,
-#                                   d=d, D=D,
-#                                   error_action=error_action,
-#                                   stepwise=stepwise,
-#                                   seasonal=seasonal,
-#                                   out_file=m_out_file)
-#
-# stand.select_model(i_start=m_i_start, j_start=m_j_start)
+stand = ArimaParamsetersSelection(file, m_window_size, m_inner_window_size,
+                                  start_p, max_p, start_q, max_q, max_d,
+                                  start_P, max_P, start_Q, max_Q, max_D,
+                                  m, information_criterion,
+                                  max_order=max_order,
+                                  d=d, D=D,
+                                  error_action=error_action,
+                                  stepwise=stepwise,
+                                  seasonal=seasonal,
+                                  out_file=m_out_file)
+
+stand.select_model(i_start=m_i_start, j_start=m_j_start)
 
 get_max_orders(m_out_file)
