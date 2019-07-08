@@ -30,19 +30,19 @@ path_to_file = '%s/Centar_PM10.csv' % path
 path_prepared = '%s/pollution_data/centar' % Path(__file__).parent
 path_to_file_prepared = '%s/Centar_PM25_prepared.csv' % path_prepared
 
-start = '2017-05-01 00:00:00'
-end = '2017-05-04 00:00:00'
+start = '2017-01-01 00:00:00'
+end = '2017-12-21 23:00:00'
 
 start_datetime = str_to_datetime(start)
 end_datetime = str_to_datetime(end)
 
 # out_folder = 'candidates_checking'
 out_folder = 'cut_data'
-out_file = get_autosave_path(path_to_file_prepared, out_folder, '540H')
+out_file = get_autosave_path(path_to_file_prepared, out_folder, '1_year_arima_exp')
 
 # prepare_csv(path_to_file, out_file, start=start_datetime, end=end_datetime)
-# cut_csv(path_to_file_prepared, out_file, start=start, end=end)
-# cut_csv_by_period(path_to_file_prepared, out_file, start=start_datetime, period=90*6)
+cut_csv(path_to_file_prepared, out_file, start=start, end=end)
+# cut_csv_by_period(path_to_file_prepared, out_file, start=start_datetime, period=365*24)
 # analyze(path_to_file_prepared)
 
 # METHODS
@@ -65,7 +65,7 @@ out_file = get_autosave_path(path_to_file_prepared, out_folder, '540H')
 # exp_lstm(lstm_path_to_file)
 
 # ADDITIONAL
-plot_one_file(path_to_file)
+# plot_one_file(path_to_file)
 
 # plot_one_file(path_to_file_prepared)
 
