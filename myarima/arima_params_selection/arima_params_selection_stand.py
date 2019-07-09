@@ -28,13 +28,13 @@ path_out = '%s/pollution_data/arima_selection_results/parameters' % Path(__file_
 file = '%s/Centar_PM25_prepared_1_year_arima_2016.csv' % path_prepared
 # file = '%s/Centar_PM25_prepared.csv' % path_prepared
 
-m_window_size = 1000
-m_inner_window_size = 200
+m_window_size = 1200
+m_inner_window_size = 300
 
 m_i_start = 0 * m_window_size
 m_j_start = 0 * m_inner_window_size
 
-m_out_file = '%s/%s_%s_%s_1_year.json' % (path_out, 'parameters', m_window_size, m_inner_window_size)
+m_out_file = '%s/%s_%s_%s_2016.json' % (path_out, 'parameters', m_window_size, m_inner_window_size)
 
 stand = ArimaParamsetersSelection(file, m_window_size, m_inner_window_size,
                                   start_p, max_p, start_q, max_q, max_d,
