@@ -25,7 +25,7 @@ out_file = 'arima_parameters_selection.json'
 
 path_prepared = '%s/pollution_data/cut_data' % Path(__file__).parents[2]
 path_out = '%s/pollution_data/arima_selection_results/parameters' % Path(__file__).parents[2]
-file = '%s/Centar_PM25_prepared_1_year_arima_exp.csv' % path_prepared
+file = '%s/Centar_PM25_prepared_1_year_arima_2016.csv' % path_prepared
 # file = '%s/Centar_PM25_prepared.csv' % path_prepared
 
 m_window_size = 1000
