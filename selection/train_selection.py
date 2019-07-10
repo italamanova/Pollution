@@ -24,9 +24,6 @@ def predict_on_train(df, train, test):
 
 
 def accuracy_evaluation(test, predictions):
-    # for i, p, t in enumerate(zip(predictions, test)):
-    #     pass
-
     measure_accuracy(test, predictions)
 
 
