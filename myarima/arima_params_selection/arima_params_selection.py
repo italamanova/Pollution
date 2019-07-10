@@ -120,8 +120,6 @@ class ArimaParamsetersSelection:
                                      'inner_window_end': inner_window.index[-1].strftime('%Y-%m-%d %H-%M-%S'),
                                      'range': '%s - %s' % (inner_window['number'][0], inner_window['number'][-1])
                                      })
-                # print('BEFORE', output)
-                # print('BEFORE', len(train), len(test))
                 model = self.build_model(inner_window[self.col_name])
                 inner_output.update(self.output_model(model))
                 inner_output.update({'len': int(len(inner_window))})

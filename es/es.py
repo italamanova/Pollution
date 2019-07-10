@@ -4,13 +4,36 @@ import pandas as pd
 from statsmodels.tsa.holtwinters import ExponentialSmoothing, Holt
 
 from analysis.analyzer import get_data
-from helpers.accuracy import  measure_accuracy
+from helpers.accuracy import measure_accuracy
 from helpers.preparator import cut_dataframe
 from helpers.visualizer import plot_prediction
 
 
-def exponential_smoothing(file):
-    data = get_data(file)
+def exponential_smoothing(train, test, seasonal='add', seasonal_periods=24):
+    model = ExponentialSmoothing(train, seasonal=seasonal, seasonal_periods=seasonal_periods)
+    fit = model.fit()
+    pred = fit.forecast(len(test))
+    return pred
+
+
+def exponential_smoothing_from_df(df):
+    col_name = df.columns.values[0]
+
+    train_size = int(len(df) * 0.8)
+    train_copy = df[0:train_size].copy()
+    test_copy = df[train_size:len(df)].copy()
+
+    train = train_copy[col_name]
+    test = test_copy[col_name]
+
+    pred = exponential_smoothing(train, test)
+
+    measure_accuracy(test, pred)
+    plot_prediction(train, test, pred, title='Exponential Smoothing')
+
+
+def exponential_smoothing_from_file(file):
+    data = get_data(file).iloc[:100]
     # data = data.last('4W')
 
     # start = '2018-02-10 00:00:00'
@@ -18,23 +41,7 @@ def exponential_smoothing(file):
     #
     # data = cut_dataframe(data, start, end)
 
-    col_name = data.columns.values[0]
-
-    train_size = int(len(data) * 0.8)
-    train_copy = data[0:train_size].copy()
-    test_copy = data[train_size:len(data)].copy()
-
-    train = train_copy[col_name]
-    test = test_copy[col_name]
-
-    # model = ExponentialSmoothing(train)
-    model = ExponentialSmoothing(train, seasonal='add', seasonal_periods=24)
-    fit = model.fit()
-    print('model', fit.__dict__)
-    pred = fit.forecast(len(test))
-
-    measure_accuracy(test, pred)
-    plot_prediction(train, test, pred, title='Exponential Smoothing')
+    exponential_smoothing_from_df(data)
 
 
 def exponential_smoothing_old(file):
@@ -78,6 +85,3 @@ def exponential_smoothing_old(file):
 
     measure_accuracy(test, pred2)
     plot_prediction(train, test, pred2)
-
-
-

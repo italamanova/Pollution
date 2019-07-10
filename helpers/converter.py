@@ -17,3 +17,7 @@ def date_str_to_datetime(str_date):
 def datetime_to_string(datetime):
     if isinstance(datetime, (datetime.date, datetime.datetime)):
         return datetime.isoformat()
+
+
+def df_to_csv(df, out_file):
+    df.to_csv(out_file, encoding='utf-8-sig')

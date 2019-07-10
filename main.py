@@ -4,7 +4,7 @@ from analysis.batch_analysis import analyze_batch
 from analysis.trend_seasonality_checker import box_plot, check_seasonal_decomposition, analyze_rolling
 from myarima.arima import check_seasonality, analyze_data, my_auto_arima, pure_arima
 from es.des import manual_es
-from es.es import exponential_smoothing
+from es.es import exponential_smoothing_from_file
 from helpers.converter import str_to_datetime
 from helpers.dataset_preparator import prepare_csv
 from helpers.plotter import plot_one_file, plot_all_data
@@ -41,14 +41,14 @@ out_folder = 'cut_data'
 out_file = get_autosave_path(path_to_file_prepared, out_folder, '1_year_arima_2016')
 
 # prepare_csv(path_to_file, out_file, start=start_datetime, end=end_datetime)
-cut_csv(path_to_file_prepared, out_file, start=start, end=end)
+# cut_csv(path_to_file_prepared, out_file, start=start, end=end)
 # cut_csv_by_period(path_to_file_prepared, out_file, start=start_datetime, period=365*24)
 # analyze(path_to_file_prepared)
 
 # METHODS
 
 # print('\n ES')
-# exponential_smoothing(path_to_file)
+exponential_smoothing_from_file(path_to_file_prepared)
 # print('\n ARIMA')
 # my_auto_arima(path_to_file, 5)
 # print('\n LSTM')

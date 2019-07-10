@@ -1,1 +1,778 @@
-[{"window_start": "2016-01-01 00-00-00", "window_end": "2016-02-11 15-00-00", "num": 0, "inner": [{"inner_window_start": "2016-01-01 00-00-00", "inner_window_end": "2016-01-09 07-00-00", "range": "0 - 199", "order": [2, 0, 0], "seasonal_order": [0, 0, 0, 24], "aic": 1496.7618613150757, "len": 200}, {"inner_window_start": "2016-01-01 00-00-00", "inner_window_end": "2016-01-17 15-00-00", "range": "0 - 399", "order": [0, 1, 0], "seasonal_order": [1, 0, 1, 24], "aic": 2932.9284344912553, "len": 400}, {"inner_window_start": "2016-01-01 00-00-00", "inner_window_end": "2016-01-25 23-00-00", "range": "0 - 599", "order": [1, 1, 2], "seasonal_order": [1, 0, 1, 24], "aic": 4568.874230763222, "len": 600}, {"inner_window_start": "2016-01-01 00-00-00", "inner_window_end": "2016-02-03 07-00-00", "range": "0 - 799", "order": [2, 1, 1], "seasonal_order": [1, 0, 1, 24], "aic": 6178.041265081958, "len": 800}, {"inner_window_start": "2016-01-01 00-00-00", "inner_window_end": "2016-02-11 15-00-00", "range": "0 - 999", "order": [3, 1, 2], "seasonal_order": [1, 0, 1, 24], "aic": 7612.897868144328, "len": 1000}]}, {"window_start": "2016-02-11 16-00-00", "window_end": "2016-03-24 07-00-00", "num": 1, "inner": [{"inner_window_start": "2016-02-11 16-00-00", "inner_window_end": "2016-02-19 23-00-00", "range": "1000 - 1199", "order": [1, 0, 0], "seasonal_order": [0, 0, 1, 24], "aic": 1319.3109374145497, "len": 200}, {"inner_window_start": "2016-02-11 16-00-00", "inner_window_end": "2016-02-28 07-00-00", "range": "1000 - 1399", "order": [1, 0, 0], "seasonal_order": [1, 0, 1, 24], "aic": 2671.1847487865284, "len": 400}, {"inner_window_start": "2016-02-11 16-00-00", "inner_window_end": "2016-03-07 15-00-00", "range": "1000 - 1599", "order": [0, 1, 0], "seasonal_order": [1, 0, 1, 24], "aic": 3922.6298816897497, "len": 600}, {"inner_window_start": "2016-02-11 16-00-00", "inner_window_end": "2016-03-15 23-00-00", "range": "1000 - 1799", "order": [1, 1, 4], "seasonal_order": [1, 0, 1, 24], "aic": 5078.328063695103, "len": 800}, {"inner_window_start": "2016-02-11 16-00-00", "inner_window_end": "2016-03-24 07-00-00", "range": "1000 - 1999", "order": [1, 1, 2], "seasonal_order": [1, 0, 2, 24], "aic": 6262.060127378283, "len": 1000}]}, {"window_start": "2016-03-24 08-00-00", "window_end": "2016-05-04 23-00-00", "num": 2, "inner": [{"inner_window_start": "2016-03-24 08-00-00", "inner_window_end": "2016-04-01 15-00-00", "range": "2000 - 2199", "order": [0, 1, 0], "seasonal_order": [1, 0, 1, 24], "aic": 1107.0467318771616, "len": 200}, {"inner_window_start": "2016-03-24 08-00-00", "inner_window_end": "2016-04-09 23-00-00", "range": "2000 - 2399", "order": [2, 0, 1], "seasonal_order": [3, 0, 2, 24], "aic": 2207.6725893829157, "len": 400}, {"inner_window_start": "2016-03-24 08-00-00", "inner_window_end": "2016-04-18 07-00-00", "range": "2000 - 2599", "order": [2, 1, 3], "seasonal_order": [1, 0, 1, 24], "aic": 3654.890205357269, "len": 600}, {"inner_window_start": "2016-03-24 08-00-00", "inner_window_end": "2016-04-26 15-00-00", "range": "2000 - 2799", "order": [3, 1, 1], "seasonal_order": [2, 0, 1, 24], "aic": 4765.506386403693, "len": 800}, {"inner_window_start": "2016-03-24 08-00-00", "inner_window_end": "2016-05-04 23-00-00", "range": "2000 - 2999", "order": [3, 1, 1], "seasonal_order": [1, 0, 2, 24], "aic": 5733.142859327052, "len": 1000}]}, {"window_start": "2016-05-05 00-00-00", "window_end": "2016-06-15 15-00-00", "num": 3, "inner": [{"inner_window_start": "2016-05-05 00-00-00", "inner_window_end": "2016-05-13 07-00-00", "range": "3000 - 3199", "order": [1, 0, 2], "seasonal_order": [1, 0, 1, 24], "aic": 270.70761444006916, "len": 200}, {"inner_window_start": "2016-05-05 00-00-00", "inner_window_end": "2016-05-21 15-00-00", "range": "3000 - 3399", "order": [2, 1, 2], "seasonal_order": [0, 0, 1, 24], "aic": 541.7824917670127, "len": 400}, {"inner_window_start": "2016-05-05 00-00-00", "inner_window_end": "2016-05-29 23-00-00", "range": "3000 - 3599", "order": [1, 2, 1], "seasonal_order": [2, 0, 2, 24], "aic": 1190.3927625673919, "len": 600}, {"inner_window_start": "2016-05-05 00-00-00", "inner_window_end": "2016-06-07 07-00-00", "range": "3000 - 3799", "order": [4, 1, 0], "seasonal_order": [1, 0, 1, 24], "aic": 2299.8079218255343, "len": 800}, {"inner_window_start": "2016-05-05 00-00-00", "inner_window_end": "2016-06-15 15-00-00", "range": "3000 - 3999", "order": [2, 1, 0], "seasonal_order": [3, 0, 2, 24], "aic": 3178.112847452033, "len": 1000}]}, {"window_start": "2016-06-15 16-00-00", "window_end": "2016-07-27 07-00-00", "num": 4, "inner": [{"inner_window_start": "2016-06-15 16-00-00", "inner_window_end": "2016-06-23 23-00-00", "range": "4000 - 4199", "order": [2, 0, 1], "seasonal_order": [0, 0, 0, 24], "aic": 908.7579376621505, "len": 200}, {"inner_window_start": "2016-06-15 16-00-00", "inner_window_end": "2016-07-02 07-00-00", "range": "4000 - 4399", "order": [0, 1, 0], "seasonal_order": [1, 0, 1, 24], "aic": 2423.5474267716745, "len": 400}, {"inner_window_start": "2016-06-15 16-00-00", "inner_window_end": "2016-07-10 15-00-00", "range": "4000 - 4599", "order": [1, 1, 0], "seasonal_order": [1, 0, 1, 24], "aic": 3816.8026718772476, "len": 600}, {"inner_window_start": "2016-06-15 16-00-00", "inner_window_end": "2016-07-18 23-00-00", "range": "4000 - 4799", "order": [2, 1, 1], "seasonal_order": [1, 0, 1, 24], "aic": 4879.889577446274, "len": 800}, {"inner_window_start": "2016-06-15 16-00-00", "inner_window_end": "2016-07-27 07-00-00", "range": "4000 - 4999", "order": [1, 1, 0], "seasonal_order": [1, 0, 1, 24], "aic": 5965.220361965613, "len": 1000}]}, {"window_start": "2016-07-27 08-00-00", "window_end": "2016-09-06 23-00-00", "num": 5, "inner": [{"inner_window_start": "2016-07-27 08-00-00", "inner_window_end": "2016-08-04 15-00-00", "range": "5000 - 5199", "order": [1, 1, 0], "seasonal_order": [2, 0, 2, 24], "aic": 629.4266288146096, "len": 200}, {"inner_window_start": "2016-07-27 08-00-00", "inner_window_end": "2016-08-12 23-00-00", "range": "5000 - 5399", "order": [1, 1, 0], "seasonal_order": [0, 0, 0, 24], "aic": 1599.610498388926, "len": 400}, {"inner_window_start": "2016-07-27 08-00-00", "inner_window_end": "2016-08-21 07-00-00", "range": "5000 - 5599", "order": [2, 1, 1], "seasonal_order": [0, 0, 0, 24], "aic": 2260.3912762889036, "len": 600}, {"inner_window_start": "2016-07-27 08-00-00", "inner_window_end": "2016-08-29 15-00-00", "range": "5000 - 5799", "order": [0, 1, 1], "seasonal_order": [0, 0, 0, 24], "aic": 3094.178132286847, "len": 800}, {"inner_window_start": "2016-07-27 08-00-00", "inner_window_end": "2016-09-06 23-00-00", "range": "5000 - 5999", "order": [0, 1, 1], "seasonal_order": [0, 0, 0, 24], "aic": 3780.9240575159747, "len": 1000}]}, {"window_start": "2016-09-07 00-00-00", "window_end": "2016-10-18 15-00-00", "num": 6, "inner": [{"inner_window_start": "2016-09-07 00-00-00", "inner_window_end": "2016-09-15 07-00-00", "range": "6000 - 6199", "order": [0, 1, 1], "seasonal_order": [0, 0, 0, 24], "aic": 490.0098831123364, "len": 200}, {"inner_window_start": "2016-09-07 00-00-00", "inner_window_end": "2016-09-23 15-00-00", "range": "6000 - 6399", "order": [5, 1, 4], "seasonal_order": [0, 0, 0, 24], "aic": 2430.2533680170427, "len": 400}, {"inner_window_start": "2016-09-07 00-00-00", "inner_window_end": "2016-10-01 23-00-00", "range": "6000 - 6599", "order": [2, 1, 2], "seasonal_order": [0, 0, 0, 24], "aic": 3910.4614555908847, "len": 600}, {"inner_window_start": "2016-09-07 00-00-00", "inner_window_end": "2016-10-10 07-00-00", "range": "6000 - 6799", "order": [2, 1, 2], "seasonal_order": [0, 0, 0, 24], "aic": 4987.879675875896, "len": 800}, {"inner_window_start": "2016-09-07 00-00-00", "inner_window_end": "2016-10-18 15-00-00", "range": "6000 - 6999", "order": [5, 1, 4], "seasonal_order": [0, 0, 0, 24], "aic": 6002.863640375954, "len": 1000}]}, {"window_start": "2016-10-18 16-00-00", "window_end": "2016-11-29 07-00-00", "num": 7, "inner": [{"inner_window_start": "2016-10-18 16-00-00", "inner_window_end": "2016-10-26 23-00-00", "range": "7000 - 7199", "order": [1, 1, 2], "seasonal_order": [0, 0, 0, 24], "aic": 1336.9473895662377, "len": 200}, {"inner_window_start": "2016-10-18 16-00-00", "inner_window_end": "2016-11-04 07-00-00", "range": "7000 - 7399", "order": [2, 1, 1], "seasonal_order": [2, 0, 0, 24], "aic": 2979.4049413448956, "len": 400}, {"inner_window_start": "2016-10-18 16-00-00", "inner_window_end": "2016-11-12 15-00-00", "range": "7000 - 7599", "order": [2, 0, 0], "seasonal_order": [1, 0, 1, 24], "aic": 4456.48597996028, "len": 600}, {"inner_window_start": "2016-10-18 16-00-00", "inner_window_end": "2016-11-20 23-00-00", "range": "7000 - 7799", "order": [0, 1, 0], "seasonal_order": [1, 0, 1, 24], "aic": 6019.485128025697, "len": 800}, {"inner_window_start": "2016-10-18 16-00-00", "inner_window_end": "2016-11-29 07-00-00", "range": "7000 - 7999", "order": [1, 1, 1], "seasonal_order": [1, 0, 1, 24], "aic": 7595.7359066072195, "len": 1000}]}]
+[
+  {
+    "window_start": "2016-01-01 00-00-00",
+    "window_end": "2016-02-11 15-00-00",
+    "num": 0,
+    "inner": [
+      {
+        "inner_window_start": "2016-01-01 00-00-00",
+        "inner_window_end": "2016-01-09 07-00-00",
+        "range": "0 - 199",
+        "order": [
+          2,
+          0,
+          0
+        ],
+        "seasonal_order": [
+          0,
+          0,
+          0,
+          24
+        ],
+        "aic": 1496.7618613150757,
+        "len": 200
+      },
+      {
+        "inner_window_start": "2016-01-01 00-00-00",
+        "inner_window_end": "2016-01-17 15-00-00",
+        "range": "0 - 399",
+        "order": [
+          0,
+          1,
+          0
+        ],
+        "seasonal_order": [
+          1,
+          0,
+          1,
+          24
+        ],
+        "aic": 2932.9284344912553,
+        "len": 400
+      },
+      {
+        "inner_window_start": "2016-01-01 00-00-00",
+        "inner_window_end": "2016-01-25 23-00-00",
+        "range": "0 - 599",
+        "order": [
+          1,
+          1,
+          2
+        ],
+        "seasonal_order": [
+          1,
+          0,
+          1,
+          24
+        ],
+        "aic": 4568.874230763222,
+        "len": 600
+      },
+      {
+        "inner_window_start": "2016-01-01 00-00-00",
+        "inner_window_end": "2016-02-03 07-00-00",
+        "range": "0 - 799",
+        "order": [
+          2,
+          1,
+          1
+        ],
+        "seasonal_order": [
+          1,
+          0,
+          1,
+          24
+        ],
+        "aic": 6178.041265081958,
+        "len": 800
+      },
+      {
+        "inner_window_start": "2016-01-01 00-00-00",
+        "inner_window_end": "2016-02-11 15-00-00",
+        "range": "0 - 999",
+        "order": [
+          3,
+          1,
+          2
+        ],
+        "seasonal_order": [
+          1,
+          0,
+          1,
+          24
+        ],
+        "aic": 7612.897868144328,
+        "len": 1000
+      }
+    ]
+  },
+  {
+    "window_start": "2016-02-11 16-00-00",
+    "window_end": "2016-03-24 07-00-00",
+    "num": 1,
+    "inner": [
+      {
+        "inner_window_start": "2016-02-11 16-00-00",
+        "inner_window_end": "2016-02-19 23-00-00",
+        "range": "1000 - 1199",
+        "order": [
+          1,
+          0,
+          0
+        ],
+        "seasonal_order": [
+          0,
+          0,
+          1,
+          24
+        ],
+        "aic": 1319.3109374145497,
+        "len": 200
+      },
+      {
+        "inner_window_start": "2016-02-11 16-00-00",
+        "inner_window_end": "2016-02-28 07-00-00",
+        "range": "1000 - 1399",
+        "order": [
+          1,
+          0,
+          0
+        ],
+        "seasonal_order": [
+          1,
+          0,
+          1,
+          24
+        ],
+        "aic": 2671.1847487865284,
+        "len": 400
+      },
+      {
+        "inner_window_start": "2016-02-11 16-00-00",
+        "inner_window_end": "2016-03-07 15-00-00",
+        "range": "1000 - 1599",
+        "order": [
+          0,
+          1,
+          0
+        ],
+        "seasonal_order": [
+          1,
+          0,
+          1,
+          24
+        ],
+        "aic": 3922.6298816897497,
+        "len": 600
+      },
+      {
+        "inner_window_start": "2016-02-11 16-00-00",
+        "inner_window_end": "2016-03-15 23-00-00",
+        "range": "1000 - 1799",
+        "order": [
+          1,
+          1,
+          4
+        ],
+        "seasonal_order": [
+          1,
+          0,
+          1,
+          24
+        ],
+        "aic": 5078.328063695103,
+        "len": 800
+      },
+      {
+        "inner_window_start": "2016-02-11 16-00-00",
+        "inner_window_end": "2016-03-24 07-00-00",
+        "range": "1000 - 1999",
+        "order": [
+          1,
+          1,
+          2
+        ],
+        "seasonal_order": [
+          1,
+          0,
+          2,
+          24
+        ],
+        "aic": 6262.060127378283,
+        "len": 1000
+      }
+    ]
+  },
+  {
+    "window_start": "2016-03-24 08-00-00",
+    "window_end": "2016-05-04 23-00-00",
+    "num": 2,
+    "inner": [
+      {
+        "inner_window_start": "2016-03-24 08-00-00",
+        "inner_window_end": "2016-04-01 15-00-00",
+        "range": "2000 - 2199",
+        "order": [
+          0,
+          1,
+          0
+        ],
+        "seasonal_order": [
+          1,
+          0,
+          1,
+          24
+        ],
+        "aic": 1107.0467318771616,
+        "len": 200
+      },
+      {
+        "inner_window_start": "2016-03-24 08-00-00",
+        "inner_window_end": "2016-04-09 23-00-00",
+        "range": "2000 - 2399",
+        "order": [
+          2,
+          0,
+          1
+        ],
+        "seasonal_order": [
+          3,
+          0,
+          2,
+          24
+        ],
+        "aic": 2207.6725893829157,
+        "len": 400
+      },
+      {
+        "inner_window_start": "2016-03-24 08-00-00",
+        "inner_window_end": "2016-04-18 07-00-00",
+        "range": "2000 - 2599",
+        "order": [
+          2,
+          1,
+          3
+        ],
+        "seasonal_order": [
+          1,
+          0,
+          1,
+          24
+        ],
+        "aic": 3654.890205357269,
+        "len": 600
+      },
+      {
+        "inner_window_start": "2016-03-24 08-00-00",
+        "inner_window_end": "2016-04-26 15-00-00",
+        "range": "2000 - 2799",
+        "order": [
+          3,
+          1,
+          1
+        ],
+        "seasonal_order": [
+          2,
+          0,
+          1,
+          24
+        ],
+        "aic": 4765.506386403693,
+        "len": 800
+      },
+      {
+        "inner_window_start": "2016-03-24 08-00-00",
+        "inner_window_end": "2016-05-04 23-00-00",
+        "range": "2000 - 2999",
+        "order": [
+          3,
+          1,
+          1
+        ],
+        "seasonal_order": [
+          1,
+          0,
+          2,
+          24
+        ],
+        "aic": 5733.142859327052,
+        "len": 1000
+      }
+    ]
+  },
+  {
+    "window_start": "2016-05-05 00-00-00",
+    "window_end": "2016-06-15 15-00-00",
+    "num": 3,
+    "inner": [
+      {
+        "inner_window_start": "2016-05-05 00-00-00",
+        "inner_window_end": "2016-05-13 07-00-00",
+        "range": "3000 - 3199",
+        "order": [
+          1,
+          0,
+          2
+        ],
+        "seasonal_order": [
+          1,
+          0,
+          1,
+          24
+        ],
+        "aic": 270.70761444006916,
+        "len": 200
+      },
+      {
+        "inner_window_start": "2016-05-05 00-00-00",
+        "inner_window_end": "2016-05-21 15-00-00",
+        "range": "3000 - 3399",
+        "order": [
+          2,
+          1,
+          2
+        ],
+        "seasonal_order": [
+          0,
+          0,
+          1,
+          24
+        ],
+        "aic": 541.7824917670127,
+        "len": 400
+      },
+      {
+        "inner_window_start": "2016-05-05 00-00-00",
+        "inner_window_end": "2016-05-29 23-00-00",
+        "range": "3000 - 3599",
+        "order": [
+          1,
+          2,
+          1
+        ],
+        "seasonal_order": [
+          2,
+          0,
+          2,
+          24
+        ],
+        "aic": 1190.3927625673919,
+        "len": 600
+      },
+      {
+        "inner_window_start": "2016-05-05 00-00-00",
+        "inner_window_end": "2016-06-07 07-00-00",
+        "range": "3000 - 3799",
+        "order": [
+          4,
+          1,
+          0
+        ],
+        "seasonal_order": [
+          1,
+          0,
+          1,
+          24
+        ],
+        "aic": 2299.8079218255343,
+        "len": 800
+      },
+      {
+        "inner_window_start": "2016-05-05 00-00-00",
+        "inner_window_end": "2016-06-15 15-00-00",
+        "range": "3000 - 3999",
+        "order": [
+          2,
+          1,
+          0
+        ],
+        "seasonal_order": [
+          3,
+          0,
+          2,
+          24
+        ],
+        "aic": 3178.112847452033,
+        "len": 1000
+      }
+    ]
+  },
+  {
+    "window_start": "2016-06-15 16-00-00",
+    "window_end": "2016-07-27 07-00-00",
+    "num": 4,
+    "inner": [
+      {
+        "inner_window_start": "2016-06-15 16-00-00",
+        "inner_window_end": "2016-06-23 23-00-00",
+        "range": "4000 - 4199",
+        "order": [
+          2,
+          0,
+          1
+        ],
+        "seasonal_order": [
+          0,
+          0,
+          0,
+          24
+        ],
+        "aic": 908.7579376621505,
+        "len": 200
+      },
+      {
+        "inner_window_start": "2016-06-15 16-00-00",
+        "inner_window_end": "2016-07-02 07-00-00",
+        "range": "4000 - 4399",
+        "order": [
+          0,
+          1,
+          0
+        ],
+        "seasonal_order": [
+          1,
+          0,
+          1,
+          24
+        ],
+        "aic": 2423.5474267716745,
+        "len": 400
+      },
+      {
+        "inner_window_start": "2016-06-15 16-00-00",
+        "inner_window_end": "2016-07-10 15-00-00",
+        "range": "4000 - 4599",
+        "order": [
+          1,
+          1,
+          0
+        ],
+        "seasonal_order": [
+          1,
+          0,
+          1,
+          24
+        ],
+        "aic": 3816.8026718772476,
+        "len": 600
+      },
+      {
+        "inner_window_start": "2016-06-15 16-00-00",
+        "inner_window_end": "2016-07-18 23-00-00",
+        "range": "4000 - 4799",
+        "order": [
+          2,
+          1,
+          1
+        ],
+        "seasonal_order": [
+          1,
+          0,
+          1,
+          24
+        ],
+        "aic": 4879.889577446274,
+        "len": 800
+      },
+      {
+        "inner_window_start": "2016-06-15 16-00-00",
+        "inner_window_end": "2016-07-27 07-00-00",
+        "range": "4000 - 4999",
+        "order": [
+          1,
+          1,
+          0
+        ],
+        "seasonal_order": [
+          1,
+          0,
+          1,
+          24
+        ],
+        "aic": 5965.220361965613,
+        "len": 1000
+      }
+    ]
+  },
+  {
+    "window_start": "2016-07-27 08-00-00",
+    "window_end": "2016-09-06 23-00-00",
+    "num": 5,
+    "inner": [
+      {
+        "inner_window_start": "2016-07-27 08-00-00",
+        "inner_window_end": "2016-08-04 15-00-00",
+        "range": "5000 - 5199",
+        "order": [
+          1,
+          1,
+          0
+        ],
+        "seasonal_order": [
+          2,
+          0,
+          2,
+          24
+        ],
+        "aic": 629.4266288146096,
+        "len": 200
+      },
+      {
+        "inner_window_start": "2016-07-27 08-00-00",
+        "inner_window_end": "2016-08-12 23-00-00",
+        "range": "5000 - 5399",
+        "order": [
+          1,
+          1,
+          0
+        ],
+        "seasonal_order": [
+          0,
+          0,
+          0,
+          24
+        ],
+        "aic": 1599.610498388926,
+        "len": 400
+      },
+      {
+        "inner_window_start": "2016-07-27 08-00-00",
+        "inner_window_end": "2016-08-21 07-00-00",
+        "range": "5000 - 5599",
+        "order": [
+          2,
+          1,
+          1
+        ],
+        "seasonal_order": [
+          0,
+          0,
+          0,
+          24
+        ],
+        "aic": 2260.3912762889036,
+        "len": 600
+      },
+      {
+        "inner_window_start": "2016-07-27 08-00-00",
+        "inner_window_end": "2016-08-29 15-00-00",
+        "range": "5000 - 5799",
+        "order": [
+          0,
+          1,
+          1
+        ],
+        "seasonal_order": [
+          0,
+          0,
+          0,
+          24
+        ],
+        "aic": 3094.178132286847,
+        "len": 800
+      },
+      {
+        "inner_window_start": "2016-07-27 08-00-00",
+        "inner_window_end": "2016-09-06 23-00-00",
+        "range": "5000 - 5999",
+        "order": [
+          0,
+          1,
+          1
+        ],
+        "seasonal_order": [
+          0,
+          0,
+          0,
+          24
+        ],
+        "aic": 3780.9240575159747,
+        "len": 1000
+      }
+    ]
+  },
+  {
+    "window_start": "2016-09-07 00-00-00",
+    "window_end": "2016-10-18 15-00-00",
+    "num": 6,
+    "inner": [
+      {
+        "inner_window_start": "2016-09-07 00-00-00",
+        "inner_window_end": "2016-09-15 07-00-00",
+        "range": "6000 - 6199",
+        "order": [
+          0,
+          1,
+          1
+        ],
+        "seasonal_order": [
+          0,
+          0,
+          0,
+          24
+        ],
+        "aic": 490.0098831123364,
+        "len": 200
+      },
+      {
+        "inner_window_start": "2016-09-07 00-00-00",
+        "inner_window_end": "2016-09-23 15-00-00",
+        "range": "6000 - 6399",
+        "order": [
+          5,
+          1,
+          4
+        ],
+        "seasonal_order": [
+          0,
+          0,
+          0,
+          24
+        ],
+        "aic": 2430.2533680170427,
+        "len": 400
+      },
+      {
+        "inner_window_start": "2016-09-07 00-00-00",
+        "inner_window_end": "2016-10-01 23-00-00",
+        "range": "6000 - 6599",
+        "order": [
+          2,
+          1,
+          2
+        ],
+        "seasonal_order": [
+          0,
+          0,
+          0,
+          24
+        ],
+        "aic": 3910.4614555908847,
+        "len": 600
+      },
+      {
+        "inner_window_start": "2016-09-07 00-00-00",
+        "inner_window_end": "2016-10-10 07-00-00",
+        "range": "6000 - 6799",
+        "order": [
+          2,
+          1,
+          2
+        ],
+        "seasonal_order": [
+          0,
+          0,
+          0,
+          24
+        ],
+        "aic": 4987.879675875896,
+        "len": 800
+      },
+      {
+        "inner_window_start": "2016-09-07 00-00-00",
+        "inner_window_end": "2016-10-18 15-00-00",
+        "range": "6000 - 6999",
+        "order": [
+          5,
+          1,
+          4
+        ],
+        "seasonal_order": [
+          0,
+          0,
+          0,
+          24
+        ],
+        "aic": 6002.863640375954,
+        "len": 1000
+      }
+    ]
+  },
+  {
+    "window_start": "2016-10-18 16-00-00",
+    "window_end": "2016-11-29 07-00-00",
+    "num": 7,
+    "inner": [
+      {
+        "inner_window_start": "2016-10-18 16-00-00",
+        "inner_window_end": "2016-10-26 23-00-00",
+        "range": "7000 - 7199",
+        "order": [
+          1,
+          1,
+          2
+        ],
+        "seasonal_order": [
+          0,
+          0,
+          0,
+          24
+        ],
+        "aic": 1336.9473895662377,
+        "len": 200
+      },
+      {
+        "inner_window_start": "2016-10-18 16-00-00",
+        "inner_window_end": "2016-11-04 07-00-00",
+        "range": "7000 - 7399",
+        "order": [
+          2,
+          1,
+          1
+        ],
+        "seasonal_order": [
+          2,
+          0,
+          0,
+          24
+        ],
+        "aic": 2979.4049413448956,
+        "len": 400
+      },
+      {
+        "inner_window_start": "2016-10-18 16-00-00",
+        "inner_window_end": "2016-11-12 15-00-00",
+        "range": "7000 - 7599",
+        "order": [
+          2,
+          0,
+          0
+        ],
+        "seasonal_order": [
+          1,
+          0,
+          1,
+          24
+        ],
+        "aic": 4456.48597996028,
+        "len": 600
+      },
+      {
+        "inner_window_start": "2016-10-18 16-00-00",
+        "inner_window_end": "2016-11-20 23-00-00",
+        "range": "7000 - 7799",
+        "order": [
+          0,
+          1,
+          0
+        ],
+        "seasonal_order": [
+          1,
+          0,
+          1,
+          24
+        ],
+        "aic": 6019.485128025697,
+        "len": 800
+      },
+      {
+        "inner_window_start": "2016-10-18 16-00-00",
+        "inner_window_end": "2016-11-29 07-00-00",
+        "range": "7000 - 7999",
+        "order": [
+          1,
+          1,
+          1
+        ],
+        "seasonal_order": [
+          1,
+          0,
+          1,
+          24
+        ],
+        "aic": 7595.7359066072195,
+        "len": 1000
+      }
+    ]
+  }
+]
