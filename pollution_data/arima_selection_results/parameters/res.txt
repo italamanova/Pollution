@@ -32,3 +32,9 @@ Min D: 0, Max D: 0
 Min Q: 0, Max Q: 2
 
 2016 1000 100
+Min p: 0, Max p: 6
+Min d: 0, Max d: 2
+Min q: 0, Max q: 5
+Min P: 0, Max P: 3
+Min D: 0, Max D: 0
+Min Q: 0, Max Q: 2
