@@ -1,4 +1,4 @@
-from sklearn.metrics import mean_squared_error, mean_absolute_error
+from sklearn.metrics import mean_squared_error, mean_absolute_error, accuracy_score
 from math import sqrt
 import numpy as np
 
@@ -37,7 +37,7 @@ def measure_accuracy_avg_sample(test_data, predictions):
     return rmse_results
 
 
-def measure_accuracy_each_sample(test_data, predictions):
+def measure_mae_each_sample(test_data, predictions):
     mae_measures = []
     mae_results = []
     for p, t in zip(predictions, test_data):
@@ -48,5 +48,19 @@ def measure_accuracy_each_sample(test_data, predictions):
     for i in range(1, len(mae_measures)):
         result = mae_measures[i] / first
         mae_results.append(result)
-    # print('RESULT', rmse_results)
     return mae_results
+
+
+def measure_accuracy_each_sample(test_data, predictions):
+    accuracy_measures = []
+    accuracy_results = []
+    for p, t in zip(predictions, test_data):
+        accuracy = mean_absolute_percentage_error([t], [p])
+        accuracy_measures.append(accuracy)
+
+    first = accuracy_measures[0]
+    for i in range(1, len(accuracy_measures)):
+        result = accuracy_measures[i]
+        accuracy_results.append(result)
+
+    return accuracy_results

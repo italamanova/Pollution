@@ -1,0 +1,17 @@
+Time series prediction is a complex problem that exists in many fields, such as
+
+(A Comparison of ARIMA and LSTM in Forecasting Time Series)
+- scheduling io
+- client-server architecture
+...
+нужно дописать еще
+
+Research question:
+- compare performance of statistical and deep learning methods
+- ...
+
+The internet of things technology allows us to....
+
+As far as we know there is no(?) research conducted to compare air pollution forecasting methods
+for real time.
+

@@ -4,7 +4,7 @@ import pandas as pd
 from statsmodels.tsa.holtwinters import ExponentialSmoothing, Holt
 
 from analysis.analyzer import get_data
-from helpers.accuracy import measure_accuracy, measure_accuracy_each_sample
+from helpers.accuracy import measure_accuracy, measure_accuracy_each_sample, measure_mae_each_sample
 from helpers.preparator import cut_dataframe
 from helpers.visualizer import plot_prediction
 
@@ -16,11 +16,11 @@ def exponential_smoothing(train, test, seasonal='add', seasonal_periods=24):
     return pred
 
 
-def exponential_smoothing_from_df(df):
+def exponential_smoothing_from_df(df, test_size):
     col_name = df.columns.values[0]
 
     # train_size = int(len(df) * 0.8)
-    train_size = len(df) - 24
+    train_size = len(df) - test_size
     train_copy = df[0:train_size].copy()
     test_copy = df[train_size:len(df)].copy()
 
@@ -36,10 +36,16 @@ def exponential_smoothing_from_df(df):
     plt.plot(res)
     plt.show()
 
+    res = measure_mae_each_sample(test, pred)
+    plt.plot(res)
+    plt.show()
+
 
 def exponential_smoothing_from_file(file):
-    a = 90*24
-    data = get_data(file).iloc[a:a + 24 * 7]
+    a = 240 * 24
+    test_size = 24
+    data = get_data(file)
+    data = data.iloc[a:a + 24 * 7]
     # data = data.last('4W')
 
     # start = '2018-02-10 00:00:00'
@@ -47,7 +53,7 @@ def exponential_smoothing_from_file(file):
     #
     # data = cut_dataframe(data, start, end)
 
-    exponential_smoothing_from_df(data)
+    exponential_smoothing_from_df(data, test_size)
 
 
 def exponential_smoothing_old(file):
