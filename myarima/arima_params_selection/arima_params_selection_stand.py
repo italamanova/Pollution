@@ -6,7 +6,7 @@ from myarima.arima_params_selection.selection_json_parser import get_max_orders
 start_p = 0
 max_p = 10
 start_q = 0
-max_q = 6
+max_q = 10
 d = None
 max_d = 2
 start_P = 0
@@ -25,16 +25,16 @@ out_file = 'arima_parameters_selection.json'
 
 path_prepared = '%s/pollution_data/cut_data' % Path(__file__).parents[2]
 path_out = '%s/pollution_data/arima_selection_results/parameters' % Path(__file__).parents[2]
-file = '%s/Centar_PM25_prepared_1_year_arima_2016.csv' % path_prepared
+file = '%s/Centar_PM25_prepared_2016_2017.csv' % path_prepared
 # file = '%s/Centar_PM25_prepared.csv' % path_prepared
 
-m_window_size = 1000
-m_inner_window_size = 100
+m_window_size = 1200
+m_inner_window_size = 300
 
 m_i_start = 0 * m_window_size
 m_j_start = 0 * m_inner_window_size
 
-m_out_file = '%s/%s_%s_%s_2017.json' % (path_out, 'parameters', m_window_size, m_inner_window_size)
+m_out_file = '%s/%s_%s_%s_2years_2016_2017.json' % (path_out, 'parameters', m_window_size, m_inner_window_size)
 
 stand = ArimaParamsetersSelection(file, m_window_size, m_inner_window_size,
                                   start_p, max_p, start_q, max_q, max_d,
