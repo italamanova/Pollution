@@ -34,7 +34,7 @@ m_inner_window_size = 300
 m_i_start = 0 * m_window_size
 m_j_start = 0 * m_inner_window_size
 
-m_out_file = '%s/%s_%s_%s_2years_2016_2017.json' % (path_out, 'parameters', m_window_size, m_inner_window_size)
+m_out_file = '%s/%s_%s_%s_2years_2016_2017_boxcox.json' % (path_out, 'parameters', m_window_size, m_inner_window_size)
 
 stand = ArimaParamsetersSelection(file, m_window_size, m_inner_window_size,
                                   start_p, max_p, start_q, max_q, max_d,

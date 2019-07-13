@@ -46,3 +46,11 @@ Min q: 0, Max q: 5
 Min P: 0, Max P: 3
 Min D: 0, Max D: 0
 Min Q: 0, Max Q: 3
+
+2016 1200 300 box
+Min p: 0, Max p: 4
+Min d: 0, Max d: 1
+Min q: 0, Max q: 5
+Min P: 0, Max P: 3
+Min D: 0, Max D: 0
+Min Q: 0, Max Q: 3
