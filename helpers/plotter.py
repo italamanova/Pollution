@@ -3,6 +3,7 @@ import os
 
 import pandas as pd
 import plotly
+from matplotlib import pyplot
 
 from helpers.visualizer import plot_to_file, simple_plot
 
@@ -36,3 +37,19 @@ def plot_one_file(file, start=None, end=None, title=''):
     simple_plot(data, ylabel=data.columns[0], title=title)
 
 
+def plot_average(data, col_name):
+    weekly = data.resample('M').sum()
+    plot_to_file(weekly, ylabel='%s_weekly' % col_name, title='Air pollution')
+
+
+def plot_rolling_average(data, col_name):
+    rolling = data.rolling(window=5040)
+    rolling_mean = rolling.mean()
+    data.plot()
+    rolling_mean.plot(color='red')
+    pyplot.show()
+
+
+def plot_boxplot(data):
+    data.boxplot()
+    pyplot.show()

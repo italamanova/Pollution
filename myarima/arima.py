@@ -22,118 +22,77 @@ from analysis.analyzer import plot_distribution
 from analysis.trend_seasonality_checker import check_seasonal_decomposition
 from helpers.decorators import timeit
 from helpers.accuracy import measure_accuracy
-from helpers.preparator import cut_dataframe
+from helpers.preparator import cut_dataframe, get_data_with_box_cox, get_data
 from helpers.visualizer import plot_to_file, simple_plot, plot_prediction
 
 parent_dir_path = Path(__file__).parents[1]
 
 
-def check_seasonality(file, start_date, end_date):
-    series = Series.from_csv(file, header=0)
-    series = series.loc[start_date:end_date]
-    resample = series.resample('D')
-    monthly_mean = resample.mean()
-    print(monthly_mean)
-    monthly_mean.plot()
-    pyplot.show()
+def predict_auto_arima(train, test, start_p, max_p, start_q, max_q, max_d,
+                       start_P, max_P, start_Q, max_Q, max_D,
+                       m, information_criterion,
+                       max_order=10,
+                       d=None, D=None,
+                       method=None, trend='c', solver='lbfgs',
+                       suppress_warnings=True, error_action='warn', trace=True,
+                       stepwise=False, seasonal=True, n_jobs=1,
+                       out_file=None):
+    _model = auto_arima(train, start_p=start_p, max_p=max_p,
+                        d=d, max_d=max_d,
+                        start_q=start_q, max_q=max_q,
+                        start_P=start_P, max_P=max_P,
+                        D=D, max_D=max_D,
+                        start_Q=start_Q, max_Q=max_Q,
+                        seasonal=seasonal, m=m,
+                        max_order=max_order,
+                        trace=trace,
+                        error_action=error_action,
+                        suppress_warnings=suppress_warnings,
+                        stepwise=stepwise)
 
+    aic = _model.aic()
 
-def get_data(file, start=None, end=None):
-    df = pd.read_csv(file, index_col=0)
-    df.index = pd.to_datetime(df.index)
+    _model.fit(train)
 
-    if start and end:
-        data = df.loc[start:end]
-    else:
-        data = df
-    return data
-
-
-def plot_average(data, col_name):
-    weekly = data.resample('M').sum()
-    plot_to_file(weekly, ylabel='%s_weekly' % col_name, title='Air pollution')
-
-
-def plot_rolling_average(data, col_name):
-    rolling = data.rolling(window=5040)
-    rolling_mean = rolling.mean()
-    data.plot()
-    rolling_mean.plot(color='red')
-    pyplot.show()
-
-
-def plot_boxplot(data):
-    data.boxplot()
-    pyplot.show()
-
-
-def analyze_data(file, start=None, end=None):
-    data = get_data(file, start, end)
-    col_name = data.columns.values[0]
-
-    # plot_average(data, col_name)
-    # plot_rolling_average(data, col_name)
-
-    # data = data.last('4W')
-    plot_distribution(data, col_name)
-    #
-    # check_adfuller(data, col_name)
-    #
-    # plot_autocorrelation(data)
-    # plot_boxplot(data)
+    pred = _model.predict(n_periods=len(test))
+    return pred, aic
 
 
 @timeit
-def my_auto_arima(file, test_size, start=None, end=None):
-    data = get_data(file, start, end)
-    print(data[data.isna().any(axis=1)])
+def my_auto_arima(file, test_size, start_p, max_p, start_q, max_q, max_d,
+                  start_P, max_P, start_Q, max_Q, max_D,
+                  m, information_criterion,
+                  max_order=10,
+                  d=None, D=None,
+                  method=None, trend='c', solver='lbfgs',
+                  suppress_warnings=True, error_action='warn', trace=True,
+                  stepwise=False, seasonal=True, n_jobs=1,
+                  out_file=None):
+    df, lambda_ = get_data_with_box_cox(file)
 
-    # start = '2018-01-10 00:00:00'
-    # end = '2018-02-10 00:00:00'
-    #
-    # data = cut_dataframe(data, start, end)
-    # data = data.last('2W')
+    col_name = df.columns[0]
+    train_size = len(df) - test_size
 
-    col_name = data.columns.values[0]
-
-    # plot(data, ylabel=col_name, title='Air pollution')
-    print('Description', data[col_name].describe())
-
-    test_size = test_size
-    train_size = len(data) - test_size
-
-    train_copy = data[0:train_size].copy()
-    test_copy = data[train_size:len(data)].copy()
+    train_copy = df[0:train_size].copy()
+    test_copy = df[train_size:len(df)].copy()
 
     train = train_copy[col_name]
     test = test_copy[col_name]
 
-    # check_seasonal_decomposition(data)
+    predictions, aic = predict_auto_arima(train, test, start_p, max_p, start_q, max_q, max_d,
+                                          start_P, max_P, start_Q, max_Q, max_D,
+                                          m, information_criterion,
+                                          max_order=10,
+                                          d=None, D=None,
+                                          method=None, trend='c', solver='lbfgs',
+                                          suppress_warnings=True, error_action='warn', trace=True,
+                                          stepwise=False, seasonal=True, n_jobs=1,
+                                          out_file=None)
 
-    stepwise_model = auto_arima(train, start_p=0, max_p=3,
-                                start_q=0, max_q=3,
-                                start_P=0, max_P=2,
-                                start_Q=0, max_Q=2,
-                                seasonal=True, m=24,
-                                # d=1,
-                                # D=0, max_D=1,
-                                max_order=None,
-                                trace=True,
-                                error_action='ignore',
-                                suppress_warnings=True,
-                                stepwise=True  # True
-                                )
+    # TODO: reverse train test pred
 
-    print(stepwise_model.aic())
-    print(stepwise_model.__dict__)
-
-    stepwise_model.fit(train)
-
-    future_forecast = stepwise_model.predict(n_periods=test_size)
-    print(future_forecast)
-
-    future_forecast = pd.DataFrame(future_forecast, index=test.index, columns=['Prediction'])
-    plot_prediction(train, test, future_forecast, df=data, title='ARIMA')
+    future_forecast = pd.DataFrame(predictions, index=test.index, columns=['Prediction'])
+    plot_prediction(train, test, future_forecast, df=df, title='ARIMA')
     measure_accuracy(test, future_forecast)
 
 

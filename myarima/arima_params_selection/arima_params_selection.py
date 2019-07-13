@@ -97,7 +97,7 @@ class ArimaParamsetersSelection:
                             start_q=self.start_q, max_q=self.max_q,
                             start_P=self.start_P, max_P=self.max_P,
                             D=self.D, max_D=self.max_D,
-                            start_Q=self.start_Q, max_Q=self.max_P,
+                            start_Q=self.start_Q, max_Q=self.max_Q,
                             seasonal=self.seasonal, m=self.m,
                             max_order=self.max_order,
                             trace=self.trace,

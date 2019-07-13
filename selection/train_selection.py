@@ -6,17 +6,12 @@ from helpers.accuracy import measure_accuracy, measure_accuracy_each_sample
 from helpers.visualizer import plot_prediction
 
 
-def get_train_test(df):
-    tscv = TimeSeriesSplit(n_splits=5)
-    for train_index, test_index in tscv.split(df):
-        print("TRAIN:", len(train_index), "TEST:", len(test_index))
-        train, test = df.iloc[train_index], df.iloc[test_index]
-        # print(train, test)
-
-
-def predict_on_train(df, train, test):
-    predictions = exponential_smoothing(train, test)
-    plot_prediction(train, test, predictions, title='Exponential Smoothing')
+def predict_on_train(df, train, test, method_name):
+    if method_name == 'es':
+        predictions = exponential_smoothing(train, test)
+    if method_name == 'arima':
+        predictions = exponential_smoothing(train, test)
+    plot_prediction(train, test, predictions, title=method_name)
     return predictions
 
 
