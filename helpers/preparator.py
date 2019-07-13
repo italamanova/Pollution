@@ -144,13 +144,10 @@ def reverse_box_cox(train_box_cox, test_box_cox, pred_box_cox, lambda_):
     test_ = inv_boxcox(test_box_cox, lambda_)
     reversed_pred = inv_boxcox(pred_box_cox, lambda_)
     result_train = pd.DataFrame(data=train_,
-                                index=train_box_cox.index,
-                                columns=train_box_cox.columns)
+                                index=train_box_cox.index)
     result_test = pd.DataFrame(data=test_,
-                               index=test_box_cox.index,
-                               columns=test_box_cox.columns)
+                               index=test_box_cox.index)
     result_pred = pd.DataFrame(data=reversed_pred,
-                               index=test_box_cox.index,
-                               columns=test_box_cox.columns)
+                               index=test_box_cox.index)
 
     return result_train, result_test, result_pred

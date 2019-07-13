@@ -79,8 +79,8 @@ def plot_prediction(train, test, prediction, title='', df=None, xlabel=None, yla
 
 
 def plot_errors(errors):
-    mae = errors['mae']
-    mape = errors['mape']
+    mae = errors['each_mae']
+    mape = errors['each_mape']
 
     plt.plot(mae)
     plt.title('MAE')

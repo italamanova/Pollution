@@ -9,11 +9,12 @@ from helpers.preparator import cut_dataframe, reverse_box_cox, get_data_with_box
 from helpers.visualizer import plot_prediction, plot_errors
 
 
-def exponential_smoothing(train, test, seasonal='add', seasonal_periods=24):
+def exponential_smoothing(train, test, lambda_, seasonal='add', seasonal_periods=24):
     model = ExponentialSmoothing(train, trend='add', seasonal=seasonal, seasonal_periods=seasonal_periods)
     fit = model.fit()
     pred = fit.forecast(len(test))
-    return pred
+    reversed_train, reversed_test, reversed_pred = reverse_box_cox(train, test, pred, lambda_)
+    return reversed_train, reversed_test, reversed_pred
 
 
 def exponential_smoothing_from_df(df, test_size, lambda_):
@@ -27,18 +28,16 @@ def exponential_smoothing_from_df(df, test_size, lambda_):
     train = train_copy[col_name]
     test = test_copy[col_name]
 
-    pred = exponential_smoothing(train, test)
-    reversed_train, reversed_test, reversed_pred = reverse_box_cox(train_copy, test_copy, pred, lambda_)
+    reversed_train, reversed_test, reversed_pred = exponential_smoothing(train, test, lambda_)
 
     measure_accuracy(reversed_test, reversed_pred)
     plot_prediction(reversed_train, reversed_test, reversed_pred, title='Exponential Smoothing')
 
-    reversed_test_values = reversed_test[reversed_test.columns[0]].values
-    reversed_pred_values = reversed_pred[reversed_pred.columns[0]].values
-
-    errors = {'mape': measure_accuracy_each_sample(reversed_test_values, reversed_pred_values),
-              'mae': measure_mae_each_sample(reversed_test_values, reversed_pred_values)}
+    errors = {'mape': measure_accuracy_each_sample(reversed_test.values, reversed_pred.values),
+              'mae': measure_mae_each_sample(reversed_test.values, reversed_pred.values)}
     plot_errors(errors)
+
+    return reversed_train, reversed_test, reversed_pred
 
 
 def exponential_smoothing_from_file(file):
