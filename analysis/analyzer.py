@@ -13,7 +13,7 @@ from statsmodels.iolib import SimpleTable
 from statsmodels.stats.stattools import jarque_bera
 from statsmodels.tsa.stattools import adfuller, kpss
 
-from analysis.trend_seasonality_checker import check_seasonal_decomposition
+from analysis.trend_seasonality_checker import check_seasonal_decomposition, check_polyfit
 from helpers.converter import get_resampled
 from helpers.preparator import delete_outliers, get_data
 from helpers.visualizer import simple_plot
@@ -99,7 +99,7 @@ def analyze(file):
     degree = 1
 
     # simple_plot(df)
-
+    df = df.iloc[24*365:24*365+24*30]
     # df = df.loc['2015-02-01 00:00:00':'2015-07-01 00:00:00']
     # simple_plot(df)
     # plot_distribution(df, col_name)
@@ -114,7 +114,8 @@ def analyze(file):
 
     # check_adfuller(df)
     # check_kpss(df)
-    # check_seasonal_decomposition(df)
+    simple_plot(df)
+    check_seasonal_decomposition(df)
     # plot_autocorrelation(df)
 
 

@@ -5,6 +5,9 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+from matplotlib import pyplot
+from scipy import stats
+from scipy.special._ufuncs import inv_boxcox
 
 from helpers.visualizer import simple_plot
 
@@ -16,6 +19,15 @@ def get_data(file):
     df = df.set_index('time')
     df.index = pd.to_datetime(df.index)
     return df
+
+
+def get_data_with_box_cox(file):
+    df = pd.read_csv(file)
+    df = df.set_index('time')
+    df.index = pd.to_datetime(df.index)
+    df_boxcox, lambda_ = apply_box_cox(df)
+    # df_boxcox = df_boxcox + abs(min(df_boxcox))
+    return df_boxcox, lambda_
 
 
 def split_csv(folder_path):
@@ -118,5 +130,27 @@ def sdd_missing_dates(df):
     return new_df
 
 
-def differencing(df):
-    pass
+def apply_box_cox(df):
+    array_box_cox, lambda_ = stats.boxcox(df)
+    result_df = pd.DataFrame(data=array_box_cox,
+                             index=df.index,
+                             columns=df.columns)
+
+    return result_df, lambda_
+
+
+def reverse_box_cox(train_box_cox, test_box_cox, pred_box_cox, lambda_):
+    train_ = inv_boxcox(train_box_cox, lambda_)
+    test_ = inv_boxcox(test_box_cox, lambda_)
+    reversed_pred = inv_boxcox(pred_box_cox, lambda_)
+    result_train = pd.DataFrame(data=train_,
+                                index=train_box_cox.index,
+                                columns=train_box_cox.columns)
+    result_test = pd.DataFrame(data=test_,
+                               index=test_box_cox.index,
+                               columns=test_box_cox.columns)
+    result_pred = pd.DataFrame(data=reversed_pred,
+                               index=test_box_cox.index,
+                               columns=test_box_cox.columns)
+
+    return result_train, result_test, result_pred

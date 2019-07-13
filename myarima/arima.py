@@ -133,7 +133,7 @@ def my_auto_arima(file, test_size, start=None, end=None):
     print(future_forecast)
 
     future_forecast = pd.DataFrame(future_forecast, index=test.index, columns=['Prediction'])
-    plot_prediction(train, test, future_forecast, title='ARIMA')
+    plot_prediction(train, test, future_forecast, df=data, title='ARIMA')
     measure_accuracy(test, future_forecast)
 
 
@@ -164,4 +164,4 @@ def pure_arima(file):
     # report performance
 
     future_forecast = pd.DataFrame(future_forecast, index=test.index, columns=['Prediction'])
-    plot_prediction(train, test, future_forecast)
+    plot_prediction(train, test, future_forecast, df=data)

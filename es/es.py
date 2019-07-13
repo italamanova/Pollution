@@ -5,8 +5,8 @@ from statsmodels.tsa.holtwinters import ExponentialSmoothing, Holt
 
 from analysis.analyzer import get_data
 from helpers.accuracy import measure_accuracy, measure_accuracy_each_sample, measure_mae_each_sample
-from helpers.preparator import cut_dataframe
-from helpers.visualizer import plot_prediction
+from helpers.preparator import cut_dataframe, reverse_box_cox, get_data_with_box_cox
+from helpers.visualizer import plot_prediction, plot_errors
 
 
 def exponential_smoothing(train, test, seasonal='add', seasonal_periods=24):
@@ -16,7 +16,7 @@ def exponential_smoothing(train, test, seasonal='add', seasonal_periods=24):
     return pred
 
 
-def exponential_smoothing_from_df(df, test_size):
+def exponential_smoothing_from_df(df, test_size, lambda_):
     col_name = df.columns.values[0]
 
     # train_size = int(len(df) * 0.8)
@@ -28,24 +28,24 @@ def exponential_smoothing_from_df(df, test_size):
     test = test_copy[col_name]
 
     pred = exponential_smoothing(train, test)
+    reversed_train, reversed_test, reversed_pred = reverse_box_cox(train_copy, test_copy, pred, lambda_)
 
-    measure_accuracy(test, pred)
-    plot_prediction(train, test, pred, title='Exponential Smoothing')
+    measure_accuracy(reversed_test, reversed_pred)
+    plot_prediction(reversed_train, reversed_test, reversed_pred, title='Exponential Smoothing')
 
-    res = measure_accuracy_each_sample(test, pred)
-    plt.plot(res)
-    plt.show()
+    reversed_test_values = reversed_test[reversed_test.columns[0]].values
+    reversed_pred_values = reversed_pred[reversed_pred.columns[0]].values
 
-    res = measure_mae_each_sample(test, pred)
-    plt.plot(res)
-    plt.show()
+    errors = {'mape': measure_accuracy_each_sample(reversed_test_values, reversed_pred_values),
+              'mae': measure_mae_each_sample(reversed_test_values, reversed_pred_values)}
+    plot_errors(errors)
 
 
 def exponential_smoothing_from_file(file):
-    a = 240 * 24
+    a = 300 * 24
     test_size = 24
-    data = get_data(file)
-    data = data.iloc[a:a + 24 * 7]
+    data, lambda_ = get_data_with_box_cox(file)
+    data = data.iloc[a:a + 24 * 5]
     # data = data.last('4W')
 
     # start = '2018-02-10 00:00:00'
@@ -53,7 +53,7 @@ def exponential_smoothing_from_file(file):
     #
     # data = cut_dataframe(data, start, end)
 
-    exponential_smoothing_from_df(data, test_size)
+    exponential_smoothing_from_df(data, test_size, lambda_)
 
 
 def exponential_smoothing_old(file):
@@ -96,4 +96,4 @@ def exponential_smoothing_old(file):
     # plt.show()
 
     measure_accuracy(test, pred2)
-    plot_prediction(train, test, pred2)
+    plot_prediction(train, test, pred2, df=data)

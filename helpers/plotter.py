@@ -16,7 +16,6 @@ def plot_all_data(folder_path):
     all_filenames = [i for i in glob.glob('Rektorat*.{}'.format(extension))]
 
     for file in all_filenames:
-        print(file)
         dataset = pd.read_csv(file, index_col=0)
         data = dataset
 

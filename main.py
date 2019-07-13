@@ -43,14 +43,14 @@ out_folder = 'cut_data'
 out_file = get_autosave_path(path_to_file_prepared, out_folder, '2016_2017')
 
 # prepare_csv(path_to_file, out_file, start=None, end=None)
-cut_csv(path_to_file_prepared, out_file, start=start, end=end)
+# cut_csv(path_to_file_prepared, out_file, start=start, end=end)
 # cut_csv_by_period(path_to_file_prepared, out_file, start=start_datetime, period=365*24)
 # analyze(path_to_file_prepared)
 
 # METHODS
 
 # print('\n ES')
-# exponential_smoothing_from_file(path_to_file_prepared)
+exponential_smoothing_from_file(path_to_file_prepared)
 # print('\n ARIMA')
 # my_auto_arima(path_to_file, 5)
 # print('\n LSTM')

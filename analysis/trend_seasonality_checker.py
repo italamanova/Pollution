@@ -7,6 +7,7 @@ from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
 from statsmodels.tsa.seasonal import seasonal_decompose
 import seaborn as sns
 
+from helpers.converter import get_resampled
 from helpers.preparator import get_data
 from helpers.visualizer import plot_to_file, simple_plot
 
@@ -66,7 +67,7 @@ def box_plot(file):
 def check_seasonal_decomposition(df):
     col_name = df.columns[0]
 
-    result = seasonal_decompose(df, model='multiplicative', extrapolate_trend='freq')
+    result = seasonal_decompose(df, model='additive', extrapolate_trend='freq')
     # plot_to_file(result, title=col_name, out_file_name='%s_seasonal_decompose' % col_name)
     simple_plot(result)
 
