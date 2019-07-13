@@ -6,6 +6,7 @@ from pmdarima import auto_arima
 import pandas as pd
 
 from helpers.converter import datetime_to_string
+from helpers.preparator import get_data_with_box_cox
 from helpers.visualizer import simple_plot
 from myarima.arima import get_data
 from helpers.accuracy import measure_accuracy
@@ -22,7 +23,7 @@ class ArimaParamsetersSelection:
                  suppress_warnings=True, error_action='warn', trace=True,
                  stepwise=False, seasonal=True, n_jobs=1,
                  out_file=None):
-        self.df = get_data(file)
+        self.df, self.lambda_ = get_data_with_box_cox(file)
         self.df['number'] = numpy.arange(len(self.df))
         self.col_name = self.df.columns[0]
         self.window_size = window_size
