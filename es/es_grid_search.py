@@ -35,7 +35,7 @@ def build_model_with_config(config, train, test, lambda_):
 
 
 def select_best_model(model_list):
-    best_model = min(model_list, key=lambda el: el['rmse'])
+    best_model = min(model_list, key=lambda el: float(el['rmse']))
     return best_model
 
 
@@ -50,6 +50,7 @@ def es_grid_search(train, test, lambda_):
                 result_list.append(result_params)
         except Exception:
             pass
+            # result_list.append({'ERROR':config})
 
     best_model = select_best_model(result_list)
     return {'best_model': best_model}

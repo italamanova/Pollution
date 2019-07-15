@@ -9,7 +9,7 @@ from helpers.preparator import cut_dataframe, reverse_box_cox, get_data_with_box
 from helpers.visualizer import plot_prediction, plot_errors
 
 
-def exponential_smoothing(train, test, lambda_, trend='add', seasonal='add', seasonal_periods=24, damped=True):
+def exponential_smoothing(train, test, lambda_, trend=None, seasonal='add', seasonal_periods=24, damped=False):
     _model = ExponentialSmoothing(train, trend=trend, seasonal=seasonal, seasonal_periods=seasonal_periods,
                                   damped=damped)
     model_params = {
