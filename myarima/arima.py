@@ -28,6 +28,14 @@ from helpers.visualizer import plot_to_file, simple_plot, plot_prediction
 parent_dir_path = Path(__file__).parents[1]
 
 
+def model_params_to_json(model):
+    output = {}
+    output['order'] = model.order
+    output['seasonal_order'] = model.seasonal_order
+    output['aic'] = model.aic()
+    return output
+
+
 def predict_auto_arima(train, test, lambda_,
                        start_p, max_p, start_q, max_q, max_d,
                        start_P, max_P, start_Q, max_Q, max_D,
@@ -37,7 +45,6 @@ def predict_auto_arima(train, test, lambda_,
                        method=None, trend='c', solver='lbfgs',
                        suppress_warnings=True, error_action='warn', trace=True,
                        stepwise=False, seasonal=True, n_jobs=1):
-
     _model = auto_arima(train, start_p=start_p, max_p=max_p,
                         d=d, max_d=max_d,
                         start_q=start_q, max_q=max_q,
@@ -51,14 +58,14 @@ def predict_auto_arima(train, test, lambda_,
                         suppress_warnings=suppress_warnings,
                         stepwise=stepwise)
 
-    aic = _model.aic()
+    model_params = model_params_to_json(_model)
 
     _model.fit(train)
 
     pred = _model.predict(n_periods=len(test))
     reversed_train, reversed_test, reversed_pred = reverse_box_cox(train, test, pred, lambda_)
 
-    return reversed_train, reversed_test, reversed_pred
+    return reversed_train, reversed_test, reversed_pred, model_params
 
 
 @timeit
@@ -81,19 +88,19 @@ def my_auto_arima(file, test_size, start_p, max_p, start_q, max_q, max_d,
     train = train_copy[col_name]
     test = test_copy[col_name]
 
-    reversed_train, reversed_test, reversed_pred = predict_auto_arima(train, test, lambda_,
-                                                                      start_p=start_p, max_p=max_p,
-                                                                      d=d, max_d=max_d,
-                                                                      start_q=start_q, max_q=max_q,
-                                                                      start_P=start_P, max_P=max_P,
-                                                                      D=D, max_D=max_D,
-                                                                      start_Q=start_Q, max_Q=max_Q,
-                                                                      seasonal=seasonal, m=m,
-                                                                      max_order=max_order,
-                                                                      trace=trace,
-                                                                      error_action=error_action,
-                                                                      suppress_warnings=suppress_warnings,
-                                                                      stepwise=stepwise)
+    reversed_train, reversed_test, reversed_pred, model_params = predict_auto_arima(train, test, lambda_,
+                                                                                    start_p=start_p, max_p=max_p,
+                                                                                    d=d, max_d=max_d,
+                                                                                    start_q=start_q, max_q=max_q,
+                                                                                    start_P=start_P, max_P=max_P,
+                                                                                    D=D, max_D=max_D,
+                                                                                    start_Q=start_Q, max_Q=max_Q,
+                                                                                    seasonal=seasonal, m=m,
+                                                                                    max_order=max_order,
+                                                                                    trace=trace,
+                                                                                    error_action=error_action,
+                                                                                    suppress_warnings=suppress_warnings,
+                                                                                    stepwise=stepwise)
 
     plot_prediction(reversed_train, reversed_test, reversed_pred, title='ARIMA')
     measure_accuracy(reversed_test, reversed_pred)

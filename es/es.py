@@ -9,12 +9,18 @@ from helpers.preparator import cut_dataframe, reverse_box_cox, get_data_with_box
 from helpers.visualizer import plot_prediction, plot_errors
 
 
-def exponential_smoothing(train, test, lambda_, seasonal='add', seasonal_periods=24):
-    model = ExponentialSmoothing(train, trend='add', seasonal=seasonal, seasonal_periods=seasonal_periods)
-    fit = model.fit()
+def exponential_smoothing(train, test, lambda_, trend='add', seasonal='add', seasonal_periods=24, damped=True):
+    _model = ExponentialSmoothing(train, trend=trend, seasonal=seasonal, seasonal_periods=seasonal_periods,
+                                  damped=damped)
+    model_params = {
+        'trend': trend,
+        'seasonal': seasonal,
+        'damped': damped
+    }
+    fit = _model.fit()
     pred = fit.forecast(len(test))
     reversed_train, reversed_test, reversed_pred = reverse_box_cox(train, test, pred, lambda_)
-    return reversed_train, reversed_test, reversed_pred
+    return reversed_train, reversed_test, reversed_pred, model_params
 
 
 def exponential_smoothing_from_df(df, test_size, lambda_):
@@ -28,7 +34,7 @@ def exponential_smoothing_from_df(df, test_size, lambda_):
     train = train_copy[col_name]
     test = test_copy[col_name]
 
-    reversed_train, reversed_test, reversed_pred = exponential_smoothing(train, test, lambda_)
+    reversed_train, reversed_test, reversed_pred, model_params = exponential_smoothing(train, test, lambda_)
 
     measure_accuracy(reversed_test, reversed_pred)
     plot_prediction(reversed_train, reversed_test, reversed_pred, title='Exponential Smoothing')

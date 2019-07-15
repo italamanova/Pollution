@@ -2,32 +2,49 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import TimeSeriesSplit
 
 from es.es import exponential_smoothing
+from es.es_grid_search import es_grid_search
 from helpers.accuracy import measure_accuracy, measure_accuracy_each_sample, measure_mae_each_sample
 from helpers.saver import print_to_file
 from helpers.visualizer import plot_prediction, plot_errors
 from myarima.arima import predict_auto_arima
 
 
-def predict_on_train(train, test, lambda_, method_name):
-    print('current_train.shape', train.shape)
-    if method_name == 'es':
-        reversed_train, reversed_test, reversed_pred = exponential_smoothing(train, test, lambda_)
-        plot_title = 'Exponential Smoothing'
-    if method_name == 'arima':
-        # TODO add arima model paramms!
-        reversed_train, reversed_test, reversed_pred = predict_auto_arima(train, test, lambda_)
-        plot_title = 'ARIMA'
-    plot_prediction(reversed_train, reversed_test, reversed_pred, title=plot_title)
-    return reversed_train, reversed_test, reversed_pred
-
-
 def accuracy_evaluation(test, predictions):
     accuracy = measure_accuracy(test, predictions)
-    errors = {'each_mape': measure_accuracy_each_sample(test, predictions),
-              'each_mae': measure_mae_each_sample(test, predictions)}
+    errors = {'each_mape': measure_accuracy_each_sample(test, predictions)}
     plot_errors(errors)
     accuracy.update(errors)
     return accuracy
+
+
+def predict_on_train_es(train, test, lambda_):
+    reversed_train, reversed_test, reversed_pred, model_params = exponential_smoothing(train, test, lambda_)
+    plot_prediction(reversed_train, reversed_test, reversed_pred, title='Exponential Smoothing')
+    result_json = {}
+    result_json.update(model_params)
+    accuracy = accuracy_evaluation(reversed_pred.values, reversed_test.values)
+    result_json.update(accuracy)
+    return result_json
+
+
+def predict_on_train_grid_search_es(train, test, lambda_):
+    result_json = es_grid_search(train, test, lambda_)
+    return result_json
+
+
+def predict_on_train_arima(train, test, lambda_):
+    # TODO add arima model paramms!
+    reversed_train, reversed_test, reversed_pred, model_params = predict_auto_arima(train, test, lambda_)
+    plot_prediction(reversed_train, reversed_test, reversed_pred, title='ARIMA')
+    result_json = {}
+    result_json.update(model_params)
+    accuracy = accuracy_evaluation(reversed_pred.values, reversed_test.values)
+    result_json.update(accuracy)
+    return result_json
+
+
+def predict_on_train_lstm(train, test, lambda_):
+    pass
 
 
 def select_train(df, train_start_length, step, test_length, lambda_, method_name='es'):
@@ -49,13 +66,15 @@ def select_train(df, train_start_length, step, test_length, lambda_, method_name
             'test': '%s - %s' % (current_test.index[0], current_test.index[-1]),
             'step': i
         })
+        if method_name == 'es':
+            prediction_result = predict_on_train_grid_search_es(current_train, current_test, lambda_)
+        if method_name == 'arima':
+            prediction_result = predict_on_train_arima(current_train, current_test, lambda_)
+        if method_name == 'lstm':
+            prediction_result = predict_on_train_lstm(current_train, current_test, lambda_)
 
-        reversed_train, reversed_test, reversed_pred = predict_on_train(current_train, current_test, lambda_,
-                                                                        method_name)
-        accuracy = accuracy_evaluation(reversed_pred.values, reversed_test.values)
-        current_result.update(accuracy)
-
+        current_result.update(prediction_result)
         result_json['results'].append(current_result)
         i += 1
         train_length += step
-    print_to_file('koko.json', result_json)
+    print_to_file('es1.json', result_json)
