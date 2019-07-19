@@ -1,3 +1,15 @@
+Background
+People always have been adjusting the environment to their own needs and now we can see the consequences.
+Air pollution problem is one of those consequences. This is the price for our comfort: cars, factories...
+We pay this price every day while breathing the polluted air. It causes irreparable changes in our bodies, such as...
+At the global level it causes even more serious problems as climate changing...
+
+AQI is an indicator how good the air is.
+
+
+
+
+Time series
 Time series prediction is a complex problem that exists in many fields, such as
 
 (A Comparison of ARIMA and LSTM in Forecasting Time Series)
@@ -8,10 +20,31 @@ Time series prediction is a complex problem that exists in many fields, such as
 
 Research question:
 - compare performance of statistical and deep learning methods
-- ...
+- compare applying methods for real time prediction
 
 The internet of things technology allows us to....
 
 As far as we know there is no(?) research conducted to compare air pollution forecasting methods
 for real time.
+
+
+
+Заметки
+В статье Seasonal variation of air pollution index:Hong Kong case study нет явного указания сезонности.
+Based on the statistical analyses, the diurnal variations of SO2, NO2, CO and RSP levels three basic phases,
+i.e., the early morning phase (00:00–5:00 am) with low pollution levels, the daytime phase (6:00 am–18:00 pm)
+with increasing pollution levels, and the evening phase (18:00 pm–0:00) with descending pollution trends.
+The monthly varying processes of main
+pollutants present different patterns during the studied period but generally with lower levels
+in summer and higher levels in other seasons.
+В статье Time series analysis and forecasting for air pollution in small urban area:
+An SARIMA and factor analysis approach сезонность считают 24 часа аргументируя это тем
+что данные почасовые и эта сезонность будет влиять на предсказание. Предсказывают на 72 час.
+
+Наши данные не идеально регулярные так как существует множество факторов которые на них влияют.
+С помощью статистических методов все эти факторы учесть очень сложно так как мы предполагаем что
+данные изменяются во времени одинаково, но как мы видим для загрязнения воздуха это не так.
+Поэтому deep learning. Так как временной ряд - это последовательность.
+Seq2Seq
+
 
