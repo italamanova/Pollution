@@ -1,0 +1,554 @@
+%----------------------------------------------------------------------------------------
+%
+% LaTeX-template for degree projects at LNU, Department of Computer Science
+% Last updated by Johan Hagelbäck, Mar 2017
+% Linnaeus University
+%
+% License: Creative Commons BY
+%
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	Settings and configuration
+%----------------------------------------------------------------------------------------
+
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{dtklogos}
+\usepackage{wallpaper}
+\usepackage[absolute]{textpos}
+\usepackage[top=2cm, bottom=2.5cm, left=3cm, right=3cm]{geometry}
+\usepackage{appendix}
+\usepackage[nottoc]{tocbibind}
+\usepackage{longtable}
+\usepackage[colorlinks=true,
+            linkcolor=black,
+            urlcolor=blue,
+            citecolor=black]{hyperref}
+
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+\usepackage{sectsty}
+\sectionfont{\fontsize{14}{15}\selectfont}
+\subsectionfont{\fontsize{12}{15}\selectfont}
+\subsubsectionfont{\fontsize{12}{15}\selectfont}
+
+\usepackage{csquotes} % Used to handle citations
+
+\renewcommand{\thetable}{\arabic{section}.\arabic{table}}
+\renewcommand{\thefigure}{\arabic{section}.\arabic{figure}}
+
+%----------------------------------------------------------------------------------------
+%
+%----------------------------------------------------------------------------------------
+\newsavebox{\mybox}
+\newlength{\mydepth}
+\newlength{\myheight}
+
+\newenvironment{sidebar}%
+{\begin{lrbox}{\mybox}\begin{minipage}{\textwidth}}%
+{\end{minipage}\end{lrbox}%
+ \settodepth{\mydepth}{\usebox{\mybox}}%
+ \settoheight{\myheight}{\usebox{\mybox}}%
+ \addtolength{\myheight}{\mydepth}%
+ \noindent\makebox[0pt]{\hspace{-20pt}\rule[-\mydepth]{1pt}{\myheight}}%
+ \usebox{\mybox}}
+
+%----------------------------------------------------------------------------------------
+%	Title section
+%----------------------------------------------------------------------------------------
+\newcommand\BackgroundPic{
+    \put(-2,-3){
+    \includegraphics[keepaspectratio,scale=0.3]{img/lnu_etch.png} % Background picture
+    }
+}
+\newcommand\BackgroundPicLogo{
+    \put(30,740){
+    \includegraphics[keepaspectratio,scale=0.10]{img/logo.png} % Logo in upper left corner
+    }
+}
+
+\title{
+\vspace{-8cm}
+\begin{sidebar}
+    \vspace{10cm}
+    \normalfont \normalsize
+    \Huge Master Degree Project \\
+    \vspace{-1.3cm}
+\end{sidebar}
+\vspace{3cm}
+\begin{flushleft}
+    \huge Title of your degree project\\
+    \it \LARGE - Optional subtitle
+\end{flushleft}
+\null
+\vfill
+\begin{textblock}{6}(10,13)
+\begin{flushright}
+\begin{minipage}{\textwidth}
+\begin{flushleft} \large
+\emph{Author:} Your name here\\ % Author
+\emph{Supervisor:} Name of your supervisor\\ % Supervisor
+%\emph{Examiner:} Dr.~Mark \textsc{Brown}\\ % Examiner (course manager)
+\emph{Semester:} VT/HT 2017\\ %
+\emph{Subject:} Computer Science\\ % Subject area
+\end{flushleft}
+\end{minipage}
+\end{flushright}
+\end{textblock}
+}
+
+\date{}
+
+\begin{document}
+\pagenumbering{gobble}
+\newgeometry{left=5cm}
+\AddToShipoutPicture*{\BackgroundPic}
+\AddToShipoutPicture*{\BackgroundPicLogo}
+\maketitle
+\restoregeometry
+\clearpage
+%----------------------------------------------------------------------------------------
+%	Abstract
+%----------------------------------------------------------------------------------------
+\selectlanguage{english}
+\begin{abstract}
+\noindent The report shall begin with a summary, called abstract. The abstract shall not be longer than a paragraph, and is not divided into more than one piece. It shall contain:
+
+\begin {itemize}
+\item A short background description to the area of your project
+\item A description of the problem you investigate
+\item A motivation why this problem is interesting to investigate
+\item What you have done to answer the problem
+\item A short summary of your results
+\end {itemize}
+
+From reading the abstract the reader should clearly understand what the report is all about. The purpose of the abstract is to make the reader interested in continue reading the report, if it covers something that the reader wants to know more about.
+\newline
+\newline
+\textbf{Keywords: fill in some keywords for your work here. Examples: software architectures, adaptive systems, network intrusion detection, ...}
+\end{abstract}
+
+\newpage
+%----------------------------------------------------------------------------------------
+%	Preface
+%----------------------------------------------------------------------------------------
+
+\textbf {\large{Preface}}\\
+
+\noindent You can have a preface in the report if you want, but it is not necessary. In this you can write more personal reflections on your degree project. In the preface you can also take the opportunity to thank the people who have been particularly helpful during the report writing, for example if you had any contact with a company that helped with the project, people that guided or helped you during the project, or your family and friends that supported you during the project. The preface shall not be longer than half a page.
+
+%----------------------------------------------------------------------------------------
+\newpage
+\pagenumbering{gobble}
+\tableofcontents % Table of contents
+\newpage
+\pagenumbering{arabic}
+
+%----------------------------------------------------------------------------------------
+%
+%	Here follows the actual text contents of the report.
+%
+%----------------------------------------------------------------------------------------
+
+\section{Introduction}
+Introduction about air pollution
+
+\subsection{Background}
+Smart City is a complex system that uses data from sensors to increase operational efficiency and improve the quality of life of its citizens. Air pollution is a very important indicator for the quality of life in every city because it has been proven that these factors could cause heart and lung diseases \cite{Kunzli:2000}.
+An enormous amount of data is generated by different sensors in Smart City every day and it's impossible for a human to analyze it manually. The problem of analyzing such amounts of data is usually resolved by using Artificial Intelligence. One of AI applications is Machine Learning that provides the ability to manage tasks without being explicitly programmed for a system.
+
+\subsection{Related work}
+
+\begin{longtable}{|p{0.3cm}|p{6.6cm}|p{6.6cm}|}\hline
+ & Reference & What is Monitored
+\\ \hline
+1
+& Urban Air Pollution Monitoring System With Forecasting Models \cite{Shaban:2016}
+&
+The  system  proposed  in this  paper  is  created  for forecasting  air  pollution.
+Authors investigate 3 machine learning algorithms: SVM,  M5P  model  trees and  artificial  neural  networks. They  pursue two types  of  modeling:   univariate   and   multivariate.
+The   outcome   could   be used for alarming applications with high air pollution levels. The future improvement of this work is about studying a real-time pollution prediction.
+\\ \hline
+2
+& Data analysis for predicting air pollutant concentration in Smart city Uppsala \cite{Subramanian:2016}
+& The main focus the paper is to explore the suitable data mining technique that will help in better forecasting of the pollution concentration. Used data mining  techniques are  Multiple  Linear  Regression and Neural  Network.
+\\  \hline
+3
+& Real-time Air Pollution prediction model based on Spatiotemporal Big data \cite{Le:2018}
+&  The paper describes an air-pollution prediction model that is based on spatiotemporal Big data. This data is collected from air quality sensors installed on taxis running across the city Daegu, Korea. The amount of data is huge (1-second interval) and in both Spatial and Temporal format. The prediction model is based on Convolutional Neural Network (CNN) algorithm for image like Spatial distribution of air pollution.
+The temporal information in the data is handled using combination of a Long Short-Term Memory (LSTM) unit for time series data and a Neural Network model for other air pollution impact factors such as weather conditions to build a hybrid prediction model.
+\\  \hline
+4
+& Air quality prediction: Big data and machine learning approaches \cite{Kang:2018}
+&  The overview of different machine learning techniques that are used in air pollution forecasting. It’s mentioned that form observed machine learning methods only Neural Networks could be used for real-time prediction.
+\\  \hline
+5
+& LSTM Online Training and Prediction: Non-Stationary Real Time Data Stream Forecasting \cite{Press:2018}
+&  In his article author describes method that combines LSTM Recurrent Neural Network with statistical prediction methods to get higher accuracy. The model is developed to predict Exchange Rate for Bitcoin cryptocurrencyб, but could be also used for any data that updates in real time, in our case data from air pollution sensors.
+\\  \hline
+\end{longtable}
+
+The real time air pollution analysis and prediction is a prospective task because the amount of sensors will grow and the faster analysis and prediction of this data will be needed.
+
+\subsection{Problem formulation}
+As it was mentioned in \cite{Shaban:2016} their work can be extended by considering data changes over time for real-time forecasting. It can be achieved by building online models that adapt automatically to environmental changes.
+So it was decided to compare which method for time series forecasting fits the best for real time prediction.
+
+\subsection{Motivation}
+Air pollution data analysis is important for improving the quality of life of citizens in every city. Special commissions are updating maps of environment situation in big cities in EU for every 5 years. However, this information becomes obsolete very fast and because of that it is hard to rely on predictions made on this data basis.
+Computers are able to get and analyze large amount of information and predict future events which are not obvious for a human. So by using Machine Learning for predicting this data we can get a reliable real-time forecast of air pollution. In the future this information could be used for creating alarming applications.
+
+\subsection{Objectives}
+The main objectives of this project are:\\
+
+\begin{tabular} {|p{1.2cm}|p{11.6cm}|} \hline
+\textbf{O1} & To study time series prediction methods in context of real-time applications \\ \hline
+\textbf{O2} &  To study how these methods can be applied to air pollution prediction   \\ \hline
+\end{tabular}\\
+
+\subsection{Time series forecast specifics}
+A data that is recorded at regular intervals of time is called a time series.
+The purpose of a predictive model is to estimate future value of an unknown variable. In our case we have an independent variable t as time and dependent variable yt which is our target variable. The model's output is the predicted value for y at time t.
+
+These are several components of time series:
+\begin{itemize}
+
+\item Trend: Trend reflects the long-term progression of the series. A trend exists when there is a persistent increasing or decreasing direction in the data
+\item Seasonality: A seasonal pattern exists when a time series is influenced by seasonal factors. Seasonality occurs over a fixed and known period (e.g., the quarter of the year, the month, or day of the week).
+\item Cycles: Cycle reflects repeated but non-periodic fluctuations.
+\end{itemize}
+
+\subsection{Time series forecasting methods overview}
+\begin{itemize}
+\item \textbf{Linear Regression} \\
+Linear approach to modelling the relationship between a scalar response (or dependent variable) and one or more explanatory variables (or independent variables).\\
+ \textbf{Pros:}\\
+ Ability to handle different time series components and features. High interpretability. \\
+ \textbf{Cons:}\\
+ Sensitive to outliers. Strong assumptions. \\
+Applying in real-time:
+Continuously updating parameters while receiving new data.
+
+\item \textbf{Exponential Smoothing} \\
+Technique for smoothing time series data using the exponential window function. There are different types of ES, which include Single-, Double-, Triple Exponential Smoothing, Holt-Winters filters. \\
+\textbf{Pros:}\\
+ Ability to handle variable level, trend and seasonality component.Automated optimization. \\
+ \textbf{Cons:}\\
+ Sensitive to outliers. Narrow confidence interval. \\
+
+\item \textbf{ARIMA} \\
+Models the next step in the sequence as a linear function of the differenced observations and residual errors at prior time steps. \\
+\textbf{Pros:}\\
+ High interpretability. Realistic confidence intervals. Unbiased forecasts. \\
+ \textbf{Cons:}\\
+ Requires more data. Strong restrictions and assumptions. Hard to automate.\\
+
+\item \textbf{Kalman Filters} \\
+An algorithm that uses a series of measurements observed over time, containing statistical noise and other inaccuracies, and produces estimates of unknown variables that tend to be more accurate than those based on a single measurement alone, by estimating a joint probability distribution over the variables for each timeframe. \\
+
+\item \textbf{Theta model} \\
+Univariate forecasting method which is based on the concept of modifying the local curvature of the time-series through a coefficient ‘Theta’ (the Greek letter θ), that is applied directly to the second differences of the data. The resulting series that are created maintain the mean and the slope of the original data but not their curvatures. \\
+
+\item \textbf{Dynamic Linear Model} \\
+Type of linear regression model, wherein the parameters are treated as time-varying rather than static. The main goals are short-term forecasting,intervention analysis and monitoring. \\
+\textbf{Pros:}\\
+High interpretability. More transparent than other models. Deals well with uncertainty. Control the variance of the components. \\
+ \textbf{Cons:}\\
+ Higher holdout errors. Higher training and evaluation time.\\
+
+\item \textbf{Neural Network} \\
+Computing systems vaguely inspired by the biological neural networks that constitute animal brains.The neural network itself is not an algorithm, but rather a framework for many different machine learning algorithms to work together and process complex data inputs. \\
+\textbf{Pros:}\\
+Less restrictions and assumptions. Ability to handle complex non-linear patterns. High predictive power. Can be easily automated.  \\
+ \textbf{Cons:}\\
+ Low interpretability. Difficult to derive confidence intervals for the forecast. Requires a lot of data.\\
+
+ \item \textbf{MLP(Multi-Layer perceptron)} \\
+ Is a class of feedforward artificial neural network. A MLP consists of at least three layers of nodes: an input layer, a hidden layer and an output layer. Except for the input nodes, each node is a neuron that uses a nonlinear activation function. \\
+
+ \item \textbf{KNN(k-nearest neighbour) regression} \\
+Is a non-parametric method used for classification and regression. In both cases, the input consists of the k closest training examples in the feature space. \\
+
+\item \textbf{RNN (Recurrent Neural Network)} \\
+Class of artificial neural network where connections between nodes form a directed graph along a temporal sequence. \\
+
+\item \textbf{LSTM (Long-Short Term Memory)} \\
+An artificial recurrent neural network (RNN) architecture used in the field of deep learning. LSTM has feedback connections that make it a "general purpose computer". It can not only process single data points (such as images), but also entire sequences of data (such as speech or video)
+
+\item \textbf{GRU (Gated Recurrent Unit)} \\
+A gating mechanism in recurrent neural networks. The GRU is like a long short-term memory (LSTM) with forget gate but has fewer parameters than LSTM, as it lacks an output gate. GRU's performance on certain tasks of polyphonic music modeling and speech signal modeling was found to be similar to that of LSTM. GRUs have been shown to exhibit even better performance on certain smaller datasets.
+
+\item \textbf{SVM(Support-Vector Machines)} \\
+Are supervised learning models with associated learning algorithms that analyze data used for classification and regression analysis. \\
+
+\end{itemize}
+
+\subsection{Methods to analyze}
+
+\subsubsection{Exponential Smoothing}
+Exponential smoothing is a method for time series forecasting for univariate data. In this method a prediction is a weighted sum of the  past observations. Each value of the series gets a weight and this weight is exponentially decreasing for past values.\\
+
+\textbf {Simple Exponential Smoothing}\\
+The equation is the following:
+\begin{equation}
+s_{t} = \alpha \cdot x_{t} + (1 - \alpha) \cdot s_{t-1} = s_{t-1} + \alpha \cdot(x_{t} - s_{t-1})
+\end{equation}
+
+where $\alpha$ is the smoothing factor. $\alpha$ is usually located between 0 and 1, because larger values of $\alpha$ reduce level of smoothing.\\
+
+\textbf{Hyperparameters}:
+\begin{itemize}
+\item $\alpha$
+\end{itemize}
+
+
+\subsubsection{ARIMA}
+ARIMA model is a popular solution for analyzing and predicting time series. The acronym ARIMA stands for Auto-Regressive Integrated Moving Average.\\
+Autoregression (\textbf{AR}) refers to a  model in which current value of the time series is linearly dependent on the previous values of these series.\\
+Integrated (\textbf{I}) allows to make the time series stationary using differencing.\\
+Moving average (\textbf{MA}) calculates the dependency between the current value and a residual error from a moving average model applied to lagged observations.\\
+In ARIMA model the future value of time series considered to be a linear function of several past observations and residual error.\cite{Box:2015}\\
+
+ARIMA has 7 parameters which should be tuned for to predict time series:
+\begin{itemize}
+\item p - lag order which means the count of lagged observations in the model
+\item d - degree of differencing which stands for count of times the initial observations were differenced
+\item q - order of moving average window which stands for size of MA window
+\end{itemize}
+
+\\For seasonal component:
+\begin{itemize}
+\item P - seasonal autoregressive order
+\item D - seasonal difference order
+\item Q - seasonal moving average order
+\item m - number of time steps which a seasonal period contains
+\end{itemize}
+
+\textbf{Hyperparameters}:
+\begin{itemize}
+\item p, d, q
+\item P, D, Q
+\item m
+\end{itemize}
+
+\subsubsection{LSTM}
+
+For understanding LSTM the brief information about neural networks is provided\\
+\textbf{ANN}\\
+Artificial Neural Network is a sequence of neurons connected between each other. The structure of neural networks came to the programming from biology. Using this structure the machine could analyze and even memorize various information. \\
+A neuron is a computational unit that receives information, performs simple calculations on this information and transfers it further on. Neurons are organized into layers. The input layer is needed to get the information from the sample, hidden layers are processing this information and the result is retrieved through the output layer.\\
+\textbf{RNN}\\
+A Recurrent Neural Network is a type of Neural Network where the neuron can not only calculate some value but can also remember the state of the network.\\
+But on the other hand this improvement leads to vanishing or exploding gradient problem if the network is trained on a long sequence.\cite{Hochreiter:1998}
+\begin{figure}[ht!]
+\begin{center}
+\includegraphics*[width=0.8\columnwidth]{img/theory/RNN}
+\end{center}
+\caption{Unrolled RNN}
+\label{graph}
+\end{figure}\\
+\textbf{LSTM}\\
+LSTM or  Long Short-Term Memory\cite{Gers:1999} is used when we need to have a historical context of inputs. This variation of Recurrent Neural Network was proposed by Hochreiter and Schmidhuber to solve the vanishing or exploding gradient problem.\\
+LSTM cell has more complex structure then RNN cell. The idea consists in remembering only useful information and forgetting data that we don’t need anymore.\\
+The structure of the cell is the following. There are two states that are kept by the cell: a cell state and a hidden state. \\
+There are also 3 gates in each cell:
+\begin{itemize}
+\item Forget gate - decides which information from the input should be forgotten
+\item Input gate - decides which information from the input should be remembered
+\item Output gate - decides what the next hidden state should be
+\end{itemize}
+Depending on the gates the cell state and hidden state are updated for each cell. The main advantage of LSTM is that cell state prevents vanishing and exploding for long sequences.
+
+\begin{figure}[ht!]
+\begin{center}
+\includegraphics*[width=0.97\columnwidth]{img/theory/LSTM}
+\end{center}
+\caption{LSTM cell}
+\label{graph}
+\end{figure}
+
+Equation:
+\begin{equation}
+i_{t} = \sigma (w_{i}[h_{t-1}, x_{t}] + b_{i})
+\end{equation}
+\begin{equation}
+f_{t} = \sigma (w_{f}[h_{t-1}, x_{t}] + b_{f})
+\end{equation}
+\begin{equation}
+o_{t} = \sigma (w_{o}[h_{t-1}, x_{t}] + b_{o})
+\end{equation}
+
+\begin{equation}
+\widetilde{c}_{t} = tanh(w_{c}[h_{t-1}, x_{t}] + b_{c})
+\end{equation}
+\begin{equation}
+c_{t} = f_{t} \cdot c_{t-1} + i_{t} \cdot \widetilde{c}_{t}
+\end{equation}
+\begin{equation}
+h_{t} = o_{t} \cdot tanh(c^{t})
+\end{equation}
+
+
+\textbf{Hyperparameters}:
+\begin{itemize}
+\item Sequence length
+\item Dropout
+\item Epochs
+\item Neurons per layer
+\item Activation function
+\item Optimization function
+\end{itemize}
+
+\subsection{Measurement evaluation}
+
+\textbf{MAE}\\
+Mean Absolute Error (MAE) is an average over the test set between predicted value and actual value of the series and all the individual differences have equal weight.
+\begin{equation}
+MAE=\frac{{}\sum_{t=1}^{n} |y_{i} -x_{i}|}{n}
+\end{equation}
+\textbf{RMSE}\\
+Root mean squared error (RMSE) is the square root of the average of squared differences between predicted value and actual value of the series.
+\begin{equation}
+RMSE=\sqrt{\frac{\sum_{t=1}^{n} (y_{i} -x_{i})^{2}}{n}}
+\end{equation}
+
+\subsection{Real time approach}
+Predicting data in real time means that we need to update the model as soon as it starts giving wrong predictions. For that we can compare the predicted value with the real value and rebuild the model if the error is too big.\\
+
+Let's see how a model generation and usage life-cycle could look like. The main components of the system are Generator and Predictor. \\
+The Generator component is responsible for the model construction. It is creating a model and returns it to Predictor.  \\
+The Predictor module is responsible for predicting new values based on the training set and computation of the forecast error. If the data is not predicted correctly and the error is too big Predictor requests a new model form Generator.
+
+In general the system could have the following architecture:
+
+\begin{figure}[ht!]
+\begin{center}
+\includegraphics*[width=0.8\columnwidth]{img/implementation/system_architecture}
+\end{center}
+\caption{Proposed system architecture}
+\label{graph}
+\end{figure}
+
+For each model there will be separate experiment to tune the best hyperparameters.
+After tuning we will compare the models in terms of accuracy and performance.
+
+
+
+
+
+\subsection{Scope/Limitation}
+
+
+\subsection{Target group}
+
+
+\subsection{Outline}
+
+
+\newpage
+
+\section{Method}
+\label{Method}
+
+\begin{itemize}
+\item Controlled Experiment
+\item Case Study
+\end{itemize}
+
+\subsection{Reliability and Validity}
+
+
+\subsection{Ethical considerations}
+
+\newpage
+
+\section{Implementation}
+
+The LSTM recurrent neural network will be implemented. The model will be trained on the air pollution data.
+The data will be emulated based on the real dataset.
+
+\subsection{Dataset}
+
+The dataset I got from Linköping kommuns öppna data. It has only PM10 measures.
+
+\begin{figure}[ht!]
+\begin{center}
+\includegraphics*[width=0.6\columnwidth]{img/results/initial_dataset}
+\end{center}
+\caption{Initial data in dataset}
+\label{graph}
+\end{figure}
+
+I have built the scatter plot to detect outliers.
+\begin{figure}[ht!]
+\begin{center}
+\includegraphics*[width=0.6\columnwidth]{img/results/scatter_initial_dataset}
+\end{center}
+\caption{Initial data scatter plot}
+\label{graph}
+\end{figure}
+
+\newpage
+After removing outliers I have built the seasonality and trend for this data.
+\begin{figure}[ht!]
+\begin{center}
+\includegraphics*[width=1\columnwidth]{img/results/seasonality}
+\end{center}
+\caption{Seasonality and trend}
+\label{graph}
+\end{figure}
+
+We can see that there is no trend in data.
+
+\newpage
+
+\section{Results}
+
+\newpage
+
+\section{Analysis}
+
+
+\newpage
+
+\section{Discussion}
+
+
+\newpage
+
+\section{Conclusion}
+
+
+\subsection{Future work}
+
+
+\newpage
+
+
+%----------------------------------------------------------------------------------------
+%	References. IEEE style is used.
+%
+%----------------------------------------------------------------------------------------
+\newpage
+
+\hypersetup{urlcolor=black}
+\bibliographystyle{IEEEtran}
+\bibliography{}
+\newpage
+%----------------------------------------------------------------------------------------
+%	Appendix
+%-----------------------------------------------------------------------------------------
+\pagenumbering{Alph}
+\setcounter{page}{1} % Reset page numbering for Appendix
+\appendix
+
+\section{Appendix 1}
+In the appendix you can put details that does not fit into the main report. Examples are source code, long tables with raw data and questionnaires.
+
+\end{document}
