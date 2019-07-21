@@ -40,13 +40,23 @@
 может оказываться хуже предыдущего. В этом случае необходимо определить
 горизонт предсказания
 
-2.7.2 Наиболее популярной мерикой величины отличия предсказаний от тестовыъ
-является RMSE (...). Для N шагов предсказания можно построить набор метрик
-RMSE[1] для первого шага, RMSE[K] для первых K шагов ... RMSE[N] для N шагов
+2.7.2 Наиболее популярной метрикой величины отличия предсказаний от тестовыъ
+является RMSE (...). Она оценивает усредненные отличие реальных данных и предсказания
+? Другими словами она показывает "среднюю температуру по палате"
+В этой работе предлагается использовать метрику MAPE, наиболее реалистично показывающую
+величину отклонения предсказания от реальных данных
 
 2.7.3. Для оценки изменения качества от количества шагов предсказания
-предлагается использовать метрику приведенного среднего
-SUM[i=1, N](RMSE[i])/N/RMSE[1]
+предлагается использовать метрику MAPE[i] - MAPE[0] < alpha, величину которой ? подобрать
+ экспериментально
+
+2.8. Способы выбора интервалов и параметров моделей
+2.8.1 Общеупотребительными являются два способа - случайного выбора и гридСерч
+2.8.2 Выбор интервалов предсказаний предлагается выполнять псевдослучайным способом - выбор
+ начальных (стартовых) показателей путем разбиения всего ряда на несколько интервалов,
+ выбор величины интервала предсказания - путем расширения его размера, начиная с некоторого небольшого
+ на первой иттерации в два раза, на втрой иттерации - пошагово от одного до 24.
+2.8.3 Способ подбора параметров методов будем выбирать для каждого метода дополнительно
 
 3. Выбор и сравнение методов и моделей для проведения работ
 Для проведения работ были выбраны;
@@ -69,38 +79,117 @@ decode-encode ie seq2seq - 1 LSTM layer - decoder, 1 LSTM layre - encoder).
 3.1.1 Smoosing
 Принцип выполнения предсказаний
 ...
+
 Параметры модели
 ....
+Выбор интервалов тренинга и параметров модели будем выполнять псевдослучайным
+способом одновременно
 
 3.1.2. (S)ARIMA
 Принцип выполнения предсказаний
 Использование авторегресии с последующим moving average, для рядов с выраженной
 сезонностью использование тех же механизмов для учета сезонности
 Параметры
-p - лаг автокорреляции основного ряда
+p - лаг автокорреляции основногое ряда
 d - количество дифференцирований основного ряда для исключения тренда
 q - шаг moving average основногоряда
 m - размер интервала сезонности 
 P - лаг автокорреляции сезонности
 D - количество дифференцирований сезонности для исключения тренда
 Q - шаг moving average для сезонности
+Выбор интервалов тренинга будем выподнять псевдослучайным образом
+Подбор параметров модели будем выполнять с использованием пакета autoARIMA, 
+который в сущности выполняет роль гридСеча
+Для ограниченя интервалов поиска лучшего решения проведем сначала подбор максимальных
+значений параметров на интервалах тренинга, выбранных псевдослучайным способом
 
 3.2 Рекурентные нейронные сети с использованием LSTM
 Принцип выполнения предсказаний
 Возможность одно/много шагогово предсказания для одно/много фрагмента
 наблюдаемых данных
-Это достигается путем подготовки данных траин/тест в виде ... (см рисунок)
+
+
+данные для обучения, валидации и тестирования prepare as (see image: batch_stepSeries.png)
+- количество фичей (features), в нашем случае = 3??:
+   - значения ряда
+   + почасовая классификация - в каком часу получено значение
+   + разница между текущим значением и предыдущим (аналог дифференцирования)
+- n_steps_in - количество входных для трининга/теста шагов (серий) 1 ... 24 - количество входных шагов
+   (размер серии) для каждой фичи (step_in)
+- количество самплов  (samples)
+- обучение проводится по эпохам (n_epochs) порциями по размеру батча (batch_size)
+
 Параметры
-n_units - количество скрытых нейронов в слое LSTM
-dropout - уровень отсечения решений !!!
-n_steps_out - количество выходных для тренинга/теста шагов
-n_steps_in - количество входных для трининга/теста шагов
-batch_size - количество ...
-n_epochs - количество элох (повторения однократного траина) для улучшения обучения
-n_pacience - количество эпох, не приносящих улучшение в обучение, позволяющее уменьшить время обучения
- и избежать переобучения
+1. модели
+- тип использования (смотри ...) type = stateless or stateful
+Each LSTM has gates. These gates regulate the addition and removal of information to cell states.
+ At every time step, the state of these gates changes.
+  However when you move to the next batch of data, you can either start over again by erasing these
+   states or maintain the states from last batch and start from there.
+  In keras state can be preserved between batches by setting the parameter stateful to True.
+
+Различие в том когда сбрасываются состояния ячеек скрытых нейронов
+- stateless - after each batch_size, stateful - after each epoch
+- n_units - количество скрытых нейронов в слое LSTM
+- dropout - уровень отсечения решений !!!  ~ 0.1
++ reccurent_dropout ~ 0.5
+- n_steps_out - количество выходных для тренинга/теста шагов (глубина предсказания) 1 ... 24
+  на этапе компиляции
+- оптимизатор (optimizer) = adam
+- метрика оценки обучаемости (metrics + loss) = mean_squared_logarithmic_error
+2. обучения
+- количество эпох обучения (epochs) (повторения однократного траина) для улучшения обучения
++ earlyStopping - количество эпох ожидания улучшения обучаемости (patience),
+  количество эпох, не приносящих улучшение в обучение, позволяющее уменьшить время обучения
+  и избежать переобучения
+- Кроме того, для возможности использовать не только механизм forvardPropagators, но и 
+   backPropagators совметим обучениие модели с верификацией качества, поделив траин последовательность на
+   собственно траин и валидате, для чего используем параметр validation_split - отношение
+   размера валидатион к размеру траин, размер партии валидации, из общего количества самплов S * (1 - v) - train
+   S * v - validate
+- batch size (train step) see batch_size.txt +image batch_size.png:
+  Vanilla = samples,
+  Stochastic - 1,
+  MiniBatch - n = 2... in each miniBatch
+3. Предикт
+- размер тестовых самплов - для проверки стабильности предсказаний на периоде 24
+
+ 
+4. Выбор интервалов тренинга.
+- test_size = 24
+- start = 800#24*20
+- data_length = 3000#24*15
+
+ ?Общеизвестно, что для нейронных сетей больший размер данных обучения позволяет получить
+ лучшие результаты
+ Учитывая, что с одной стороны анализируемые данные носят нечеткую годовую сезонность, с другой
+  стороны - ?данные за год устаревают, разумно в качетве начального значения интервала
+   тренинга выбирать размер, ненамного
+  превышающий годовой интервал.
+Подбор параметров модели
+В отличие от статистических методов количество и разброс параметров модели нейронной сети
+не позволяет провести достаточно полный гридСеч, поэтому будем использовать комбинацию случайного
+поиска и гридСеч путем последовательного подбора того или иного параметра
+
 ????Предлагаемые для анализа архитектуры 
-- 
+Архитектуры
+simple one LSTM layer + Dense
+stacked - two LSTM layers + Dense
+bidirectual - witth one LSTM layer
+?seq2seq - one LSTM layer as decode + one LSTM layer as encode
+seq2seq will take a sequence of values as input and then output a sequence of values.
+ So in that case, you could probably train a Keras Sequential Model to take in a sequence of web traffic
+  for 30 days or so and then output the web traffic for the next 30 days. 
+----------------
+For example, TS can be handled as:
+    Images (Vision applications)
+    Bag of words (Text applications)
+    Structured data (Tabular data applications)
+----------------
+from https://ieeexplore.ieee.org/document/7836709
+Encouraged by recent waves of successful applications of deep learning, some researchers have demonstrated the effectiveness of applying convolutional neural networks (CNN) to time series classification problems.
+ In this paper, we propose a novel model incorporating a sequence-to-sequence model that consists two LSTMs, one encoder and one decoder. The encoder LSTM accepts input time series of arbitrary lengths, extracts information from the raw data and based on which the decoder LSTM constructs fixed length sequences that can be regarded as discriminatory features
+ 
 
 3.3 Главное отличие модели нейронных сетей от статистических методов заключается именно
 в возможности использования ее без перестройки для выполнения предикта
@@ -140,30 +229,222 @@ n_pacience - количество эпох, не приносящих улучш
 Для уменьшения времени подбора предварительно провести выбор оптимальных границ параметров autoARIMA
 5.3. Рекурентные нейронные сети с использованием LSTM
 Платформа python + keras
-На (??нескольких произвольно выбранных) интервалах траин/тест и (??нескольких произвольно подобранных)
+keras - это помесь пазлов и кубика рубика
+keras has many layers, include LSTM layer
+also use Dense layer
+also may be use other layers
+В каждом слое есть ряд параметров, могущих влиять на работу
+- activations
+keras.activations.elu(x, alpha=1.0)
+The exponential linear activation: x if x > 0 and alpha * (exp(x)-1) if x < 0.
+--
+keras.activations.softplus(x)
+The softplus activation: log(exp(x) + 1).
+--
+keras.activations.softsign(x)
+The softsign activation: x / (abs(x) + 1).
+--!!!!!
+keras.activations.relu(x, alpha=0.0, max_value=None, threshold=0.0)
+With default values, it returns element-wise max(x, 0).
+Otherwise, it follows: f(x) = max_value for x >= max_value, f(x) = x for threshold <= x < max_value, f(x) = alpha * (x - threshold) otherwise.
+--
+keras.activations.tanh(x)
+Hyperbolic tangent activation function.
+--
+keras.activations.sigmoid(x)
+Sigmoid activation function.
+--
+keras.activations.hard_sigmoid(x)
+Hard sigmoid activation:
+    0 if x < -2.5
+    1 if x > 2.5
+    0.2 * x + 0.5 if -2.5 <= x <= 2.5.
+--
+keras.activations.exponential(x)
+Exponential (base e) activation function.
+--
+keras.activations.linear(x)
+Linear (i.e. identity) activation function.
+
+- initializers
+Initializations define the way to set the initial random weights of Keras layers.
+keras.initializers.Zeros()
+Initializer that generates tensors initialized to 0.
+keras.initializers.Ones()
+Initializer that generates tensors initialized to 1.
+keras.initializers.Constant(value=0)
+Initializer that generates tensors initialized to a constant value.
+keras.initializers.RandomNormal(mean=0.0, stddev=0.05, seed=None)
+Initializer that generates tensors with a normal distribution.
+keras.initializers.RandomUniform(minval=-0.05, maxval=0.05, seed=None)
+Initializer that generates tensors with a uniform distribution.
+keras.initializers.TruncatedNormal(mean=0.0, stddev=0.05, seed=None)
+Initializer that generates a truncated normal distribution.
+These values are similar to values from a RandomNormal except that values more than two standard deviations from the mean are discarded and redrawn. This is the recommended initializer for neural network weights and filters.
+keras.initializers.VarianceScaling(scale=1.0, mode='fan_in', distribution='normal', seed=None)
+Initializer capable of adapting its scale to the shape of weights.
+With distribution="normal", samples are drawn from a truncated normal distribution centered on zero, with stddev = sqrt(scale / n) where n is:
+    number of input units in the weight tensor, if mode = "fan_in"
+    number of output units, if mode = "fan_out"
+    average of the numbers of input and output units, if mode = "fan_avg"
+With distribution="uniform", samples are drawn from a uniform distribution within [-limit, limit], with limit = sqrt(3 * scale / n).
+keras.initializers.Orthogonal(gain=1.0, seed=None)
+Initializer that generates a random orthogonal matrix.
+keras.initializers.lecun_uniform(seed=None)
+LeCun uniform initializer.
+It draws samples from a uniform distribution within [-limit, limit] where limit is sqrt(3 / fan_in) where fan_in is the number of input units in the weight tensor.
+keras.initializers.glorot_normal(seed=None)
+Glorot normal initializer, also called Xavier normal initializer.
+It draws samples from a truncated normal distribution centered on 0 with stddev = sqrt(2 / (fan_in + fan_out)) where fan_in is the number of input units in the weight tensor and fan_out is the number of output units in the weight tensor.
+keras.initializers.glorot_uniform(seed=None)
+Glorot uniform initializer, also called Xavier uniform initializer.
+It draws samples from a uniform distribution within [-limit, limit] where limit is sqrt(6 / (fan_in + fan_out)) where fan_in is the number of input units in the weight tensor and fan_out is the number of output units in the weight tensor.
+keras.initializers.he_normal(seed=None)
+He normal initializer.
+It draws samples from a truncated normal distribution centered on 0 with stddev = sqrt(2 / fan_in) where fan_in is the number of input units in the weight tensor.
+keras.initializers.lecun_normal(seed=None)
+LeCun normal initializer.
+It draws samples from a truncated normal distribution centered on 0 with stddev = sqrt(1 / fan_in) where fan_in is the number of input units in the weight tensor.
+keras.initializers.he_uniform(seed=None)
+He uniform variance scaling initializer.
+It draws samples from a uniform distribution within [-limit, limit] where limit is sqrt(6 / fan_in) where fan_in is the number of input units in the weight tensor.
+
+
+
+- regularizers
+Regularizers allow to apply penalties on layer parameters or layer activity during optimization. These penalties are incorporated in the loss function that the network optimizes.
+Available penalties
+  keras.regularizers.l1(0.)
+  keras.regularizers.l2(0.)
+  keras.regularizers.l1_l2(l1=0.01, l2=0.01)
+- constraints
+Functions from the constraints module allow setting constraints (eg. non-negativity) on network parameters during optimization.
+keras.constraints.MaxNorm(max_value=2, axis=0)
+Constrains the weights incident to each hidden unit to have a norm less than or equal to a desired value.
+keras.constraints.NonNeg()
+Constrains the weights to be non-negative.
+keras.constraints.UnitNorm(axis=0)
+Constrains the weights incident to each hidden unit to have unit norm.
+keras.constraints.MinMaxNorm(min_value=0.0, max_value=1.0, rate=1.0, axis=0)
+MinMaxNorm weight constraint.
+Constrains the weights incident to each hidden unit to have the norm between a lower bound and an upper boun
+
+-----------
+Dense layer has Arguments
+keras.layers.Dense(units, activation=None, use_bias=True, kernel_initializer='glorot_uniform', bias_initializer='zeros', kernel_regularizer=None, bias_regularizer=None, activity_regularizer=None, kernel_constraint=None, bias_constraint=None)
+    units: Positive integer, dimensionality of the output space.
+    activation: Activation function to use (see activations).
+     If you don't specify anything, no activation is applied (ie. "linear" activation: a(x) = x).
+    use_bias: Boolean, whether the layer uses a bias vector.
+    kernel_initializer: Initializer for the kernel weights matrix (see initializers).
+    bias_initializer: Initializer for the bias vector (see initializers).
+    kernel_regularizer: Regularizer function applied to the kernel weights matrix (see regularizer).
+    bias_regularizer: Regularizer function applied to the bias vector (see regularizer).
+    activity_regularizer: Regularizer function applied to the output of the layer (its "activation"). (see regularizer).
+    kernel_constraint: Constraint function applied to the kernel weights matrix (see constraints).
+    bias_constraint: Constraint function applied to the bias vector (see constraints).
+--------
+keras.layers.LSTM(units, activation='tanh', recurrent_activation='hard_sigmoid', use_bias=True
+, kernel_initializer='glorot_uniform', recurrent_initializer='orthogonal', bias_initializer='zeros'
+, unit_forget_bias=True
+, kernel_regularizer=None, recurrent_regularizer=None, bias_regularizer=None, activity_regularizer=None
+, kernel_constraint=None, recurrent_constraint=None, bias_constraint=None
+, dropout=0.0, recurrent_dropout=0.0, implementation=1, return_sequences=False
+, return_state=False, go_backwards=False, stateful=False, unroll=False)
+LSTM layer has Arguments
+    units: Positive integer, dimensionality of the output space.
+    activation: Activation function to use (see activations).
+     Default: hyperbolic tangent (tanh) ??? sigmoid ???.
+      If you pass None, no activation is applied (ie. "linear" activation: a(x) = x).
+    recurrent_activation: Activation function to use for the recurrent step (see activations).
+     Default: hard sigmoid (hard_sigmoid).
+      If you pass None, no activation is applied (ie. "linear" activation: a(x) = x).
+    use_bias: Boolean, whether the layer uses a bias vector.
+    kernel_initializer: Initializer for the kernel weights matrix, used for the linear transformation of the inputs. (see initializers).
+    recurrent_initializer: Initializer for the recurrent_kernel weights matrix, used for the linear transformation of the recurrent state. (see initializers).
+    bias_initializer: Initializer for the bias vector (see initializers).
+    unit_forget_bias: Boolean. If True, add 1 to the bias of the forget gate at initialization. Setting it to true will also force bias_initializer="zeros". This is recommended in Jozefowicz et al. (2015).
+    kernel_regularizer: Regularizer function applied to the kernel weights matrix (see regularizer).
+    recurrent_regularizer: Regularizer function applied to the recurrent_kernel weights matrix (see regularizer).
+    bias_regularizer: Regularizer function applied to the bias vector (see regularizer).
+    activity_regularizer: Regularizer function applied to the output of the layer (its "activation"). (see regularizer).
+    kernel_constraint: Constraint function applied to the kernel weights matrix (see constraints).
+    recurrent_constraint: Constraint function applied to the recurrent_kernel weights matrix (see constraints).
+    bias_constraint: Constraint function applied to the bias vector (see constraints).
+    dropout: Float between 0 and 1. Fraction of the units to drop for the linear transformation of the inputs.
+    recurrent_dropout: Float between 0 and 1. Fraction of the units to drop for the linear transformation of the recurrent state.
+    implementation: Implementation mode, either 1 or 2.
+     Mode 1 will structure its operations as a larger number of smaller dot products and additions,
+      whereas mode 2 will batch them into fewer, larger operations.
+       These modes will have different performance profiles on different hardware and for
+        different applications.
+    return_sequences: Boolean. Whether to return the last output in the output sequence, or the full sequence.
+    return_state: Boolean. Whether to return the last state in addition to the output. The returned elements of the states list are the hidden state and the cell state, respectively.
+    go_backwards: Boolean (default False). If True, process the input sequence backwards and return the reversed sequence.
+    stateful: Boolean (default False). If True, the last state for each sample at index i in a batch will be used as initial state for the sample of index i in the following batch.
+    unroll: Boolean (default False). If True, the network will be unrolled, else a symbolic loop will be used. Unrolling can speed-up a RNN, although it tends to be more memory-intensive. Unrolling is only suitable for short sequences.
+
+5.4. На (??нескольких произвольно выбранных) интервалах траин/тест и (??нескольких произвольно подобранных)
 сочетаниях параметров провести сравнение архитектур по критериях качества предикта и времени обучения
 и выбрать одну архитектуру для дальнейшей работы
-Подбор параметров ??
-Подбор интервалов ??
-Дополнительно определить количество самплов (повторений предсказывания) без переобучения модели
+5.5. Подбор параметров ??
+5.6. Подбор интервалов ??
+5.7. Дополнительно определить количество самплов (повторений предсказывания) без переобучения модели
  
 7. Эксперимент со Smoosing
-Подбор интервалов и параметров
-Оценка точности (??первого предикта), доверительного интервала предикта
+7.1. Подбор интервалов траина и параметров
+7.2. Оценка точности (??первого предикта), доверительного интервала предикта
 .....
 
 8. Эксперимент с (S)ARIMA
 ....
-Выбор интервалов параметров с учетом интервала сезонности
-Подбор интервалов
-Оценка точности (??первого предикта), доверительного интервала предикта
+8.1. Поскольку предполагается поиск параметров модели выполнять с использованием autoarima
+  выбор максимальных значений для настройки путем стохастического? поиска.
+??8.2. Выбор интервалов параметров с учетом интервала сезонности
+8.3. Подбор интервалов
+8.4. Оценка точности (??первого предикта), доверительного интервала предикта
 
 9. Эксперимент с рекурентными нейронными сетями с использованием LSTM
 ...
-Выбор архитектуры
-Использование дополнительных знаний
+9.1. Выбор архитектуры +  тип модели (stateless / stateful)
+на стохастически? выбранных параметрах и интервалах траина сравнение архитектур показало
+- качество предикта
+- скорость обучения
+- ???
+9.2. Использование дополнительных знаний
 - интервал сезонности
 ??- изменение величин показателя от времени = x[i] - x[i-1] (1 - увеличение, -1 - уменьшение
+
+9.3. Подбор параметров
+К сожалению количество параметров и интервалы их разброса не позволяют выполнить полноценный
+гридсеч.
+Поэтому ряд параметров модели мы зафиксируем, ряд параметров придется подбырать заранее на 
+  стохастически выбранных остальных?, ряд параметров будем подбирать при проведении эксперимента
+  с использованием гридсеча
+  
+Фиксированные параметры
+- количество тестовых последовательностей test_size = 24, больше не имеет смысла??
+- архитектура и тип (type) модели - по результатам сравгнения архитектур
+- величина (глубина) предсказания - n_steps_out = 24
+- количество фичей - 1 или несколько ?
+- оптимизатор (optimizer) = adam#'Nadam'#'Adadelta'#'Adamax'#'RMSprop'
+- метрика оценки обучаемости metrics + (val_)loss = mean_squared_logarithmic_error# 'mse', 'mae', 'mape'
+
+Подбираемые параметры:
+- n_steps_in - количество входных для трининга/теста шагов (серий) 1 ... 24
+- количество эпох обучения (epochs) (повторения однократного траина) для улучшения обучения
++ earlyStopping - количество эпох ожидания улучшения обучаемости (patience),
+- validation_split ~ 0.1 - 0.2 ?
+
+Грид сеч:
+- количество скрытых нейронов n_units ~
+    samples / a / (series + output),     a = 2 ... 10
+    (series + output) / k, k = ???
+- размер батча batch size 1, 2, 4, 6, 8, 12, 24, more??
+- dropout - уровень отсечения решений !!!  ~ 0.1
++ reccurent_dropout ~ 0?, 0.3 - 0.5 - что это???
+
+9.4. Оценка точности (??первого предикта), доверительного интервала предикта
 
 10. Сравнение моделей
 - интервал предсказания (??и)
