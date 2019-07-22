@@ -99,6 +99,7 @@ def Simple(units, areStateful, dropout, recurrent_dropout
 	model = Sequential()
 	model.add(LSTM(units
 		#, activation='relu'
+		#, recurrent_activation='tanh'
 		, input_shape=(n_steps_in, n_features)
 		, batch_size = batch_size
 		, stateful = areStateful
@@ -177,7 +178,9 @@ def Seq2seq(units, areStateful, dropout, recurrent_dropout
 	return model	
 
 def prepare1(data#, n_features
-	, validation_split, test_size
+	#, validation_split
+	, validation_size
+	, test_size
 	, batch_size
 	, n_steps_in, n_steps_out):
 	n_features = 1
@@ -203,7 +206,7 @@ def prepare1(data#, n_features
 	# calc length fn train, validation, test sequence
 	length_all = len(Xa)
 	length_train_val = length_all - test_size
-	length_val = int(length_train_val * validation_split)
+	length_val = validation_size#int(length_train_val * validation_split)
 	length_train = length_train_val - length_val 
 	# tweak length to match with batch_size
 	to_val = length_val - length_val % batch_size
@@ -245,7 +248,9 @@ def differ(step, data):
 	return seq#.asType(float)
 
 def prepare2(datas
-	, validation_split, test_size
+	#, validation_split
+	, validation_size
+	, test_size
 	, batch_size
 	, n_steps_in, n_steps_out
 	):
@@ -270,7 +275,7 @@ def prepare2(datas
 	ya = array(yl)
 	length_all = len(Xa)
 	length_train_val = length_all - test_size
-	length_val = int(length_train_val * validation_split)
+	length_val = validation_size#int(length_train_val * validation_split)
 	# tweak to match with batch_size
 	to_val = length_val - length_val % batch_size
 	length_train = length_train_val - length_val 
@@ -314,17 +319,27 @@ def inverse_difference(history, yhat, interval=1):
 # invert differencing
 #yhat = inverse_difference(raw_values, yhat, len(test_scaled)+1-i)
 
+def buildDiffDatas(data, diff_size):
+	datas =[]
+	datas.append(data)
+	diff = data.copy()
+	for i in range(1, diff_size + 1):
+		diff = differ(i, diff)
+		datas.append(diff)
+	datas.append(data)
+	return datas
 ####################	
 random.seed(7)
 file_name = 'Centar_PM25_prepared.csv'
 column_name = 'PM25'
-areStateful = True
+areStateful = False
 areLog = True
 areScale = True
 test_size = 24
 start = 800#24*20
 data_length = 3000#24*15
-validation_split = 0.1#05
+#validation_split = 0.1#05
+validation_size = 24
 #batches = findBatch_size(test_size)
 s1 = ''
 if areStateful:
@@ -355,13 +370,16 @@ hours = hoursSeq(dd.index)
 # first difference
 diff1 = differ(1, data)
 #diff1 = transform(diff1, areScale, scaler)
-#diff2 = differ(1, diff1)
+diff2 = differ(1, diff1)
 #diff2 = transform(diff2, areScale, scaler)
+diff3 = differ(1, diff2)
 # day difference
 diff24 = differ(24, data)
 #diff24 = transform(diff24, areScale, scaler)
-datas = [data, hours, diff1, diff24, data]
-#datas = [data, data]
+#datas = [data, diff1, diff2, diff3, diff24, hours, data]
+datas = [data, data]
+#datas = buildDiffDatas(data, 24)
+print('datas len =', len(datas))
 
 X, y, Xv, yv, Xt, yt, model = None, None, None, None, None, None, None
 areSeq2seq, areStack, areBidirect = False, False, False
@@ -391,15 +409,21 @@ for j in [0, 3]:
 	batch_size = 24#12#int(len(X)/1)
 	if test_size < batch_size:
 		test_size = batch_size
+	if validation_size < batch_size:
+		validation_size = batch_size
 #############################
 	if areSeq2seq:
 		X, y, Xv, yv, Xt, yt = prepare1(data
-				, validation_split, test_size
+				#, validation_split
+				, validation_size
+				, test_size
 				, batch_size
 				, n_steps_in, n_steps_out)
 	else:
 		X, y, Xv, yv, Xt, yt = prepare2(datas
-				, validation_split, test_size
+				#, validation_split
+				, validation_size
+				, test_size
 				, batch_size
 				, n_steps_in, n_steps_out)
 	#print(X.shape)
@@ -410,10 +434,11 @@ for j in [0, 3]:
 	#units = int((n_steps_in + n_steps_out)/2)#int(len(X)/8)
 	units = 2*int(len(X)/7/(n_steps_in + n_steps_out))
 	dropout = 0.1
-	if areStateful:
-		recurrent_dropout = 0.3
-	else:
-		recurrent_dropout = 0.1
+	#if areStateful:
+	#	recurrent_dropout = 0.3
+	#else:
+	#	recurrent_dropout = 0.1
+	recurrent_dropout = 0
 	epochs = 50
 	patience = max(1, int(epochs*0.2))
 ##############################
@@ -431,8 +456,10 @@ for j in [0, 3]:
 			model = Simple(units, areStateful, dropout, recurrent_dropout
 				, n_steps_in, n_steps_out, X.shape[2], batch_size)
 	print('%s : start=%d, data length=%d, test size=%d' % (s1, start, data_length, test_size))
-	print('samples=%d, validation_stlit=%3f, steps in=%d, steps out=%d,  batch_size=%d'
-		 % (len(X), validation_split, n_steps_in, n_steps_out, batch_size)) 
+	#print('samples=%d, validation_stlit=%3f, steps in=%d, steps out=%d,  batch_size=%d'
+	#	 % (len(X), validation_split, n_steps_in, n_steps_out, batch_size)) 
+	print('samples=%d, validation_size=%d, steps in=%d, steps out=%d,  batch_size=%d'
+		 % (len(X), validation_size, n_steps_in, n_steps_out, batch_size)) 
 	print('epochs=%d, patience=%d, units=%d, dropout=%3f, recurrent_dropout=%3f'
 		 % (epochs, patience, units, dropout, recurrent_dropout))
 	model.compile(optimizer='adam'#'Nadam'#'Adadelta'#'Adamax'#'RMSprop'
