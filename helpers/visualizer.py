@@ -91,3 +91,15 @@ def plot_errors(errors):
         plt.plot(mape)
         plt.title('MAPE')
         plt.show()
+
+
+def plot_numpy_arrays(train, test, prediction):
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    ax.set_title('LSTM')
+
+    ax.plot(test, label='TEST')
+    ax.plot(prediction, color='#3c763d', label='PREDICTIONS')
+
+    ax.legend()
+    plt.show()
