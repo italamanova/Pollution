@@ -119,7 +119,7 @@ class Predictor:
 
         self.compile_model(model)
 
-        if self.is_stateful:
+        if is_stateful:
             predictions = self.run_model_stateful(model)
         else:
             predictions = self.run_model_stateless(model)

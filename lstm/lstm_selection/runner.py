@@ -25,13 +25,16 @@ datas = [scaled_df, scaled_df]
 n_steps_in = 24
 n_steps_out = 24
 batch_size = 24
-is_stateful = False
+is_stateful = True
 
 test_size = batch_size
 validation_size = batch_size
 
 X, y, Xv, yv, Xt, yt = prepare_data(datas, validation_size, test_size, batch_size, n_steps_in, n_steps_out)
 predictor = Predictor(X, y, Xv, yv, Xt, yt, n_steps_in, n_steps_out, batch_size, is_stateful, epochs=50)
-yhat, history = predictor.predict(model_name='stacked')
+# yhat, history = predictor.predict(model_name='simple')
+# yhat, history = predictor.predict(model_name='bidirect')
+# yhat, history = predictor.predict(model_name='stacked')
+yhat, history = predictor.predict(model_name='seq2seq')
 
 analyze(scaler, X, Xt, yhat)
