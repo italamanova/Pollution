@@ -80,8 +80,8 @@ def select_train(df, train_start_length, step, test_length, lambda_, method_name
             prediction_result = predict_on_train_grid_search_es(current_train, current_test, lambda_)
         if method_name == 'arima':
             prediction_result = predict_on_train_arima(current_train, current_test, lambda_)
-        if method_name == 'lstm':
-            prediction_result = predict_on_train_lstm(current_train, current_test, lambda_)
+        # if method_name == 'lstm':
+        #     prediction_result = predict_on_train_lstm(current_train, current_test, lambda_)
 
         current_result.update(prediction_result)
         result_json['results'].append(current_result)

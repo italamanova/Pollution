@@ -37,30 +37,33 @@ def measure_accuracy_avg_sample(test_data, predictions):
     return rmse_results
 
 
-def measure_mae_each_sample(test_data, predictions):
+def measure_accuracy_each_sample(test_data, predictions):
     mae_measures = []
-    mae_results = []
     for p, t in zip(predictions, test_data):
-        mae = mean_absolute_error([t], [p])
+        mae = round(mean_absolute_error([t], [p]), 3)
         mae_measures.append(mae)
 
-    first = mae_measures[0]
-    for i in range(1, len(mae_measures)):
-        result = mae_measures[i] / first
-        mae_results.append(result)
-    return mae_results
+    return mae_measures
 
 
-def measure_accuracy_each_sample(test_data, predictions):
-    accuracy_measures = []
-    accuracy_results = []
+def measure_rmse_each_sample(test_data, predictions):
+    mae_measures = []
     for p, t in zip(predictions, test_data):
-        accuracy = mean_absolute_percentage_error([t], [p])
-        accuracy_measures.append(accuracy)
+        mse = mean_squared_error([t], [p])
+        rmse = round(sqrt(mse), 3)
+        mae_measures.append(rmse)
 
-    first = accuracy_measures[0]
-    for i in range(1, len(accuracy_measures)):
-        result = accuracy_measures[i]
-        accuracy_results.append(result)
+    return mae_measures
 
-    return accuracy_results
+# def measure_accuracy_each_sample(test_data, predictions):
+#     accuracy_measures = []
+#     accuracy_results = []
+#     for p, t in zip(predictions, test_data):
+#         accuracy = mean_absolute_percentage_error([t], [p])
+#         accuracy_measures.append(accuracy)
+#
+#     for i in range(1, len(accuracy_measures)):
+#         result = accuracy_measures[i]
+#         accuracy_results.append(result)
+#
+#     return accuracy_results

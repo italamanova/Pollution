@@ -151,3 +151,13 @@ def reverse_box_cox(train_box_cox, test_box_cox, pred_box_cox, lambda_):
                                index=test_box_cox.index)
 
     return result_train, result_test, result_pred
+
+
+def reverse_box_cox_for_lstm(lambda_, test, pred, df, test_size):
+    train_df = df[:len(df) - test_size]
+
+    reversed_train = inv_boxcox(train_df, lambda_)
+    reversed_test = inv_boxcox(test, lambda_)
+    reversed_pred = inv_boxcox(pred, lambda_)
+
+    return reversed_train, reversed_test, reversed_pred

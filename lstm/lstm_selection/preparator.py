@@ -38,16 +38,10 @@ def prepare_data(datas, validation_size, test_size, batch_size, n_steps_in, n_st
     return X, y, Xv, yv, Xt, yt
 
 
-def inverse_scale(scaler, train, test, pred):
-    for i in range(0, len(train)):
-        train_reshaped = train[i].reshape(-1, 1)
+def inverse_scale(scaler, test, pred):
+    reshaped_test = test.reshape(24, 24)
 
-    for i in range(0, len(test)):
-        test_reshaped = test[i].reshape(-1, 1)
-        pred_reshaped = pred[i].reshape(-1, 1)
+    inverse_test = scaler.inverse_transform(reshaped_test)
+    inverse_pred = scaler.inverse_transform(pred)
 
-    inverse_train = scaler.inverse_transform(train_reshaped)
-    inverse_test = scaler.inverse_transform(test_reshaped)
-    inverse_pred = scaler.inverse_transform(pred_reshaped)
-
-    return inverse_train, inverse_test, inverse_pred
+    return inverse_test, inverse_pred

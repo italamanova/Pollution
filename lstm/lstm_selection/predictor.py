@@ -10,7 +10,7 @@ class Predictor:
                  dropout=0.1,
                  recurrent_dropout=0,
                  epochs=50,
-                 patience_coef=0.2):
+                 patience_coef=0.1):
         self.X = X
         self.y = y
         self.Xv = Xv
@@ -114,12 +114,14 @@ class Predictor:
             model = self.bidirect_model()
         if model_name == 'stacked':
             model = self.stacked_model()
-        if model_name == 'seq2seq':
-            model = self.seq2seq_model()
+
+        # TODO: check seq2seq
+        # if model_name == 'seq2seq':
+        #     model = self.seq2seq_model()
 
         self.compile_model(model)
 
-        if is_stateful:
+        if self.is_stateful:
             predictions = self.run_model_stateful(model)
         else:
             predictions = self.run_model_stateless(model)

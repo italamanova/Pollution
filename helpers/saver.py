@@ -15,10 +15,21 @@ def get_autosave_path(file, folder, params):
     return new_file_name
 
 
-def print_to_file(out_file, string):
+def print_to_file(out_file, dictionary):
     f = open(out_file, "w")
-    f.write(json.dumps(string, default=datetime_to_string))
+    f.write(json.dumps(dictionary, default=datetime_to_string))
     f.close()
 
 
+def update_and_print_to_file(out_file, update_print):
+    f = open(out_file, "r")
+    data = json.load(f)
+    f.close()
 
+    tmp = data
+    print(tmp)
+    tmp.append(update_print)
+
+    f = open(out_file, "w+")
+    f.write(json.dumps(data))
+    f.close()
