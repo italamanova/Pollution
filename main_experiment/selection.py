@@ -67,9 +67,6 @@ def run_select(df, train_window, step, test_window, rolling_window, lambda_, out
         current_train = df.iloc[i:i + train_window]
         current_test = df.iloc[i + train_window:i + train_window + test_window]
 
-
-        print('LEN', len(current_train), len(current_test))
-
         current_result.update({
             'train': '%s - %s' % (current_train.index[0], current_train.index[-1]),
             'test': '%s - %s' % (current_test.index[0], current_test.index[-1]),
