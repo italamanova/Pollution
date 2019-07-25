@@ -13,7 +13,7 @@ from helpers.preparator import cut_csv, fill_nan, cut_last, fill_nan_rolling_mea
     interpolate_nan, delete_outliers, cut_csv_by_period
 from helpers.saver import get_autosave_path
 
-# path = '%s/pollution_data/cut_data' % Path(__file__).parent
+# path = '%s/data/cut_data' % Path(__file__).parent
 # path_to_file = '%s/Centar_PM25_prepared.csv' % path
 from helpers.visualizer import simple_plot
 from lstm.lstm import my_lstm
@@ -21,14 +21,14 @@ from lstm.lstm_rolling_window import exp_lstm
 
 
 
-# path = '%s/pollution_data/every_station_data' % Path(__file__).parent
+# path = '%s/data/every_station_data' % Path(__file__).parent
 # path_to_file = '%s/Centar_PM10.csv' % path
 
 
 path = '%s/old/data' % Path(__file__).parent
 path_to_file = '%s/pollution2.csv' % path
 
-path_prepared = '%s/pollution_data/centar' % Path(__file__).parent
+path_prepared = '%s/data/centar' % Path(__file__).parent
 path_to_file_prepared = '%s/Centar_PM25_prepared.csv' % path_prepared
 
 start = '2016-01-01 00:00:00'
@@ -62,7 +62,7 @@ exponential_smoothing_from_file(path_to_file_prepared)
 # pure_arima(path_to_file_prepared)
 
 # LSTM
-# lstm_path_to_file = '%s/pollution_data/cut_data/Centar_PM25_fill_mean_year.csv' % Path(__file__).parent
+# lstm_path_to_file = '%s/data/cut_data/Centar_PM25_fill_mean_year.csv' % Path(__file__).parent
 # exp_lstm(lstm_path_to_file)
 
 # ADDITIONAL

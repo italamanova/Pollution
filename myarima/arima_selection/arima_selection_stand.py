@@ -23,8 +23,8 @@ stepwise = False
 error_action = 'ignore'
 out_file = 'arima_select.json'
 
-path_prepared = '%s/pollution_data/cut_data' % Path(__file__).parents[2]
-path_out = '%s/pollution_data/arima_selection_results/1' % Path(__file__).parents[2]
+path_prepared = '%s/data/cut_data' % Path(__file__).parents[2]
+path_out = '%s/data/arima_selection_parameter_results/1' % Path(__file__).parents[2]
 # file = '%s/Centar_PM25_prepared_1year.csv' % path_prepared
 file = '%s/Centar_PM25_prepared_1year.csv' % path_prepared
 

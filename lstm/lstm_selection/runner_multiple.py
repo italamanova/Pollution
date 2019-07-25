@@ -8,10 +8,10 @@ from helpers.saver import print_to_file
 from lstm.lstm_selection.analyzer import analyze, analyze_multiple
 from lstm.lstm_selection.processor import process_lstm
 
-path_prepared = '%s/pollution_data/centar' % Path(__file__).parents[2]
+path_prepared = '%s/data/centar' % Path(__file__).parents[2]
 path_to_file_prepared = '%s/Centar_PM25_prepared.csv' % path_prepared
 
-path_out = '%s/pollution_data/lstm_experiment_results' % Path(__file__).parents[2]
+path_out = '%s/data/main_experiment/lstm_experiment_results' % Path(__file__).parents[2]
 m_out_file = '%s/%s.json' % (path_out, 'multiple_lstm')
 
 df, lambda_ = get_data_with_box_cox(path_to_file_prepared)
@@ -56,4 +56,4 @@ print_to_file(m_out_file, [])
 for config in model_configs:
     reversed_train, reversed_test, reversed_pred, train_df, test_df = process_lstm(datas, df, scaler, lambda_,
                                                                                    config)
-    analyze_multiple(m_out_file, reversed_train, reversed_test, reversed_pred, config, train_df, test_df)
+    analyze_multiple(m_out_file, reversed_train, reversed_test, reversed_pred, config, lambda_, df)

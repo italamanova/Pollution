@@ -6,7 +6,7 @@ from selection.train_selection import select_train
 
 METHOD_NAME = 'Exponential Smoothing'
 
-path_prepared = '%s/pollution_data/centar' % Path(__file__).parents[1]
+path_prepared = '%s/data/centar' % Path(__file__).parents[1]
 path_to_file_prepared = '%s/Centar_PM25_prepared.csv' % path_prepared
 df, lambda_ = get_data_with_box_cox(path_to_file_prepared)
 train = 24*365

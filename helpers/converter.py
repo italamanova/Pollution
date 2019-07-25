@@ -1,4 +1,4 @@
-from datetime import datetime
+import datetime
 
 
 def get_resampled(df, period_name):
@@ -14,9 +14,9 @@ def date_str_to_datetime(str_date):
     return datetime.strptime('%s 00:00:00' % str_date, '%Y-%m-%d %H:%M:%S')
 
 
-def datetime_to_string(datetime):
-    if isinstance(datetime, (datetime.date, datetime.datetime)):
-        return datetime.isoformat()
+def datetime_to_string(_datetime):
+    if isinstance(_datetime, (datetime.date, datetime.datetime)):
+        return _datetime.isoformat()
 
 
 def df_to_csv(df, out_file):

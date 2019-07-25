@@ -6,10 +6,10 @@ from helpers.preparator import get_data_with_box_cox
 from lstm.lstm_selection.analyzer import analyze
 from lstm.lstm_selection.processor import process_lstm
 
-path_prepared = '%s/pollution_data/centar' % Path(__file__).parents[2]
+path_prepared = '%s/data/centar' % Path(__file__).parents[2]
 path_to_file_prepared = '%s/Centar_PM25_prepared.csv' % path_prepared
 
-path_out = '%s/pollution_data/lstm_experiment_results' % Path(__file__).parents[2]
+path_out = '%s/data/main_experiment/lstm_experiment_results' % Path(__file__).parents[2]
 m_out_file = '%s/%s.json' % (path_out, 'lstm_rmse')
 
 df, lambda_ = get_data_with_box_cox(path_to_file_prepared)
@@ -49,6 +49,6 @@ model_config = {
     'model_name': model_name
 }
 
-reversed_train, reversed_test, reversed_pred, train_df, test_df = process_lstm(datas, df, scaler, lambda_,
-                                                                               model_config)
-analyze(m_out_file, reversed_train, reversed_test, reversed_pred, model_config, train_df, test_df)
+reversed_train, reversed_test, reversed_pred = process_lstm(datas, df, scaler, lambda_,
+                                                            model_config)
+analyze(m_out_file, reversed_train, reversed_test, reversed_pred, model_config, lambda_, df)

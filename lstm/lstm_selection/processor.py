@@ -1,12 +1,5 @@
-import random
-from pathlib import Path
-
-import numpy
-import pandas as pd
-from sklearn.preprocessing import MinMaxScaler
-
 from helpers.decorators import timeit
-from helpers.preparator import get_data_with_box_cox, reverse_box_cox_for_lstm
+from helpers.preparator import reverse_box_cox_for_lstm
 from lstm.lstm_selection.predictor import Predictor
 from lstm.lstm_selection.preparator import prepare_data, inverse_scale
 
@@ -40,7 +33,5 @@ def process_lstm(datas, df, scaler, lambda_, model_config):
     reversed_train, reversed_test, reversed_pred = reverse_box_cox_for_lstm(lambda_,
                                                                             inverse_test, inverse_pred,
                                                                             df, sum_steps)
-    train_df = df[:len(df) - sum_steps]
-    test_df = df[len(df) - sum_steps:]
 
-    return reversed_train, reversed_test, reversed_pred, train_df, test_df
+    return reversed_train, reversed_test, reversed_pred

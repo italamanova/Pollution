@@ -4,7 +4,7 @@ import pandas as pd
 from statsmodels.tsa.holtwinters import ExponentialSmoothing, Holt
 
 from analysis.analyzer import get_data
-from helpers.accuracy import measure_accuracy, measure_accuracy_each_sample, measure_mae_each_sample
+from helpers.accuracy import measure_accuracy, measure_accuracy_each_sample
 from helpers.preparator import cut_dataframe, reverse_box_cox, get_data_with_box_cox
 from helpers.visualizer import plot_prediction, plot_errors
 

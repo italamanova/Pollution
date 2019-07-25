@@ -80,8 +80,8 @@ def main(file):
     xt = my_box_cox(series)
 
 
-# path_prepared = '%s/pollution_data/centar' % Path(__file__).parents[1]
+# path_prepared = '%s/data/centar' % Path(__file__).parents[1]
 # path_to_file_prepared = '%s/Centar_PM25_prepared.csv' % path_prepared
-path = '%s/pollution_data/cut_data' % Path(__file__).parents[1]
+path = '%s/data/cut_data' % Path(__file__).parents[1]
 file = '%s/Centar_PM25_prepared_270H.csv' % path
 main(file)
