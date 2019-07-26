@@ -28,6 +28,7 @@ is_stateful = True
 epochs = 50
 dropout = 0.1
 recurrent_dropout = 0
+units_coef = 7
 patience_coef = 0.1
 
 test_size = batch_size
@@ -43,6 +44,7 @@ model_config = {
     'epochs': epochs,
     'dropout': dropout,
     'recurrent_dropout': recurrent_dropout,
+    'units_coef': units_coef,
     'patience_coef': patience_coef,
     'test_size': test_size,
     'validation_size': validation_size,
@@ -50,5 +52,5 @@ model_config = {
 }
 
 reversed_train, reversed_test, reversed_pred, time = process_lstm(datas, df, scaler, lambda_,
-                                                            model_config)
+                                                                  model_config)
 analyze(m_out_file, reversed_train, reversed_test, reversed_pred, model_config, lambda_, df, time)

@@ -15,6 +15,7 @@ def process_lstm(datas, df, scaler, lambda_, model_config):
     epochs = model_config['epochs']
     dropout = model_config['dropout']
     recurrent_dropout = model_config['recurrent_dropout']
+    units_coef = model_config['units_coef']
     patience_coef = model_config['patience_coef']
     test_size = model_config['test_size']
     validation_size = model_config['validation_size']
@@ -23,6 +24,7 @@ def process_lstm(datas, df, scaler, lambda_, model_config):
     X, y, Xv, yv, Xt, yt = prepare_data(datas, validation_size, test_size, batch_size, n_steps_in, n_steps_out)
 
     predictor = Predictor(X, y, Xv, yv, Xt, yt, n_steps_in, n_steps_out, batch_size, is_stateful,
+                          units_coef=units_coef,
                           epochs=epochs,
                           dropout=dropout,
                           recurrent_dropout=recurrent_dropout,
