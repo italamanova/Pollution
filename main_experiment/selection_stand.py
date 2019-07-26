@@ -22,6 +22,7 @@ test_index = train_start_index + train_window + test_window + rolling_window
 df = df.iloc[train_start_index:test_index]
 
 METHOD_NAME = 'arima'
+# METHOD_NAME = 'es'
 
 print_to_file(m_out_file, [])
 run_select(df, train_window, step, test_window, rolling_window, lambda_, m_out_file, method_name=METHOD_NAME)
