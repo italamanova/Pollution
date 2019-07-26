@@ -3,7 +3,7 @@ from helpers.saver import print_to_file, update_and_print_to_file
 
 
 def create_json(reversed_train, reversed_test, reversed_pred,
-                model_config, lambda_, df):
+                model_config, lambda_, df, time):
     sum_steps = model_config['n_steps_in'] + model_config['n_steps_out']
     train_df = df[:len(df) - sum_steps]
     result_json = {'train_start': '%s' % (train_df.index[0]),
@@ -23,19 +23,19 @@ def create_json(reversed_train, reversed_test, reversed_pred,
         out_json['each_sample_accuracy'] = each_sample_accuracy
 
         result_json['results'].append(out_json)
-
+    result_json.update({'time': time})
     return result_json
 
 
 def analyze(out_file, reversed_train, reversed_test, reversed_pred,
-            model_config, lambda_, df):
+            model_config, lambda_, df, time):
     out_json = create_json(reversed_train, reversed_test, reversed_pred,
-                           model_config, lambda_, df)
+                           model_config, lambda_, df, time)
     print_to_file(out_file, out_json)
 
 
 def analyze_multiple(out_file, reversed_train, reversed_test, reversed_pred,
-                     model_config, lambda_, df):
+                     model_config, lambda_, df, time):
     out_json = create_json(reversed_train, reversed_test, reversed_pred,
-                           model_config, lambda_, df)
+                           model_config, lambda_, df, time)
     update_and_print_to_file(out_file, out_json)

@@ -1,25 +1,19 @@
+import time
+
 import matplotlib.pyplot as plt
 from sklearn.model_selection import TimeSeriesSplit
 
 from es.es import exponential_smoothing
 from es.es_grid_search import es_grid_search
-from helpers.accuracy import measure_accuracy, measure_accuracy_each_sample
+from helpers.accuracy import measure_accuracy, measure_accuracy_each_sample, measure_rmse_each_sample, \
+    accuracy_evaluation
 from helpers.saver import print_to_file, update_and_print_to_file
 from helpers.visualizer import plot_prediction, plot_errors
 from myarima.arima import predict_auto_arima
 
 
-def accuracy_evaluation(test, predictions):
-    accuracy = measure_accuracy(test, predictions)
-    errors = {'each_mape': measure_accuracy_each_sample(test, predictions)}
-    # plot_errors(errors)
-    # accuracy.update(errors)
-    return accuracy
-
-
 def predict_on_train_es(train, test, lambda_):
     reversed_train, reversed_test, reversed_pred, model_params = exponential_smoothing(train, test, lambda_)
-    # plot_prediction(reversed_train, reversed_test, reversed_pred, title='Exponential Smoothing')
     result_json = {}
     result_json.update(model_params)
     accuracy = accuracy_evaluation(reversed_pred.values, reversed_test.values)
@@ -63,6 +57,7 @@ def run_select(df, train_window, step, test_window, rolling_window, lambda_, out
                    'results': []}
 
     for i in range(0, rolling_window, step):
+        start_time = time.time()
         current_result = {}
         current_train = df.iloc[i:i + train_window]
         current_test = df.iloc[i + train_window:i + train_window + test_window]
@@ -79,5 +74,8 @@ def run_select(df, train_window, step, test_window, rolling_window, lambda_, out
             prediction_result = predict_on_train_arima(current_train, current_test, lambda_)
 
         current_result.update(prediction_result)
+        end_time = time.time()
+        current_result.update({'time': end_time - start_time})
         result_json['results'].append(current_result)
-        update_and_print_to_file(out_file, result_json)
+
+        print_to_file(out_file, result_json)

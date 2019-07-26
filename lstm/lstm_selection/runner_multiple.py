@@ -54,6 +54,6 @@ model_configs = [{
 print_to_file(m_out_file, [])
 
 for config in model_configs:
-    reversed_train, reversed_test, reversed_pred, train_df, test_df = process_lstm(datas, df, scaler, lambda_,
-                                                                                   config)
-    analyze_multiple(m_out_file, reversed_train, reversed_test, reversed_pred, config, lambda_, df)
+    reversed_train, reversed_test, reversed_pred, time = process_lstm(datas, df, scaler, lambda_,
+                                                                      config)
+    analyze_multiple(m_out_file, reversed_train, reversed_test, reversed_pred, config, lambda_, df, time)

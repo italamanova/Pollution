@@ -1,7 +1,7 @@
 from warnings import catch_warnings, filterwarnings
 
 from es.es import exponential_smoothing
-from helpers.accuracy import measure_accuracy
+from helpers.accuracy import measure_accuracy, measure_rmse_each_sample, accuracy_evaluation
 
 
 def get_grid_search_configs():
@@ -24,7 +24,8 @@ def build_model_with_config(config, train, test, lambda_):
                                                                                        seasonal=config[2],
                                                                                        seasonal_periods=24,
                                                                                        damped=config[1])
-    accuracy = measure_accuracy(reversed_test, reversed_pred)
+    accuracy = accuracy_evaluation(reversed_test.values, reversed_pred.values)
+
     result_params = dict()
     result_params.update(model_params)
     result_params.update(accuracy)
@@ -35,7 +36,7 @@ def build_model_with_config(config, train, test, lambda_):
 
 
 def select_best_model(model_list):
-    best_model = min(model_list, key=lambda el: float(el['rmse']))
+    best_model = min(model_list, key=lambda el: float(el['accuracy']['rmse']))
     return best_model
 
 
@@ -48,9 +49,9 @@ def es_grid_search(train, test, lambda_):
                 filterwarnings("ignore")
                 result_params = build_model_with_config(config, train, test, lambda_)
                 result_list.append(result_params)
-        except Exception:
+        except Exception as e:
             pass
             # result_list.append({'ERROR':config})
 
     best_model = select_best_model(result_list)
-    return {'best_model': best_model}
+    return best_model

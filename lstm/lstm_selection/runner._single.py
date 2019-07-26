@@ -49,6 +49,6 @@ model_config = {
     'model_name': model_name
 }
 
-reversed_train, reversed_test, reversed_pred = process_lstm(datas, df, scaler, lambda_,
+reversed_train, reversed_test, reversed_pred, time = process_lstm(datas, df, scaler, lambda_,
                                                             model_config)
-analyze(m_out_file, reversed_train, reversed_test, reversed_pred, model_config, lambda_, df)
+analyze(m_out_file, reversed_train, reversed_test, reversed_pred, model_config, lambda_, df, time)

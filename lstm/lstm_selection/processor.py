@@ -1,11 +1,12 @@
-from helpers.decorators import timeit
+import time
+
 from helpers.preparator import reverse_box_cox_for_lstm
 from lstm.lstm_selection.predictor import Predictor
 from lstm.lstm_selection.preparator import prepare_data, inverse_scale
 
 
-@timeit
 def process_lstm(datas, df, scaler, lambda_, model_config):
+    start_time = time.time()
     n_steps_in = model_config['n_steps_in']
     n_steps_out = model_config['n_steps_out']
     sum_steps = n_steps_in + n_steps_out
@@ -33,5 +34,6 @@ def process_lstm(datas, df, scaler, lambda_, model_config):
     reversed_train, reversed_test, reversed_pred = reverse_box_cox_for_lstm(lambda_,
                                                                             inverse_test, inverse_pred,
                                                                             df, sum_steps)
-
-    return reversed_train, reversed_test, reversed_pred
+    end_time = time.time()
+    result_time = end_time - start_time
+    return reversed_train, reversed_test, reversed_pred, result_time

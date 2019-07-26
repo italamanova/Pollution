@@ -47,13 +47,16 @@ def measure_accuracy_each_sample(test_data, predictions):
 
 
 def measure_rmse_each_sample(test_data, predictions):
-    mae_measures = []
-    for p, t in zip(predictions, test_data):
-        mse = mean_squared_error([t], [p])
-        rmse = round(sqrt(mse), 3)
-        mae_measures.append(rmse)
+    rmse_measures = []
+    try:
+        for t, p in zip(test_data, predictions):
+            mse = mean_squared_error([t], [p])
+            rmse = round(sqrt(mse), 3)
+            rmse_measures.append(rmse)
+    except Exception as e:
+        print('EXCEPTION', e)
+    return rmse_measures
 
-    return mae_measures
 
 # def measure_accuracy_each_sample(test_data, predictions):
 #     accuracy_measures = []
@@ -67,3 +70,13 @@ def measure_rmse_each_sample(test_data, predictions):
 #         accuracy_results.append(result)
 #
 #     return accuracy_results
+
+
+def accuracy_evaluation(test, predictions):
+    accuracy = measure_accuracy(test, predictions)
+    each_sample_accuracy = measure_rmse_each_sample(test, predictions)
+    result = {'accuracy': accuracy,
+              'each_sample_accuracy': each_sample_accuracy}
+    # result = {'accuracy': accuracy
+    #           }
+    return result
