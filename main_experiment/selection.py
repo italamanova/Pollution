@@ -38,7 +38,7 @@ def predict_on_train_arima(train, test, lambda_):
                                                                                     stepwise=True,
                                                                                     information_criterion='aic'
                                                                                     )
-    plot_prediction(reversed_train, reversed_test, reversed_pred, title='ARIMA')
+    # plot_prediction(reversed_train, reversed_test, reversed_pred, title='ARIMA')
     result_json = {}
     result_json.update(model_params)
     accuracy = accuracy_evaluation(reversed_pred.values, reversed_test.values)
