@@ -31,5 +31,5 @@ def update_and_print_to_file(out_file, update_print):
     tmp.append(update_print)
 
     f = open(out_file, "w+")
-    f.write(json.dumps(data))
+    f.write(json.dumps(data, default=datetime_to_string))
     f.close()

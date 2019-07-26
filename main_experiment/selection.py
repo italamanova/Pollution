@@ -80,5 +80,4 @@ def run_select(df, train_window, step, test_window, rolling_window, lambda_, out
 
         current_result.update(prediction_result)
         result_json['results'].append(current_result)
-
-    update_and_print_to_file(out_file, result_json)
+        update_and_print_to_file(out_file, result_json)

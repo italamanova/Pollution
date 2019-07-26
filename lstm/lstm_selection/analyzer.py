@@ -6,7 +6,6 @@ def create_json(reversed_train, reversed_test, reversed_pred,
                 model_config, lambda_, df):
     sum_steps = model_config['n_steps_in'] + model_config['n_steps_out']
     train_df = df[:len(df) - sum_steps]
-    print(train_df.index[0])
     result_json = {'train_start': '%s' % (train_df.index[0]),
                    'train_end': '%s' % (train_df.index[-1]),
                    'train_window': len(reversed_train),
