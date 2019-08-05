@@ -1,7 +1,8 @@
 Выбор интервалов
 1. для статистических моделей
-Выбор интервалов методом перебора базовых - 0 2000, 2000 - 4000, 4000-6000, 6000 - 8000
- и интервала траина с разбиением базового на 25%, 50%, 75%, 100%
+Выбор интервалов методом перебора базовых размером в 1000
+ со стартом - 0 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000
+ и интервала траина с разбиением базового на 120, 240, 360, 480, 720, 960?
  - выбор интервалов траина окна с подвижкой окна почасово на N с подсчетом
 0  roll  [rmse(1h), ..., rmse(Nh)]
 .....
@@ -26,6 +27,9 @@ avgall = avg(avg(rmse(1h)), ..., avg(rmse(Nh)))
 1. Smoosing
 main_experiment/selection_stand (es)
 1.1 Выбор наилучшего интервала с использованием гридсеча значений параметров
+120, 240, 360, 480, 720, 960
+best = 120
+!!!need 24, 48, 72, 96, 120, 144, 168, 196, 220 
 2. ARIMA
 main_experiment/selection_stand (es)
 !!! get parameters from into main_experiment/selection/predict_ontrain_arima
@@ -34,22 +38,70 @@ main_experiment/selection_stand (es)
 
 3. LSTM
 lstm/lstm_selection/runner_single
+начальный интервал траина = 1000
+начальные значения параметров
++epochs = 100
++patience_coef = 0.1
+------------
+train_window = 1000
+n_steps_in = 24
+batch_size = 24
+is_stateful = True
+dropout = 0.1
+recurrent_dropout = 0.1
+units_coef = 7  in formula units = 2*samples_size/units_coef/(n_steps_in+n_steps_out)
+validation_size = 24
+
+3.0. Ряд стартовых интервалов 0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000
+
 3.1. Выбор с обоснованием параметров по умолчанию
 - steps_out, test_size = N (1 - 24)h
 
-3.2. Выбор на ряде интервалов стартовых интервалов с фиксированнм размера траина лучшего параметра 
-- validation_size = test_size * k, k = 1, 2, 4
-- steps_in = 1, 2, 4, 6, 8, 12, 24
-- batch_size = 2, 4, 6, 8. 12, 24 (1 - vanilla!)
--
-3.3. Выбор на ряде интервалов стартовых интервалов с фиксированнм размера траина лучших параметров 
- методом гридсеча
-3.3.1. dorpout = 0, 01, 02
- + recurrent_dropout 0, 0.1, 0.2, 0.3
-3.3.2. epochs = 100, 200, 400, 600, 1000
- + patience = epochs *p, p = 0.05, 0.1, 0.2
++3.2. на ряде стартовых интервалов и начального интервала траина Предварительный выбор
+  размера patience_coef, epochs методом гридсеча
+ pacience_coef = 0.1, 0.2, 0.3
+ epochs = 100, 200, 400, 600, 800, 1000
+ results in _tests/ep_result.txt
+criteria = rmse
 
-3.4. Определение параметров и их значений для гридсеча для выбора интервала траина
++3.3. на ряде стартовых интервалов и начального интервала траина, выбранных epochs, patience_coef
+ выбор лучшего параметра 
+- validation_size = test_size * k, k = 1, 2, 3, 4, 5 = (24, 48 , 72, 96, 120)
+criteria = rmse
+
++3.4. на ряде стартовых интервалов и начального интервала траина, выбранных epochs, patience_coef, validation_size
+ выбор лучших параметров 
+ методом гридсеча
+ dorpout = 0, 01, 02, 03
+ + recurrent_dropout 0, 0.1, 0.2, 0.3
+criteria = rmse
+
+
++3.5. на ряде стартовых интервалов и начального интервала траина
+, выбранных epochs, patience_coef, validation_size, dropout, recurrent_dropout
+ выбор лучшего параметра 
+- steps_in = 1, 2, 4, 6, 8, 12, 24
+criteria = rmse
+
++3.6. на ряде стартовых интервалов
+ и выбранных epochs,  pacience_coef, validation_size, dropout, recurrent_dropout. steps_in
+ с начальным размером траина выбор лучших параметров методом гридсеча 
+- batch_size = 2, 4, 6, 8. 12, 24 (not 1 - vanilla!)
 - stateless / stateful
-- units size - samples/(steps_in+steps_out)/k, k = 2 - 10? 
-3.5. Выбор наилучшего интервала с использованием гридсеча значений параметров
+criteria = rmse
+
+3.7. на ряде стартовых интервалов
+ и выбранных epochs,  pacience_coef, validation_size, dropout, recurrent_dropout. steps_in, bath_size,
+ stateless/stateful
+ с начальным размером траина 
+ Определение параметров и их значений для выбора интервала траина
+- units_coef - samples/(steps_in+steps_out)/k, k = 2, 3, 4, 5, 6, 7, 8, 9, 10 
+
+3.8. на ряде стартовых интервалов и начального интервала траина
+ и выбранных epochs,  pacience_coef, validation_size, dropout, recurrent_dropout. steps_in
+ уточнение выбора интервала траина
+ из 250, 500, 750, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000
+criteria = rmse
+
+=========================================
+???????????3.10. на ряде стартовых интервалов Выбор наилучшего интервала с использованием гридсеча значений параметров
