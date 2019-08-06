@@ -29,6 +29,10 @@ for real time.
 
 
 
+Определение погрешности для различных горизонтов предсказания
+
+
+
 Заметки
 В статье Seasonal variation of air pollution index:Hong Kong case study нет явного указания сезонности.
 Based on the statistical analyses, the diurnal variations of SO2, NO2, CO and RSP levels three basic phases,
@@ -47,4 +51,17 @@ An SARIMA and factor analysis approach сезонность считают 24 ч
 Поэтому deep learning. Так как временной ряд - это последовательность.
 Seq2Seq
 
+----
+Выбираем кол во стартовых точек, на которых проверяем модели.
+1. год от начала временного ряда
+2. год + 1000, 2000
+
+Smoothing
+1. параметры
+2. опримальный интервал: разные длины train, с помощью грид серч лучшую модель и записываем характеристики
+
+ARIMA
+1. параметры
+2. выбор границ перебора параметров для grid search
+3. дальше то же самое
 
