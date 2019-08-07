@@ -1,11 +1,6 @@
-Background
-People always have been adjusting the environment to their own needs and now we can see the consequences.
-Air pollution problem is one of those consequences. This is the price for our comfort: cars, factories...
-We pay this price every day while breathing the polluted air. It causes irreparable changes in our bodies, such as...
-At the global level it causes even more serious problems as climate changing...
+ES
 
-AQI is an indicator how good the air is.
-
+Графики RMSE по часам
 
 
 
@@ -21,15 +16,7 @@ Time series prediction is a complex problem that exists in many fields, such as
 Research question:
 - compare performance of statistical and deep learning methods
 - compare applying methods for real time prediction
-
-The internet of things technology allows us to....
-
-As far as we know there is no(?) research conducted to compare air pollution forecasting methods
-for real time.
-
-
-
-Определение погрешности для различных горизонтов предсказания
+- Определение погрешности для различных горизонтов предсказания
 
 
 
@@ -64,4 +51,12 @@ ARIMA
 1. параметры
 2. выбор границ перебора параметров для grid search
 3. дальше то же самое
+
+
+
+
+
+
+Exponential Smoothing method is implemented using statsmodels package. The implementation allows to avoid manual hyperparameters tuning. Мы выполняем грид серч в предположении наличия или отсутствия тренда и сезонности. As it could be seen on previous figures the series are noisy so мы используем этот грид серч наилучшей конфигурции.
+\par Because of that the automatic configuration selection was added. Best configuration is chosen using grid search on parameters of Exponential Smoothing method. These parameters are:
 
