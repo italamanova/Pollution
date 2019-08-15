@@ -1,0 +1,79 @@
+\begin{longtable}[c]{|c|c|}
+\caption{Growth of RMSE depending on horizon increase
+\label{table:table_es}}\\
+
+\hline
+Horizon & RMSE\\
+
+\endfirsthead
+
+\hline
+\multicolumn{2}{|c|}{Continuation of Table \ref{table:table_es}}\\
+\hline
+Horizon & RMSE\\
+\hline
+\endhead
+
+\hline
+\endfoot
+
+\hline
+\endlastfoot
+\hline
+
+1 & 1.748 \hline
+2 & 2.217  \hline
+3 & 2.607  \hline
+4 & 2.94  \hline
+5 & 3.221  \hline
+6 & 3.505 \hline
+7 & 3.802 \hline
+8 & 4.087 \hline
+9 & 4.219  \hline
+10 & 4.344 \hline
+11 & 4.434 \hline
+12 & 4.509 \hline
+13 & 4.568 \hline
+14 & 4.612 \hline
+15 & 4.661 \hline
+16 & 4.714 \hline
+17 & 4.773 \hline
+18 & 4.837 \hline
+19 & 4.910 \hline
+20 & 4.99 \hline
+21 & 5.078 \hline
+22 & 5.178 \hline
+23 & 5.283 \hline
+24 & 5.396
+\end{longtable}
+
+
+\begin{longtable}[c]{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\caption{RMSE for ES model on different train intervals
+\label{table:table_es_train_selection}}\\
+\hline
+Train(hours) & 24 & 48 & 72 & 96 & 120 & 144 & 168 & 196 & 220 & 360 & 480 & 720
+\hline
+RMSE & 9.28 & 10.54 & 9.76 & \textbf{6.39} & 8.26 & 10.47 & 12.6 & 10.12 & 9.79 & 9.73 & 12.55 & 8.49
+\hline
+\end{longtable}
+
+
+\begin{longtable}[c]{|p{3.0cm}|p{3.0cm}|p{3.0cm}|p{3.0cm}|}
+ \caption{Performance comparison of methods
+ \label{table:table_comparison}}\\
+
+ \hline
+  Method & MSE & RMSE & MAPE\\
+ \hline
+ \endfirsthead
+
+ES & 16.896 & 4.111 & 32.831 \\
+ARIMA & 23.059 & 4.802 & 41.651 \\
+LSTM & 16.524 & 4.065 & 31.837
+\hline
+ \end{longtable}
+
+
+
+

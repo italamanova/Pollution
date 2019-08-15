@@ -1,0 +1,5 @@
+arima
+подбор параметров p,d, q???
+
+arima and es horizon, accuracy, time,
+
