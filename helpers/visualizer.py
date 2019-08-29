@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import tikzplotlib
 from scipy.stats import sem, t
 from scipy import mean
 import pandas as pd
@@ -25,9 +26,9 @@ def plot_to_file(dataset, xlabel='DateTime', ylabel='Value', title='', out_file_
     # plt.show()
     now = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     if out_file_name:
-        plt.savefig('%s/plots/%s.png' % (parent_dir_path, out_file_name))
+        plt.savefig('%s/plots/%s.svg' % (parent_dir_path, out_file_name))
     else:
-        plt.savefig('%s/plots/plot_%s.png' % (parent_dir_path, now))
+        plt.savefig('%s/plots/plot_%s.svg' % (parent_dir_path, now))
 
 
 def scatter_plot(dataset, xlabel='DateTime', ylabel='Value', title='Plot',
@@ -52,8 +53,8 @@ def count_confidence_interval(series):
     return start, end
 
 
-def plot_prediction(train, test, prediction, title='', df=None, xlabel=None, ylabel=None, date_format=None,
-                    train_label='Train', test_label='Test', prediction_label='Prediction'):
+def prepare_plot_prediction(train, test, prediction, title, df, xlabel, ylabel, date_format,
+                            train_label, test_label, prediction_label):
     fig = plt.figure()
     ax = fig.add_subplot(111)
     if date_format:
@@ -75,7 +76,22 @@ def plot_prediction(train, test, prediction, title='', df=None, xlabel=None, yla
     #                  color='b', alpha=.1)
 
     ax.legend()
+
+
+def plot_prediction(train, test, prediction, title='', df=None, xlabel=None, ylabel=None, date_format=None,
+                    train_label='Train', test_label='Test', prediction_label='Prediction'):
+    prepare_plot_prediction(train, test, prediction, title=title, df=df, xlabel=xlabel, ylabel=ylabel,
+                            date_format=date_format,
+                            train_label=train_label, test_label=test_label, prediction_label=prediction_label)
     plt.show()
+
+
+def plot_prediction_to_file(train, test, prediction, title='', df=None, xlabel=None, ylabel=None, date_format=None,
+                            train_label='Train', test_label='Test', prediction_label='Prediction', out_file_name='123'):
+    prepare_plot_prediction(train, test, prediction, title=title, df=df, xlabel=xlabel, ylabel=ylabel,
+                            date_format=date_format,
+                            train_label=train_label, test_label=test_label, prediction_label=prediction_label)
+    plt.savefig('%s/plots/%s.svg' % (parent_dir_path, out_file_name))
 
 
 def plot_errors(errors):

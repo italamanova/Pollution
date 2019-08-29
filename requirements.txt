@@ -12,3 +12,4 @@ keras
 tensorflow
 patsy
 dates
+tikzplotlib

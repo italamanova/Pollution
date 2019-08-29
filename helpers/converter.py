@@ -7,7 +7,7 @@ def get_resampled(df, period_name):
 
 
 def str_to_datetime(str_datetime):
-    return datetime.strptime(str_datetime, '%Y-%m-%d %H:%M:%S')
+    return datetime.datetime.strptime(str_datetime, '%Y-%m-%d %H:%M:%S')
 
 
 def date_str_to_datetime(str_date):

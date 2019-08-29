@@ -1,0 +1,5 @@
+for each series in list_of_series:
+    run auto_arima()
+    get forecast
+    count rmse
+count mean RMSE

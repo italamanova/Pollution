@@ -6,7 +6,7 @@ from statsmodels.tsa.holtwinters import ExponentialSmoothing, Holt
 from analysis.analyzer import get_data
 from helpers.accuracy import measure_accuracy, measure_accuracy_each_sample
 from helpers.preparator import cut_dataframe, reverse_box_cox, get_data_with_box_cox
-from helpers.visualizer import plot_prediction, plot_errors
+from helpers.visualizer import plot_prediction, plot_errors, plot_prediction_to_file
 
 
 def exponential_smoothing(train, test, lambda_, trend=None, seasonal='add', seasonal_periods=24, damped=False):
@@ -37,11 +37,9 @@ def exponential_smoothing_from_df(df, test_size, lambda_):
     reversed_train, reversed_test, reversed_pred, model_params = exponential_smoothing(train, test, lambda_)
 
     measure_accuracy(reversed_test, reversed_pred)
-    plot_prediction(reversed_train, reversed_test, reversed_pred, title='Exponential Smoothing')
-
-    errors = {'mape': measure_accuracy_each_sample(reversed_test.values, reversed_pred.values),
-              'mae': measure_mae_each_sample(reversed_test.values, reversed_pred.values)}
-    plot_errors(errors)
+    # plot_prediction(reversed_train, reversed_test, reversed_pred, title='Exponential Smoothing')
+    plot_prediction_to_file(reversed_train, reversed_test, reversed_pred, title='Exponential Smoothing',
+                            out_file_name='es_svg')
 
     return reversed_train, reversed_test, reversed_pred
 

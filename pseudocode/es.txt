@@ -1,0 +1,5 @@
+for each series in list_of_series:
+    for each window in series:
+        Get best model using grid search
+        Count RMSE
+    count mean RMSE of all experiments
