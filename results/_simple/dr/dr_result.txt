@@ -1,0 +1,198 @@
+['_simple/dr/3', '_simple/dr/1', '_simple/dr/2', '_simple/dr/0']
+len dirs2=16
+['_simple/dr/3/3', '_simple/dr/3/1', '_simple/dr/3/2', '_simple/dr/3/0', '_simple/dr/1/3', '_simple/dr/1/1', '_simple/dr/1/2', '_simple/dr/1/0', '_simple/dr/2/3', '_simple/dr/2/1', '_simple/dr/2/2', '_simple/dr/2/0', '_simple/dr/0/3', '_simple/dr/0/1', '_simple/dr/0/2', '_simple/dr/0/0']
+pathes= ['_simple/dr/3/3', '_simple/dr/3/1', '_simple/dr/3/2', '_simple/dr/3/0', '_simple/dr/1/3', '_simple/dr/1/1', '_simple/dr/1/2', '_simple/dr/1/0', '_simple/dr/2/3', '_simple/dr/2/1', '_simple/dr/2/2', '_simple/dr/2/0', '_simple/dr/0/3', '_simple/dr/0/1', '_simple/dr/0/2', '_simple/dr/0/0']
+=_simple/dr/3/3/7000.json:tw=2015-04-27 16:00:00, allrmse=8.252000, times=90.048711
+=_simple/dr/3/3/8000.json:tw=2015-06-08 08:00:00, allrmse=10.675000, times=445.236477
+=_simple/dr/3/3/4000.json:tw=2014-12-23 16:00:00, allrmse=13.685000, times=63.990568
+=_simple/dr/3/3/1000.json:tw=2014-08-20 16:00:00, allrmse=10.164000, times=131.110993
+=_simple/dr/3/3/2000.json:tw=2014-10-01 08:00:00, allrmse=15.392000, times=54.114469
+=_simple/dr/3/3/3000.json:tw=2014-11-12 00:00:00, allrmse=43.975000, times=96.146312
+=_simple/dr/3/3/6000.json:tw=2015-03-17 00:00:00, allrmse=8.908000, times=178.192956
+=_simple/dr/3/3/5000.json:tw=2015-02-03 08:00:00, allrmse=10.383000, times=71.481281
+=_simple/dr/3/3/0.json:tw=2014-07-10 00:00:00, allrmse=7.616000, times=33.293048
+calcavg:avgrmse=14.339000, train_start=2015-04-27 16:00:00, avgtime=129.291000, itis=dropout=0.3,recurrent_dropout=0.3,
+>_simple/dr/3/3:train_start=2015-04-27 16:00:00, avgrmse=14.339000, avgtime=129.291000, itis=dropout=0.3,recurrent_dropout=0.3,
+>======================================================
+=_simple/dr/3/1/7000.json:tw=2015-04-27 16:00:00, allrmse=8.566000, times=90.561853
+=_simple/dr/3/1/8000.json:tw=2015-06-08 08:00:00, allrmse=11.139000, times=391.170136
+=_simple/dr/3/1/4000.json:tw=2014-12-23 16:00:00, allrmse=11.953000, times=61.288812
+=_simple/dr/3/1/1000.json:tw=2014-08-20 16:00:00, allrmse=9.393000, times=141.858416
+=_simple/dr/3/1/2000.json:tw=2014-10-01 08:00:00, allrmse=15.298000, times=70.309474
+=_simple/dr/3/1/3000.json:tw=2014-11-12 00:00:00, allrmse=45.863000, times=127.461249
+=_simple/dr/3/1/6000.json:tw=2015-03-17 00:00:00, allrmse=8.540000, times=239.624886
+=_simple/dr/3/1/5000.json:tw=2015-02-03 08:00:00, allrmse=10.447000, times=70.440655
+=_simple/dr/3/1/0.json:tw=2014-07-10 00:00:00, allrmse=7.489000, times=77.426366
+calcavg:avgrmse=14.299000, train_start=2015-04-27 16:00:00, avgtime=141.127000, itis=dropout=0.3,recurrent_dropout=0.1,
+>_simple/dr/3/1:train_start=2015-04-27 16:00:00, avgrmse=14.299000, avgtime=141.127000, itis=dropout=0.3,recurrent_dropout=0.1,
+>======================================================
+=_simple/dr/3/2/7000.json:tw=2015-04-27 16:00:00, allrmse=8.517000, times=89.996218
+=_simple/dr/3/2/8000.json:tw=2015-06-08 08:00:00, allrmse=10.540000, times=398.264579
+=_simple/dr/3/2/4000.json:tw=2014-12-23 16:00:00, allrmse=11.980000, times=62.705107
+=_simple/dr/3/2/1000.json:tw=2014-08-20 16:00:00, allrmse=10.337000, times=139.105889
+=_simple/dr/3/2/2000.json:tw=2014-10-01 08:00:00, allrmse=14.588000, times=71.003897
+=_simple/dr/3/2/3000.json:tw=2014-11-12 00:00:00, allrmse=43.076000, times=95.058722
+=_simple/dr/3/2/6000.json:tw=2015-03-17 00:00:00, allrmse=7.659000, times=197.647703
+=_simple/dr/3/2/5000.json:tw=2015-02-03 08:00:00, allrmse=10.598000, times=70.524883
+=_simple/dr/3/2/0.json:tw=2014-07-10 00:00:00, allrmse=7.662000, times=32.058453
+calcavg:avgrmse=13.884000, train_start=2015-04-27 16:00:00, avgtime=128.485000, itis=dropout=0.3,recurrent_dropout=0.2,
+>_simple/dr/3/2:train_start=2015-04-27 16:00:00, avgrmse=13.884000, avgtime=128.485000, itis=dropout=0.3,recurrent_dropout=0.2,
+>======================================================
+=_simple/dr/3/0/7000.json:tw=2015-04-27 16:00:00, allrmse=8.310000, times=88.958715
+=_simple/dr/3/0/8000.json:tw=2015-06-08 08:00:00, allrmse=10.634000, times=199.668814
+=_simple/dr/3/0/4000.json:tw=2014-12-23 16:00:00, allrmse=12.778000, times=60.546431
+=_simple/dr/3/0/1000.json:tw=2014-08-20 16:00:00, allrmse=9.530000, times=139.321334
+=_simple/dr/3/0/2000.json:tw=2014-10-01 08:00:00, allrmse=13.069000, times=45.629478
+=_simple/dr/3/0/3000.json:tw=2014-11-12 00:00:00, allrmse=48.384000, times=113.681039
+=_simple/dr/3/0/6000.json:tw=2015-03-17 00:00:00, allrmse=7.596000, times=180.618356
+=_simple/dr/3/0/5000.json:tw=2015-02-03 08:00:00, allrmse=10.631000, times=70.697894
+=_simple/dr/3/0/0.json:tw=2014-07-10 00:00:00, allrmse=7.674000, times=31.983455
+calcavg:avgrmse=14.290000, train_start=2015-04-27 16:00:00, avgtime=103.456000, itis=dropout=0.3,recurrent_dropout=0.3,
+>_simple/dr/3/0:train_start=2015-04-27 16:00:00, avgrmse=14.290000, avgtime=103.456000, itis=dropout=0.3,recurrent_dropout=0.3,
+>======================================================
+=_simple/dr/1/3/7000.json:tw=2015-04-27 16:00:00, allrmse=8.313000, times=86.359171
+=_simple/dr/1/3/8000.json:tw=2015-06-08 08:00:00, allrmse=10.634000, times=289.258220
+=_simple/dr/1/3/4000.json:tw=2014-12-23 16:00:00, allrmse=13.319000, times=58.707407
+=_simple/dr/1/3/1000.json:tw=2014-08-20 16:00:00, allrmse=10.676000, times=59.065691
+=_simple/dr/1/3/2000.json:tw=2014-10-01 08:00:00, allrmse=14.055000, times=43.481753
+=_simple/dr/1/3/3000.json:tw=2014-11-12 00:00:00, allrmse=42.163000, times=107.888518
+=_simple/dr/1/3/6000.json:tw=2015-03-17 00:00:00, allrmse=8.477000, times=260.386904
+=_simple/dr/1/3/5000.json:tw=2015-02-03 08:00:00, allrmse=10.660000, times=65.548274
+=_simple/dr/1/3/0.json:tw=2014-07-10 00:00:00, allrmse=7.530000, times=28.988279
+calcavg:avgrmse=13.981000, train_start=2015-04-27 16:00:00, avgtime=111.076000, itis=dropout=0.1,recurrent_dropout=0.3,
+>_simple/dr/1/3:train_start=2015-04-27 16:00:00, avgrmse=13.981000, avgtime=111.076000, itis=dropout=0.1,recurrent_dropout=0.3,
+>======================================================
+=_simple/dr/1/1/7000.json:tw=2015-04-27 16:00:00, allrmse=8.292000, times=84.950739
+=_simple/dr/1/1/8000.json:tw=2015-06-08 08:00:00, allrmse=10.358000, times=299.032892
+=_simple/dr/1/1/4000.json:tw=2014-12-23 16:00:00, allrmse=12.008000, times=56.726000
+=_simple/dr/1/1/1000.json:tw=2014-08-20 16:00:00, allrmse=10.171000, times=86.008164
+=_simple/dr/1/1/2000.json:tw=2014-10-01 08:00:00, allrmse=13.599000, times=42.589673
+=_simple/dr/1/1/3000.json:tw=2014-11-12 00:00:00, allrmse=42.337000, times=141.592741
+=_simple/dr/1/1/6000.json:tw=2015-03-17 00:00:00, allrmse=8.330000, times=129.609564
+=_simple/dr/1/1/5000.json:tw=2015-02-03 08:00:00, allrmse=10.832000, times=65.230844
+=_simple/dr/1/1/0.json:tw=2014-07-10 00:00:00, allrmse=7.461000, times=96.762231
+calcavg:avgrmse=13.710000, train_start=2015-04-27 16:00:00, avgtime=111.389000, itis=dropout=0.1,recurrent_dropout=0.1,
+>_simple/dr/1/1:train_start=2015-04-27 16:00:00, avgrmse=13.710000, avgtime=111.389000, itis=dropout=0.1,recurrent_dropout=0.1,
+>======================================================
+=_simple/dr/1/2/7000.json:tw=2015-04-27 16:00:00, allrmse=8.296000, times=85.695496
+=_simple/dr/1/2/8000.json:tw=2015-06-08 08:00:00, allrmse=11.403000, times=348.880122
+=_simple/dr/1/2/4000.json:tw=2014-12-23 16:00:00, allrmse=12.736000, times=58.250969
+=_simple/dr/1/2/1000.json:tw=2014-08-20 16:00:00, allrmse=9.388000, times=91.116726
+=_simple/dr/1/2/2000.json:tw=2014-10-01 08:00:00, allrmse=14.941000, times=54.547218
+=_simple/dr/1/2/3000.json:tw=2014-11-12 00:00:00, allrmse=41.082000, times=112.164662
+=_simple/dr/1/2/6000.json:tw=2015-03-17 00:00:00, allrmse=8.058000, times=153.160945
+=_simple/dr/1/2/5000.json:tw=2015-02-03 08:00:00, allrmse=10.390000, times=65.497495
+=_simple/dr/1/2/0.json:tw=2014-07-10 00:00:00, allrmse=7.410000, times=101.774606
+calcavg:avgrmse=13.745000, train_start=2015-04-27 16:00:00, avgtime=119.010000, itis=dropout=0.1,recurrent_dropout=0.2,
+>_simple/dr/1/2:train_start=2015-04-27 16:00:00, avgrmse=13.745000, avgtime=119.010000, itis=dropout=0.1,recurrent_dropout=0.2,
+>======================================================
+=_simple/dr/1/0/7000.json:tw=2015-04-27 16:00:00, allrmse=8.381000, times=83.669784
+=_simple/dr/1/0/8000.json:tw=2015-06-08 08:00:00, allrmse=10.622000, times=264.030540
+=_simple/dr/1/0/4000.json:tw=2014-12-23 16:00:00, allrmse=11.911000, times=55.898565
+=_simple/dr/1/0/1000.json:tw=2014-08-20 16:00:00, allrmse=9.809000, times=85.479415
+=_simple/dr/1/0/2000.json:tw=2014-10-01 08:00:00, allrmse=12.938000, times=41.420574
+=_simple/dr/1/0/3000.json:tw=2014-11-12 00:00:00, allrmse=41.989000, times=103.278352
+=_simple/dr/1/0/6000.json:tw=2015-03-17 00:00:00, allrmse=7.937000, times=167.571443
+=_simple/dr/1/0/5000.json:tw=2015-02-03 08:00:00, allrmse=10.585000, times=65.361027
+=_simple/dr/1/0/0.json:tw=2014-07-10 00:00:00, allrmse=7.547000, times=28.142422
+calcavg:avgrmse=13.524000, train_start=2015-04-27 16:00:00, avgtime=99.428000, itis=dropout=0.1,recurrent_dropout=0.3,
+>_simple/dr/1/0:train_start=2015-04-27 16:00:00, avgrmse=13.524000, avgtime=99.428000, itis=dropout=0.1,recurrent_dropout=0.3,
+>======================================================
+=_simple/dr/2/3/7000.json:tw=2015-04-27 16:00:00, allrmse=8.432000, times=88.135782
+=_simple/dr/2/3/8000.json:tw=2015-06-08 08:00:00, allrmse=10.463000, times=287.726768
+=_simple/dr/2/3/4000.json:tw=2014-12-23 16:00:00, allrmse=12.893000, times=60.232135
+=_simple/dr/2/3/1000.json:tw=2014-08-20 16:00:00, allrmse=10.600000, times=98.484705
+=_simple/dr/2/3/2000.json:tw=2014-10-01 08:00:00, allrmse=12.107000, times=45.046220
+=_simple/dr/2/3/3000.json:tw=2014-11-12 00:00:00, allrmse=45.828000, times=125.695182
+=_simple/dr/2/3/6000.json:tw=2015-03-17 00:00:00, allrmse=8.836000, times=317.058706
+=_simple/dr/2/3/5000.json:tw=2015-02-03 08:00:00, allrmse=10.388000, times=67.699545
+=_simple/dr/2/3/0.json:tw=2014-07-10 00:00:00, allrmse=7.490000, times=31.026088
+calcavg:avgrmse=14.115000, train_start=2015-04-27 16:00:00, avgtime=124.567000, itis=dropout=0.2,recurrent_dropout=0.3,
+>_simple/dr/2/3:train_start=2015-04-27 16:00:00, avgrmse=14.115000, avgtime=124.567000, itis=dropout=0.2,recurrent_dropout=0.3,
+>======================================================
+=_simple/dr/2/1/7000.json:tw=2015-04-27 16:00:00, allrmse=8.490000, times=85.895847
+=_simple/dr/2/1/8000.json:tw=2015-06-08 08:00:00, allrmse=12.341000, times=99.952423
+=_simple/dr/2/1/4000.json:tw=2014-12-23 16:00:00, allrmse=11.974000, times=60.161219
+=_simple/dr/2/1/1000.json:tw=2014-08-20 16:00:00, allrmse=9.288000, times=107.124961
+=_simple/dr/2/1/2000.json:tw=2014-10-01 08:00:00, allrmse=13.044000, times=43.950498
+=_simple/dr/2/1/3000.json:tw=2014-11-12 00:00:00, allrmse=43.369000, times=131.237682
+=_simple/dr/2/1/6000.json:tw=2015-03-17 00:00:00, allrmse=8.861000, times=326.916843
+=_simple/dr/2/1/5000.json:tw=2015-02-03 08:00:00, allrmse=10.500000, times=67.150543
+=_simple/dr/2/1/0.json:tw=2014-07-10 00:00:00, allrmse=7.457000, times=30.198416
+calcavg:avgrmse=13.925000, train_start=2015-04-27 16:00:00, avgtime=105.843000, itis=dropout=0.2,recurrent_dropout=0.1,
+>_simple/dr/2/1:train_start=2015-04-27 16:00:00, avgrmse=13.925000, avgtime=105.843000, itis=dropout=0.2,recurrent_dropout=0.1,
+>======================================================
+=_simple/dr/2/2/7000.json:tw=2015-04-27 16:00:00, allrmse=8.569000, times=87.316192
+=_simple/dr/2/2/8000.json:tw=2015-06-08 08:00:00, allrmse=10.487000, times=347.295613
+=_simple/dr/2/2/4000.json:tw=2014-12-23 16:00:00, allrmse=14.655000, times=61.266791
+=_simple/dr/2/2/1000.json:tw=2014-08-20 16:00:00, allrmse=9.935000, times=139.093855
+=_simple/dr/2/2/2000.json:tw=2014-10-01 08:00:00, allrmse=13.034000, times=44.735347
+=_simple/dr/2/2/3000.json:tw=2014-11-12 00:00:00, allrmse=43.053000, times=148.352985
+=_simple/dr/2/2/6000.json:tw=2015-03-17 00:00:00, allrmse=7.868000, times=106.771437
+=_simple/dr/2/2/5000.json:tw=2015-02-03 08:00:00, allrmse=10.595000, times=68.424706
+=_simple/dr/2/2/0.json:tw=2014-07-10 00:00:00, allrmse=7.608000, times=30.446676
+calcavg:avgrmse=13.978000, train_start=2015-04-27 16:00:00, avgtime=114.856000, itis=dropout=0.2,recurrent_dropout=0.2,
+>_simple/dr/2/2:train_start=2015-04-27 16:00:00, avgrmse=13.978000, avgtime=114.856000, itis=dropout=0.2,recurrent_dropout=0.2,
+>======================================================
+=_simple/dr/2/0/7000.json:tw=2015-04-27 16:00:00, allrmse=8.508000, times=86.183023
+=_simple/dr/2/0/8000.json:tw=2015-06-08 08:00:00, allrmse=10.678000, times=274.378525
+=_simple/dr/2/0/4000.json:tw=2014-12-23 16:00:00, allrmse=11.841000, times=58.338733
+=_simple/dr/2/0/1000.json:tw=2014-08-20 16:00:00, allrmse=10.367000, times=130.158867
+=_simple/dr/2/0/2000.json:tw=2014-10-01 08:00:00, allrmse=12.562000, times=43.312893
+=_simple/dr/2/0/3000.json:tw=2014-11-12 00:00:00, allrmse=48.268000, times=158.641498
+=_simple/dr/2/0/6000.json:tw=2015-03-17 00:00:00, allrmse=8.391000, times=190.267075
+=_simple/dr/2/0/5000.json:tw=2015-02-03 08:00:00, allrmse=10.543000, times=66.631144
+=_simple/dr/2/0/0.json:tw=2014-07-10 00:00:00, allrmse=7.701000, times=29.470959
+calcavg:avgrmse=14.318000, train_start=2015-04-27 16:00:00, avgtime=115.265000, itis=dropout=0.2,recurrent_dropout=0.3,
+>_simple/dr/2/0:train_start=2015-04-27 16:00:00, avgrmse=14.318000, avgtime=115.265000, itis=dropout=0.2,recurrent_dropout=0.3,
+>======================================================
+=_simple/dr/0/3/7000.json:tw=2015-04-27 16:00:00, allrmse=8.271000, times=84.343032
+=_simple/dr/0/3/8000.json:tw=2015-06-08 08:00:00, allrmse=10.574000, times=311.490301
+=_simple/dr/0/3/4000.json:tw=2014-12-23 16:00:00, allrmse=12.892000, times=55.323657
+=_simple/dr/0/3/1000.json:tw=2014-08-20 16:00:00, allrmse=9.698000, times=143.262599
+=_simple/dr/0/3/2000.json:tw=2014-10-01 08:00:00, allrmse=15.847000, times=48.726706
+=_simple/dr/0/3/3000.json:tw=2014-11-12 00:00:00, allrmse=44.168000, times=107.966737
+=_simple/dr/0/3/6000.json:tw=2015-03-17 00:00:00, allrmse=8.495000, times=150.056448
+=_simple/dr/0/3/5000.json:tw=2015-02-03 08:00:00, allrmse=10.482000, times=65.292781
+=_simple/dr/0/3/0.json:tw=2014-07-10 00:00:00, allrmse=7.421000, times=64.354877
+calcavg:avgrmse=14.205000, train_start=2015-04-27 16:00:00, avgtime=114.535000, itis=dropout=0,recurrent_dropout=0.3,
+>_simple/dr/0/3:train_start=2015-04-27 16:00:00, avgrmse=14.205000, avgtime=114.535000, itis=dropout=0,recurrent_dropout=0.3,
+>======================================================
+=_simple/dr/0/1/7000.json:tw=2015-04-27 16:00:00, allrmse=8.263000, times=81.872771
+=_simple/dr/0/1/8000.json:tw=2015-06-08 08:00:00, allrmse=11.075000, times=290.424452
+=_simple/dr/0/1/4000.json:tw=2014-12-23 16:00:00, allrmse=12.064000, times=54.251230
+=_simple/dr/0/1/1000.json:tw=2014-08-20 16:00:00, allrmse=9.594000, times=87.819688
+=_simple/dr/0/1/2000.json:tw=2014-10-01 08:00:00, allrmse=13.482000, times=39.523852
+=_simple/dr/0/1/3000.json:tw=2014-11-12 00:00:00, allrmse=44.301000, times=87.398053
+=_simple/dr/0/1/6000.json:tw=2015-03-17 00:00:00, allrmse=7.905000, times=140.962640
+=_simple/dr/0/1/5000.json:tw=2015-02-03 08:00:00, allrmse=10.602000, times=64.826891
+=_simple/dr/0/1/0.json:tw=2014-07-10 00:00:00, allrmse=7.663000, times=113.342643
+calcavg:avgrmse=13.883000, train_start=2015-04-27 16:00:00, avgtime=106.714000, itis=dropout=0,recurrent_dropout=0.1,
+>_simple/dr/0/1:train_start=2015-04-27 16:00:00, avgrmse=13.883000, avgtime=106.714000, itis=dropout=0,recurrent_dropout=0.1,
+>======================================================
+=_simple/dr/0/2/7000.json:tw=2015-04-27 16:00:00, allrmse=8.414000, times=81.232574
+=_simple/dr/0/2/8000.json:tw=2015-06-08 08:00:00, allrmse=11.232000, times=289.473203
+=_simple/dr/0/2/4000.json:tw=2014-12-23 16:00:00, allrmse=11.936000, times=55.013871
+=_simple/dr/0/2/1000.json:tw=2014-08-20 16:00:00, allrmse=9.236000, times=110.525170
+=_simple/dr/0/2/2000.json:tw=2014-10-01 08:00:00, allrmse=14.918000, times=71.057760
+=_simple/dr/0/2/3000.json:tw=2014-11-12 00:00:00, allrmse=47.798000, times=161.497926
+=_simple/dr/0/2/6000.json:tw=2015-03-17 00:00:00, allrmse=8.574000, times=347.691111
+=_simple/dr/0/2/5000.json:tw=2015-02-03 08:00:00, allrmse=10.856000, times=64.897878
+=_simple/dr/0/2/0.json:tw=2014-07-10 00:00:00, allrmse=8.093000, times=150.747933
+calcavg:avgrmse=14.562000, train_start=2015-04-27 16:00:00, avgtime=148.015000, itis=dropout=0,recurrent_dropout=0.2,
+>_simple/dr/0/2:train_start=2015-04-27 16:00:00, avgrmse=14.562000, avgtime=148.015000, itis=dropout=0,recurrent_dropout=0.2,
+>======================================================
+=_simple/dr/0/0/7000.json:tw=2015-04-27 16:00:00, allrmse=8.571000, times=80.206260
+=_simple/dr/0/0/8000.json:tw=2015-06-08 08:00:00, allrmse=10.591000, times=220.616711
+=_simple/dr/0/0/4000.json:tw=2014-12-23 16:00:00, allrmse=13.113000, times=54.400079
+=_simple/dr/0/0/1000.json:tw=2014-08-20 16:00:00, allrmse=10.233000, times=120.440955
+=_simple/dr/0/0/2000.json:tw=2014-10-01 08:00:00, allrmse=13.881000, times=39.799086
+=_simple/dr/0/0/3000.json:tw=2014-11-12 00:00:00, allrmse=44.274000, times=152.337688
+=_simple/dr/0/0/6000.json:tw=2015-03-17 00:00:00, allrmse=7.893000, times=133.766294
+=_simple/dr/0/0/5000.json:tw=2015-02-03 08:00:00, allrmse=10.803000, times=63.221313
+=_simple/dr/0/0/0.json:tw=2014-07-10 00:00:00, allrmse=7.625000, times=23.839906
+calcavg:avgrmse=14.109000, train_start=2015-04-27 16:00:00, avgtime=98.736000, itis=dropout=0,recurrent_dropout=0,
+>_simple/dr/0/0:train_start=2015-04-27 16:00:00, avgrmse=14.109000, avgtime=98.736000, itis=dropout=0,recurrent_dropout=0,
+>======================================================
+callall:best_train_start=2015-04-27 16:00:00, minrmse=13.524000, fit=99.428000, asis=dropout=0.1,recurrent_dropout=0.3,
+result:train_start=2015-04-27 16:00:00, avgrmse=13.524000, avgtime=99.428000, itis=dropout=0.1,recurrent_dropout=0.3,

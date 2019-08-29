@@ -1,0 +1,40 @@
+['_simple/fediff1/13', '_simple/fediff1/11', '_simple/fediff1/12']
+pathes= ['_simple/fediff1/13', '_simple/fediff1/11', '_simple/fediff1/12']
+=_simple/fediff1/13/7000.json:tw=8000, allrmse=2.308000, times=375.515438
+=_simple/fediff1/13/8000.json:tw=8000, allrmse=1.516000, times=336.104636
+=_simple/fediff1/13/4000.json:tw=8000, allrmse=5.574000, times=300.009364
+=_simple/fediff1/13/1000.json:tw=8000, allrmse=1.334000, times=352.378919
+=_simple/fediff1/13/2000.json:tw=8000, allrmse=2.706000, times=336.384033
+=_simple/fediff1/13/3000.json:tw=8000, allrmse=3.231000, times=307.003730
+=_simple/fediff1/13/6000.json:tw=8000, allrmse=4.241000, times=328.631654
+=_simple/fediff1/13/5000.json:tw=8000, allrmse=5.297000, times=439.431468
+=_simple/fediff1/13/0.json:tw=8000, allrmse=3.011000, times=327.581551
+calcavg:avgrmse=3.246000, train_start=2015-04-27 16:00:00, avgtime=344.782000, itis=_simple/fediff1/13
+>_simple/fediff1/13:train_start=2015-04-27 16:00:00, avgrmse=3.246000, avgtime=344.782000, itis=_simple/fediff1/13
+>======================================================
+=_simple/fediff1/11/7000.json:tw=8000, allrmse=2.377000, times=316.931634
+=_simple/fediff1/11/8000.json:tw=8000, allrmse=1.532000, times=334.810945
+=_simple/fediff1/11/4000.json:tw=8000, allrmse=5.440000, times=292.661905
+=_simple/fediff1/11/1000.json:tw=8000, allrmse=1.472000, times=283.923770
+=_simple/fediff1/11/2000.json:tw=8000, allrmse=2.987000, times=282.769622
+=_simple/fediff1/11/3000.json:tw=8000, allrmse=3.255000, times=314.278540
+=_simple/fediff1/11/6000.json:tw=8000, allrmse=4.300000, times=334.145222
+=_simple/fediff1/11/5000.json:tw=8000, allrmse=5.407000, times=372.568257
+=_simple/fediff1/11/0.json:tw=8000, allrmse=3.123000, times=278.886516
+calcavg:avgrmse=3.321000, train_start=2015-04-27 16:00:00, avgtime=312.331000, itis=_simple/fediff1/11
+>_simple/fediff1/11:train_start=2015-04-27 16:00:00, avgrmse=3.321000, avgtime=312.331000, itis=_simple/fediff1/11
+>======================================================
+=_simple/fediff1/12/7000.json:tw=8000, allrmse=2.378000, times=339.388907
+=_simple/fediff1/12/8000.json:tw=8000, allrmse=1.524000, times=328.849924
+=_simple/fediff1/12/4000.json:tw=8000, allrmse=5.553000, times=296.086572
+=_simple/fediff1/12/1000.json:tw=8000, allrmse=1.443000, times=298.814075
+=_simple/fediff1/12/2000.json:tw=8000, allrmse=2.963000, times=292.787028
+=_simple/fediff1/12/3000.json:tw=8000, allrmse=3.238000, times=314.340425
+=_simple/fediff1/12/6000.json:tw=8000, allrmse=4.294000, times=340.187898
+=_simple/fediff1/12/5000.json:tw=8000, allrmse=5.410000, times=372.267236
+=_simple/fediff1/12/0.json:tw=8000, allrmse=3.104000, times=289.945354
+calcavg:avgrmse=3.323000, train_start=2015-04-27 16:00:00, avgtime=319.185000, itis=_simple/fediff1/12
+>_simple/fediff1/12:train_start=2015-04-27 16:00:00, avgrmse=3.323000, avgtime=319.185000, itis=_simple/fediff1/12
+>======================================================
+callall:best_train_start=2015-04-27 16:00:00, minrmse=3.246000, fit=344.782000, asis=_simple/fediff1/13
+result:train_start=2015-04-27 16:00:00, avgrmse=3.246000, avgtime=344.782000, itis=_simple/fediff1/13

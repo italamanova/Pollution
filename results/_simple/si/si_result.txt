@@ -1,0 +1,88 @@
+['_simple/si/6', '_simple/si/24', '_simple/si/1', '_simple/si/2', '_simple/si/4', '_simple/si/8', '_simple/si/12']
+pathes= ['_simple/si/6', '_simple/si/24', '_simple/si/1', '_simple/si/2', '_simple/si/4', '_simple/si/8', '_simple/si/12']
+=_simple/si/6/7000.json:tw=2015-04-27 16:00:00, allrmse=6.964000, times=32.110821
+=_simple/si/6/8000.json:tw=2015-06-08 08:00:00, allrmse=7.483000, times=35.832250
+=_simple/si/6/4000.json:tw=2014-12-23 16:00:00, allrmse=15.034000, times=22.813338
+=_simple/si/6/1000.json:tw=2014-08-20 16:00:00, allrmse=15.662000, times=55.939798
+=_simple/si/6/2000.json:tw=2014-10-01 08:00:00, allrmse=8.027000, times=17.176555
+=_simple/si/6/3000.json:tw=2014-11-12 00:00:00, allrmse=41.433000, times=39.971272
+=_simple/si/6/6000.json:tw=2015-03-17 00:00:00, allrmse=4.682000, times=52.387853
+=_simple/si/6/5000.json:tw=2015-02-03 08:00:00, allrmse=9.424000, times=26.491564
+=_simple/si/6/0.json:tw=2014-07-10 00:00:00, allrmse=7.958000, times=11.972247
+calcavg:avgrmse=12.963000, train_start=2015-04-27 16:00:00, avgtime=32.744000, itis=n_steps_in=6,
+>_simple/si/6:train_start=2015-04-27 16:00:00, avgrmse=12.963000, avgtime=32.744000, itis=n_steps_in=6,
+>======================================================
+=_simple/si/24/7000.json:tw=2015-04-27 16:00:00, allrmse=8.226000, times=48.944117
+=_simple/si/24/8000.json:tw=2015-06-08 08:00:00, allrmse=10.726000, times=270.761212
+=_simple/si/24/4000.json:tw=2014-12-23 16:00:00, allrmse=12.785000, times=40.425261
+=_simple/si/24/1000.json:tw=2014-08-20 16:00:00, allrmse=9.323000, times=80.099642
+=_simple/si/24/2000.json:tw=2014-10-01 08:00:00, allrmse=15.049000, times=68.997160
+=_simple/si/24/3000.json:tw=2014-11-12 00:00:00, allrmse=41.689000, times=117.809614
+=_simple/si/24/6000.json:tw=2015-03-17 00:00:00, allrmse=8.718000, times=85.746045
+=_simple/si/24/5000.json:tw=2015-02-03 08:00:00, allrmse=10.455000, times=44.169521
+=_simple/si/24/0.json:tw=2014-07-10 00:00:00, allrmse=7.581000, times=29.274927
+calcavg:avgrmse=13.839000, train_start=2015-04-27 16:00:00, avgtime=87.359000, itis=n_steps_in=24,
+>_simple/si/24:train_start=2015-04-27 16:00:00, avgrmse=13.839000, avgtime=87.359000, itis=n_steps_in=24,
+>======================================================
+=_simple/si/1/7000.json:tw=2015-04-27 16:00:00, allrmse=7.315000, times=26.528378
+=_simple/si/1/8000.json:tw=2015-06-08 08:00:00, allrmse=5.773000, times=29.082313
+=_simple/si/1/4000.json:tw=2014-12-23 16:00:00, allrmse=15.341000, times=16.752428
+=_simple/si/1/1000.json:tw=2014-08-20 16:00:00, allrmse=18.797000, times=28.379382
+=_simple/si/1/2000.json:tw=2014-10-01 08:00:00, allrmse=7.492000, times=11.356084
+=_simple/si/1/3000.json:tw=2014-11-12 00:00:00, allrmse=47.334000, times=14.636701
+=_simple/si/1/6000.json:tw=2015-03-17 00:00:00, allrmse=5.632000, times=25.397446
+=_simple/si/1/5000.json:tw=2015-02-03 08:00:00, allrmse=8.681000, times=20.231985
+=_simple/si/1/0.json:tw=2014-07-10 00:00:00, allrmse=8.980000, times=7.979191
+calcavg:avgrmse=13.927000, train_start=2015-04-27 16:00:00, avgtime=20.038000, itis=n_steps_in=1,
+>_simple/si/1:train_start=2015-04-27 16:00:00, avgrmse=13.927000, avgtime=20.038000, itis=n_steps_in=1,
+>======================================================
+=_simple/si/2/7000.json:tw=2015-04-27 16:00:00, allrmse=7.307000, times=27.795751
+=_simple/si/2/8000.json:tw=2015-06-08 08:00:00, allrmse=6.058000, times=30.448411
+=_simple/si/2/4000.json:tw=2014-12-23 16:00:00, allrmse=14.799000, times=18.718736
+=_simple/si/2/1000.json:tw=2014-08-20 16:00:00, allrmse=18.319000, times=61.353830
+=_simple/si/2/2000.json:tw=2014-10-01 08:00:00, allrmse=7.028000, times=12.596309
+=_simple/si/2/3000.json:tw=2014-11-12 00:00:00, allrmse=43.558000, times=18.280679
+=_simple/si/2/6000.json:tw=2015-03-17 00:00:00, allrmse=6.517000, times=26.044034
+=_simple/si/2/5000.json:tw=2015-02-03 08:00:00, allrmse=8.933000, times=22.397525
+=_simple/si/2/0.json:tw=2014-07-10 00:00:00, allrmse=8.739000, times=7.622226
+calcavg:avgrmse=13.473000, train_start=2015-04-27 16:00:00, avgtime=25.029000, itis=n_steps_in=2,
+>_simple/si/2:train_start=2015-04-27 16:00:00, avgrmse=13.473000, avgtime=25.029000, itis=n_steps_in=2,
+>======================================================
+=_simple/si/4/7000.json:tw=2015-04-27 16:00:00, allrmse=7.088000, times=29.584680
+=_simple/si/4/8000.json:tw=2015-06-08 08:00:00, allrmse=6.762000, times=34.169876
+=_simple/si/4/4000.json:tw=2014-12-23 16:00:00, allrmse=14.725000, times=20.533499
+=_simple/si/4/1000.json:tw=2014-08-20 16:00:00, allrmse=17.236000, times=65.609590
+=_simple/si/4/2000.json:tw=2014-10-01 08:00:00, allrmse=7.283000, times=14.843437
+=_simple/si/4/3000.json:tw=2014-11-12 00:00:00, allrmse=46.145000, times=18.433026
+=_simple/si/4/6000.json:tw=2015-03-17 00:00:00, allrmse=6.694000, times=28.953134
+=_simple/si/4/5000.json:tw=2015-02-03 08:00:00, allrmse=9.149000, times=24.454883
+=_simple/si/4/0.json:tw=2014-07-10 00:00:00, allrmse=8.298000, times=9.785187
+calcavg:avgrmse=13.709000, train_start=2015-04-27 16:00:00, avgtime=27.374000, itis=n_steps_in=4,
+>_simple/si/4:train_start=2015-04-27 16:00:00, avgrmse=13.709000, avgtime=27.374000, itis=n_steps_in=4,
+>======================================================
+=_simple/si/8/7000.json:tw=2015-04-27 16:00:00, allrmse=7.544000, times=34.056574
+=_simple/si/8/8000.json:tw=2015-06-08 08:00:00, allrmse=8.127000, times=37.899736
+=_simple/si/8/4000.json:tw=2014-12-23 16:00:00, allrmse=14.653000, times=25.430599
+=_simple/si/8/1000.json:tw=2014-08-20 16:00:00, allrmse=15.582000, times=42.082162
+=_simple/si/8/2000.json:tw=2014-10-01 08:00:00, allrmse=8.003000, times=19.095094
+=_simple/si/8/3000.json:tw=2014-11-12 00:00:00, allrmse=40.872000, times=63.112259
+=_simple/si/8/6000.json:tw=2015-03-17 00:00:00, allrmse=6.404000, times=81.383752
+=_simple/si/8/5000.json:tw=2015-02-03 08:00:00, allrmse=9.779000, times=28.798567
+=_simple/si/8/0.json:tw=2014-07-10 00:00:00, allrmse=7.835000, times=14.076961
+calcavg:avgrmse=13.200000, train_start=2015-04-27 16:00:00, avgtime=38.437000, itis=n_steps_in=8,
+>_simple/si/8:train_start=2015-04-27 16:00:00, avgrmse=13.200000, avgtime=38.437000, itis=n_steps_in=8,
+>======================================================
+=_simple/si/12/7000.json:tw=2015-04-27 16:00:00, allrmse=8.039000, times=37.830337
+=_simple/si/12/8000.json:tw=2015-06-08 08:00:00, allrmse=9.762000, times=41.960740
+=_simple/si/12/4000.json:tw=2014-12-23 16:00:00, allrmse=14.135000, times=30.069594
+=_simple/si/12/1000.json:tw=2014-08-20 16:00:00, allrmse=12.182000, times=41.022811
+=_simple/si/12/2000.json:tw=2014-10-01 08:00:00, allrmse=11.337000, times=46.191470
+=_simple/si/12/3000.json:tw=2014-11-12 00:00:00, allrmse=43.031000, times=72.543871
+=_simple/si/12/6000.json:tw=2015-03-17 00:00:00, allrmse=4.996000, times=56.031223
+=_simple/si/12/5000.json:tw=2015-02-03 08:00:00, allrmse=9.663000, times=32.844624
+=_simple/si/12/0.json:tw=2014-07-10 00:00:00, allrmse=6.432000, times=53.077065
+calcavg:avgrmse=13.286000, train_start=2015-04-27 16:00:00, avgtime=45.730000, itis=n_steps_in=12,
+>_simple/si/12:train_start=2015-04-27 16:00:00, avgrmse=13.286000, avgtime=45.730000, itis=n_steps_in=12,
+>======================================================
+callall:best_train_start=2015-04-27 16:00:00, minrmse=12.963000, fit=32.744000, asis=n_steps_in=6,
+result:train_start=2015-04-27 16:00:00, avgrmse=12.963000, avgtime=32.744000, itis=n_steps_in=6,
