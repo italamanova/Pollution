@@ -44,3 +44,11 @@ As it was mentioned by Peng \cite{Peng:2017} environmental pollution could be co
 In a smart city conception air pollution is monitored by a lot of small sensors. Prediction methods allow to forecast air pollution and warn citizens about the situation. Such awareness will allow to reduce risks for people sensitive to polluted air and encourage to ...
 
 
+\subsection{Objectives}
+The main objectives of this project are:\\
+
+\begin{tabular} {|p{1.2cm}|p{11.6cm}|} \hline
+\textbf{O1} & To study which method performs more accurate prediction for air pollution time series. \\ \hline
+\textbf{O2} &  To study the ability of selected methods to adapt automatically to environmental changes.  \\ \hline
+\textbf{O3} &  To study the best train intervals for the model to achieve the best accuracy.  \\ \hline
+\end{tabular}\\

@@ -16,7 +16,7 @@ from statsmodels.tsa.stattools import adfuller, kpss
 from analysis.trend_seasonality_checker import check_seasonal_decomposition, check_polyfit
 from helpers.converter import get_resampled
 from helpers.preparator import delete_outliers, get_data, get_data_with_box_cox
-from helpers.visualizer import simple_plot
+from helpers.visualizer import simple_plot, plot_to_file
 from stationarity.differencing_checker import fourier
 
 parent_dir_path = Path(__file__).parents[1]
@@ -100,7 +100,7 @@ def analyze(file):
     degree = 1
 
     # simple_plot(df)
-    # df = df.iloc[24*365:24*365+24*30]
+    df = df.iloc[24*365:24*365+24*5]
     # df = df.loc['2015-02-01 00:00:00':'2015-07-01 00:00:00']
     # simple_plot(df)
     # plot_distribution(df, col_name)
@@ -115,7 +115,8 @@ def analyze(file):
 
     check_adfuller(df)
     check_kpss(df)
-    simple_plot(df)
+    # simple_plot(df)
+    plot_to_file(df, out_file_name='cut_time_series')
     # check_seasonal_decomposition(df)
     # plot_autocorrelation(df)
 

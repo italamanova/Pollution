@@ -18,7 +18,7 @@ def simple_plot(dataset, xlabel='', ylabel='Value', title=''):
     plt.show()
 
 
-def plot_to_file(dataset, xlabel='DateTime', ylabel='Value', title='', out_file_name=None):
+def plot_to_file(dataset, xlabel='', ylabel='', title='', out_file_name=None):
     dataset.plot()
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
@@ -31,7 +31,7 @@ def plot_to_file(dataset, xlabel='DateTime', ylabel='Value', title='', out_file_
         plt.savefig('%s/plots/plot_%s.svg' % (parent_dir_path, now))
 
 
-def scatter_plot(dataset, xlabel='DateTime', ylabel='Value', title='Plot',
+def scatter_plot(dataset, xlabel='', ylabel='', title='',
                  point_size=10):
     plt.scatter(dataset.index, dataset, s=point_size)
     plt.xlabel(xlabel)
