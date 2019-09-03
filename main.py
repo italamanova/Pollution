@@ -23,7 +23,7 @@ from lstm.lstm_rolling_window import exp_lstm
 
 # path = '%s/data/every_station_data' % Path(__file__).parent
 # path_to_file = '%s/Centar_PM10.csv' % path
-
+from myarima.arima import my_auto_arima
 
 path = '%s/old/data' % Path(__file__).parent
 path_to_file = '%s/pollution2.csv' % path
@@ -51,7 +51,7 @@ analyze(path_to_file_prepared)
 # print('\n ES')
 # exponential_smoothing_from_file(path_to_file_prepared)
 # print('\n ARIMA')
-# my_auto_arima(path_to_file, 5)
+# my_auto_arima(path_to_file_prepared, 24)
 # print('\n LSTM')
 # my_lstm(path_to_file)
 

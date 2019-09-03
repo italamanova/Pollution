@@ -100,23 +100,23 @@ def analyze(file):
     degree = 1
 
     # simple_plot(df)
-    df = df.iloc[24*365:24*365+24*5]
-    # df = df.loc['2015-02-01 00:00:00':'2015-07-01 00:00:00']
+    # df = df.iloc[24*(365+21):24*(365+21)+24*7]
+    # df = df.loc['2014-06-21 00:00:00':'2017-06-28 00:00:00']
     # simple_plot(df)
-    # plot_distribution(df, col_name)
+    plot_distribution(df,df.columns[0])
     # df = get_resampled(df, period_name)
 
     # scatter_lag_plot(df, 24)
-    # describe_data(df)
+    describe_data(df)
     # my_autocorrelation_plot(df)
     # fourier(df[col_name], df.index, 24)
 
     # check_polyfit(df, degree)
 
-    check_adfuller(df)
-    check_kpss(df)
+    # check_adfuller(df)
+    # check_kpss(df)
     # simple_plot(df)
-    plot_to_file(df, out_file_name='cut_time_series')
+    # plot_to_file(df, title='Non-stationary', out_file_name='PM25_cut_21')
     # check_seasonal_decomposition(df)
     # plot_autocorrelation(df)
 

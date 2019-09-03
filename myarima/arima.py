@@ -69,15 +69,16 @@ def predict_auto_arima(train, test, lambda_,
 
 
 @timeit
-def my_auto_arima(file, test_size, start_p, max_p, start_q, max_q, max_d,
-                  start_P, max_P, start_Q, max_Q, max_D,
-                  m, information_criterion,
+def my_auto_arima(file, test_size, start_p=0, max_p=10, start_q=0, max_q=10, max_d=3,
+                  start_P=0, max_P=5, start_Q=0, max_Q=5, max_D=2,
+                  m=24,
                   max_order=10,
                   d=None, D=None,
                   method=None, trend='c', solver='lbfgs',
                   suppress_warnings=True, error_action='warn', trace=True,
                   stepwise=False, seasonal=True, n_jobs=1):
     df, lambda_ = get_data_with_box_cox(file)
+    df = df.iloc[24 * (365 + 14):24 * (365 + 14) + 24 *7]
 
     col_name = df.columns[0]
     train_size = len(df) - test_size
@@ -98,12 +99,14 @@ def my_auto_arima(file, test_size, start_p, max_p, start_q, max_q, max_d,
                                                                                     seasonal=seasonal, m=m,
                                                                                     max_order=max_order,
                                                                                     trace=trace,
+                                                                                    information_criterion='AIC',
                                                                                     error_action=error_action,
                                                                                     suppress_warnings=suppress_warnings,
-                                                                                    stepwise=stepwise)
+                                                                                    stepwise=True)
 
     plot_prediction(reversed_train, reversed_test, reversed_pred, title='ARIMA')
     measure_accuracy(reversed_test, reversed_pred)
+    print('ARIMA model params', model_params)
 
 
 def pure_arima(file):
