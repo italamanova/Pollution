@@ -1,0 +1,26 @@
+The study has been preformed on M3 dataset.
+
+Ways to preprocess data:
+Transforming the data - Box-Cox transformation
+Deseasonalize the data - if the strong correlation at some lag exists. Seasonal differencing. For this part the scatter plot is needed.
+Detrending the data - ordinary differencing. Cox-Stuart test
+Combination of above three
+
+Result: Seasonal adjustments provide significantly better results in both sMAPE ad MASE
+
+
+From statistical and machine learning algorithms ARIMA has the best MAPE on short term prediction.
+The main result in this article is that despite most of the studies conclude that machine learning methods outperform
+statistical methods it is not always true. In case of univariate data ES and ARIMA work much better than LSTM and also much faster.
+
+
+ML issues:
+Overfitting
+Computational complexity
+
+The one of the possible diagrams could be RMSE  to model fitting(%) and RMSE to computational complexity
+
+The most fitted data doesn't mean that the prediction will be good
+
+The characteristics of the data could be an issue about methods behavior
+
