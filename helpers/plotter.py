@@ -1,13 +1,16 @@
 import glob
 import os
 
+import pandas
 import pandas as pd
 import plotly
+from plotly import graph_objs as go
+
 from matplotlib import pyplot
 
 from helpers.visualizer import plot_to_file, simple_plot
 
-plotly.tools.set_credentials_file(username='talamash', api_key='NVqgaGN3OpMYcqXncLOw')
+plotly.tools.set_credentials_file(username='italamanova', api_key='DDLKaU0UTBTxpjmQhoaM')
 
 
 def plot_all_data(folder_path):
@@ -53,3 +56,11 @@ def plot_rolling_average(data, col_name):
 def plot_boxplot(data):
     data.boxplot()
     pyplot.show()
+
+
+def plot_heatmap(x, y, z):
+    data = [go.Heatmap(x=x, y=y, z=z, colorscale='Viridis')]
+    plotly.plotly.plot(data, filename='pandas-heatmap')
+
+
+plot_heatmap([1, 2, 3, 4, 5], [1, 2, 3, 4, 5], [1, 2, 3, 4, 5])

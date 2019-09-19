@@ -1,5 +1,6 @@
-arima
-подбор параметров p,d, q???
+JSON
 
-arima and es horizon, accuracy, time,
+72
+0,1,2 - steps
+avg rmse
 
