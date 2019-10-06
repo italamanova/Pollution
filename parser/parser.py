@@ -6,6 +6,8 @@ from os.path import isfile, isdir, join
 import json
 from pathlib import Path
 
+from helpers.plotter import plot_heatmap
+
 parent_dir_path = Path(__file__).parents[1]
 
 
@@ -81,33 +83,25 @@ def get_inner_folders(path):
 
 def check_files(folder_path):
     inner_folders = get_inner_folders(folder_path)
-    rolling_steps = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
-    for step in rolling_steps:
+    _steps = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+    _result_trains = []
+    _result_accuracy = []
+    for step in _steps:
         accuracy = []
         train_windows = []
         for folder in inner_folders:
             acc_, train_window_, time_ = calcavg(folder, step)
             accuracy.append(acc_)
             train_windows.append(train_window_)
+        _result_trains = train_windows.copy()
+        _result_accuracy.append(accuracy)
         print('STEP', step)
-        print('TRAIN', train_windows)
-        print('ACCURACY', accuracy)
+        print('TRAIN', _result_trains)
+        print('ACC', _result_accuracy)
+    return _steps, _result_trains, _result_accuracy
 
 
 _folder_path = '%s/results/_arima' % (parent_dir_path)
-print(_folder_path)
-check_files(_folder_path)
-
-# def parse_json(json_data):
-#     data = json.loads(json_data)
-#     train = data['train']
-#     for obj in json_data['results']:
-#         pass
-#
-#
-#
-#
-# def check_files(folder):
-#     for filename in os.listdir(folder):
-#         with open(filename) as json_file:
-#             pass
+# print(_folder_path)
+steps, result_trains, result_accuracy = check_files(_folder_path)
+plot_heatmap(x=steps, y=result_accuracy, z=result_trains)

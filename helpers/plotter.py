@@ -1,6 +1,7 @@
 import glob
 import os
 
+import chart_studio
 import pandas
 import pandas as pd
 import plotly
@@ -10,7 +11,7 @@ from matplotlib import pyplot
 
 from helpers.visualizer import plot_to_file, simple_plot
 
-plotly.tools.set_credentials_file(username='italamanova', api_key='DDLKaU0UTBTxpjmQhoaM')
+chart_studio.tools.set_credentials_file(username='italamanova', api_key='aCzH4J9rwXrrjrvAPNGO')
 
 
 def plot_all_data(folder_path):
@@ -60,7 +61,4 @@ def plot_boxplot(data):
 
 def plot_heatmap(x, y, z):
     data = [go.Heatmap(x=x, y=y, z=z, colorscale='Viridis')]
-    plotly.plotly.plot(data, filename='pandas-heatmap')
-
-
-plot_heatmap([1, 2, 3, 4, 5], [1, 2, 3, 4, 5], [1, 2, 3, 4, 5])
+    chart_studio.plotly.plot(data, filename='pandas-heatmap')

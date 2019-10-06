@@ -1,5 +1,6 @@
 pandas
 plotly
+chart_studio
 matplotlib
 statsmodels
 scipy==1.2
