@@ -92,16 +92,17 @@ def check_files(folder_path):
         for folder in inner_folders:
             acc_, train_window_, time_ = calcavg(folder, step)
             accuracy.append(acc_)
-            train_windows.append(train_window_)
+            train_windows.append('koko %s' %train_window_)
         _result_trains = train_windows.copy()
         _result_accuracy.append(accuracy)
-        print('STEP', step)
-        print('TRAIN', _result_trains)
-        print('ACC', _result_accuracy)
+
     return _steps, _result_trains, _result_accuracy
 
 
 _folder_path = '%s/results/_arima' % (parent_dir_path)
 # print(_folder_path)
 steps, result_trains, result_accuracy = check_files(_folder_path)
-plot_heatmap(x=steps, y=result_accuracy, z=result_trains)
+print('STEPS', steps)
+print('TRAIN', result_trains)
+print('ACC', result_accuracy)
+plot_heatmap(x=result_trains, y=steps, z=result_accuracy)
