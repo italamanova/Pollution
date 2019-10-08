@@ -11,6 +11,22 @@ from helpers.plotter import plot_heatmap
 parent_dir_path = Path(__file__).parents[1]
 
 
+def folders_sorting(folder_name):
+    split_folder_name = folder_name.split('/')
+    train_length = int(split_folder_name[-1])
+    return train_length
+
+
+def get_inner_folders(path):
+    folders = []
+    for root, directory, files in os.walk(path):
+        for folder in directory:
+            folders.append(os.path.join(root, folder))
+
+    sorted_folders = sorted(folders, key=folders_sorting)
+    return sorted_folders
+
+
 def eachsavg(eachs, steps):
     next = eachs[0: steps + 1]
     avg = sum(next) / len(next)
@@ -39,14 +55,15 @@ def calcavg(path, steps):
     acc3 = []
     time3 = []
     train_window = 0
-    ################### start files in dir
+    '''start files in dir'''
+
     for i in range(0, len(files)):
         # print(files[i])
         # one file
         acc2 = []
         time2 = []
         fullname = '%s/%s' % (path, files[i])
-        #################### start file
+        '''start file'''
         with open(fullname) as json_file:
             data = json.load(json_file)
             tw = int(data.get('train_window'))
@@ -59,7 +76,7 @@ def calcavg(path, steps):
             avgacc1 = round(sum(acc1) / len(acc1), 3)
             acc2.append(avgacc1)
             time2.append(avgtime1)
-        #################### end file
+        ''''''''''end file'''''''''''''''''
         if len(acc2) > 0:
             avgtime2 = round(sum(time2) / len(time2), 3)
             avgacc2 = round(sum(acc2) / len(acc2), 3)
@@ -73,14 +90,6 @@ def calcavg(path, steps):
     return avgacc3, train_window, avgtime3
 
 
-def get_inner_folders(path):
-    folders = []
-    for root, directory, files in os.walk(path):
-        for folder in directory:
-            folders.append(os.path.join(root, folder))
-    return folders
-
-
 def check_files(folder_path):
     inner_folders = get_inner_folders(folder_path)
     _steps = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
@@ -92,10 +101,7 @@ def check_files(folder_path):
         for folder in inner_folders:
             acc_, train_window_, time_ = calcavg(folder, step)
             accuracy.append(acc_)
-            train_windows.append('koko %s' %train_window_)
-            print('STEP', step)
-            print('TRAIN', train_window_)
-            print('ACC', accuracy)
+            train_windows.append('%s h' % train_window_)
         _result_trains = train_windows.copy()
         _result_accuracy.append(accuracy)
 
@@ -105,7 +111,8 @@ def check_files(folder_path):
 _folder_path = '%s/results/_es' % (parent_dir_path)
 # print(_folder_path)
 steps, result_trains, result_accuracy = check_files(_folder_path)
-# print('STEPS', steps)
-# print('TRAIN', result_trains)
-# print('ACC', result_accuracy)
+
+print('STEPS', steps)
+print('TRAIN', result_trains)
+print('ACC', result_accuracy)
 plot_heatmap(x=result_trains, y=steps, z=result_accuracy)
