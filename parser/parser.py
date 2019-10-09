@@ -108,11 +108,11 @@ def check_files(folder_path):
     return _steps, _result_trains, _result_accuracy
 
 
-_folder_path = '%s/results/_es' % (parent_dir_path)
+_folder_path = '%s/results/_arima' % (parent_dir_path)
 # print(_folder_path)
 steps, result_trains, result_accuracy = check_files(_folder_path)
 
 print('STEPS', steps)
 print('TRAIN', result_trains)
 print('ACC', result_accuracy)
-plot_heatmap(x=result_trains, y=steps, z=result_accuracy)
+plot_heatmap(x=result_trains, y=steps, z=result_accuracy, xaxis_name='Train periods', yaxis_name='Horizons')
