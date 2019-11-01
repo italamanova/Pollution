@@ -1,0 +1,52 @@
+['_simple/sout6_12/22', '_simple/sout6_12/19', '_simple/sout6_12/13', '_simple/sout6_12/7', '_simple/sout6_12/18', '_simple/sout6_12/5', '_simple/sout6_12/17', '_simple/sout6_12/6', '_simple/sout6_12/3', '_simple/sout6_12/24', '_simple/sout6_12/14', '_simple/sout6_12/1', '_simple/sout6_12/2', '_simple/sout6_12/23', '_simple/sout6_12/4', '_simple/sout6_12/20', '_simple/sout6_12/8', '_simple/sout6_12/16', '_simple/sout6_12/10', '_simple/sout6_12/9', '_simple/sout6_12/15', '_simple/sout6_12/11', '_simple/sout6_12/21', '_simple/sout6_12/12']
+pathes= ['_simple/sout6_12/22', '_simple/sout6_12/19', '_simple/sout6_12/13', '_simple/sout6_12/7', '_simple/sout6_12/18', '_simple/sout6_12/5', '_simple/sout6_12/17', '_simple/sout6_12/6', '_simple/sout6_12/3', '_simple/sout6_12/24', '_simple/sout6_12/14', '_simple/sout6_12/1', '_simple/sout6_12/2', '_simple/sout6_12/23', '_simple/sout6_12/4', '_simple/sout6_12/20', '_simple/sout6_12/8', '_simple/sout6_12/16', '_simple/sout6_12/10', '_simple/sout6_12/9', '_simple/sout6_12/15', '_simple/sout6_12/11', '_simple/sout6_12/21', '_simple/sout6_12/12']
+>_simple/sout6_12/22:train_start=2015-04-27 16:00:00, avgrmse=12.936000, avgtime=1078.399000, itis=n_steps_out=22,
+>======================================================
+>_simple/sout6_12/19:train_start=2015-04-27 16:00:00, avgrmse=12.027000, avgtime=977.915000, itis=n_steps_out=19,
+>======================================================
+>_simple/sout6_12/13:train_start=2015-04-27 16:00:00, avgrmse=10.444000, avgtime=1258.375000, itis=n_steps_out=13,
+>======================================================
+>_simple/sout6_12/7:train_start=2015-04-27 16:00:00, avgrmse=8.240000, avgtime=1303.889000, itis=n_steps_out=7,
+>======================================================
+>_simple/sout6_12/18:train_start=2015-04-27 16:00:00, avgrmse=13.409000, avgtime=1155.577000, itis=n_steps_out=18,
+>======================================================
+>_simple/sout6_12/5:train_start=2015-04-27 16:00:00, avgrmse=7.070000, avgtime=1101.652000, itis=n_steps_out=5,
+>======================================================
+>_simple/sout6_12/17:train_start=2015-04-27 16:00:00, avgrmse=11.881000, avgtime=1213.673000, itis=n_steps_out=17,
+>======================================================
+>_simple/sout6_12/6:train_start=2015-04-27 16:00:00, avgrmse=7.314000, avgtime=967.065000, itis=n_steps_out=6,
+>======================================================
+>_simple/sout6_12/3:train_start=2015-04-27 16:00:00, avgrmse=5.351000, avgtime=1140.425000, itis=n_steps_out=3,
+>======================================================
+>_simple/sout6_12/24:train_start=2015-04-27 16:00:00, avgrmse=14.692000, avgtime=1117.898000, itis=n_steps_out=24,
+>======================================================
+>_simple/sout6_12/14:train_start=2015-04-27 16:00:00, avgrmse=11.061000, avgtime=1195.122000, itis=n_steps_out=14,
+>======================================================
+>_simple/sout6_12/1:train_start=2015-04-27 16:00:00, avgrmse=3.265000, avgtime=1282.466000, itis=n_steps_out=1,
+>======================================================
+>_simple/sout6_12/2:train_start=2015-04-27 16:00:00, avgrmse=4.470000, avgtime=953.403000, itis=n_steps_out=2,
+>======================================================
+>_simple/sout6_12/23:train_start=2015-04-27 16:00:00, avgrmse=11.749000, avgtime=1003.031000, itis=n_steps_out=23,
+>======================================================
+>_simple/sout6_12/4:train_start=2015-04-27 16:00:00, avgrmse=6.178000, avgtime=1185.932000, itis=n_steps_out=4,
+>======================================================
+>_simple/sout6_12/20:train_start=2015-04-27 16:00:00, avgrmse=12.556000, avgtime=966.468000, itis=n_steps_out=20,
+>======================================================
+>_simple/sout6_12/8:train_start=2015-04-27 16:00:00, avgrmse=8.989000, avgtime=1256.979000, itis=n_steps_out=8,
+>======================================================
+>_simple/sout6_12/16:train_start=2015-04-27 16:00:00, avgrmse=11.299000, avgtime=1107.049000, itis=n_steps_out=16,
+>======================================================
+>_simple/sout6_12/10:train_start=2015-04-27 16:00:00, avgrmse=9.146000, avgtime=1055.007000, itis=n_steps_out=10,
+>======================================================
+>_simple/sout6_12/9:train_start=2015-04-27 16:00:00, avgrmse=9.068000, avgtime=1111.178000, itis=n_steps_out=9,
+>======================================================
+>_simple/sout6_12/15:train_start=2015-04-27 16:00:00, avgrmse=10.714000, avgtime=936.590000, itis=n_steps_out=15,
+>======================================================
+>_simple/sout6_12/11:train_start=2015-04-27 16:00:00, avgrmse=9.672000, avgtime=1354.314000, itis=n_steps_out=11,
+>======================================================
+>_simple/sout6_12/21:train_start=2015-04-27 16:00:00, avgrmse=12.717000, avgtime=1199.055000, itis=n_steps_out=21,
+>======================================================
+>_simple/sout6_12/12:train_start=2015-04-27 16:00:00, avgrmse=10.415000, avgtime=1081.125000, itis=n_steps_out=12,
+>======================================================
+callall:best_train_start=2015-04-27 16:00:00, minrmse=3.265000, fit=1282.466000, asis=n_steps_out=1,
+result:train_start=2015-04-27 16:00:00, avgrmse=3.265000, avgtime=1282.466000, itis=n_steps_out=1,

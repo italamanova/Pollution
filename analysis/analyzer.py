@@ -93,21 +93,25 @@ def plot_distribution(data, col_name):
 
 
 def analyze(file):
-    # df = get_data(file)
-    df, lambda_ = get_data_with_box_cox(file)
+    df = get_data(file)
+    # df, lambda_ = get_data_with_box_cox(file)
     # col_name = df.columns[0]
     period_name = 'M'
     degree = 1
 
     # simple_plot(df)
     # df = df.iloc[24*(365+21):24*(365+21)+24*7]
-    # df = df.loc['2014-06-21 00:00:00':'2017-06-28 00:00:00']
+
+    # ADF table data
+    # df = df.loc['2014-07-24 00:00:00':'2014-07-30 00:00:00']
+    df = df.loc['2014-07-31 00:00:00':'2014-08-06 00:00:00']
+
     # simple_plot(df)
-    plot_distribution(df,df.columns[0])
+    # plot_distribution(df,df.columns[0])
     # df = get_resampled(df, period_name)
 
     # scatter_lag_plot(df, 24)
-    describe_data(df)
+    # describe_data(df)
     # my_autocorrelation_plot(df)
     # fourier(df[col_name], df.index, 24)
 
@@ -117,7 +121,7 @@ def analyze(file):
     # check_kpss(df)
     # simple_plot(df)
     # plot_to_file(df, title='Non-stationary', out_file_name='PM25_cut_21')
-    # check_seasonal_decomposition(df)
+    check_seasonal_decomposition(df)
     # plot_autocorrelation(df)
 
 

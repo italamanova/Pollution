@@ -59,11 +59,12 @@ def plot_boxplot(data):
     pyplot.show()
 
 
-def plot_heatmap(x, y, z, xaxis_name, yaxis_name):
+def plot_heatmap(filename, x, y, z, xaxis_name, yaxis_name):
     trace = [go.Heatmap(x=x, y=y, z=z, colorscale='Viridis')]
     data = {
         'data': trace,
         'layout': go.Layout(width=1200, height=900,
                             xaxis={'title': xaxis_name}, yaxis={'title': yaxis_name})
+
     }
-    chart_studio.plotly.plot(data, filename='pandas-heatmap')
+    chart_studio.plotly.plot(data, filename=filename)
