@@ -2,27 +2,25 @@
 from os import listdir
 from os.path import isfile, isdir, join, exists
 import json
+from pathlib import Path
+
+parent_dir_path = Path(__file__).parents[1]
 
 
 def calcavg(path, params):
     files = [f for f in listdir(path) if isfile(join(path, f))]
-    # print(files)
     ar = []
     ti = []
     train_start = ''
     for i in range(0, len(files)):
-        # print(files[i])
         fullname = '%s/%s' % (path, files[i])
-        # print(fullname)
         with open(fullname) as json_file:
             data = json.load(json_file)
             tw = data.get('train_start')
             if i < 1:
                 train_start = tw
-            # print(tw)
             results = data.get('results')
             rmses = []
-            # times = []
             times = data.get('time')
             model = data.get('model')
             itis = ''
@@ -94,18 +92,20 @@ def finddirs(path):
     return alldirs
 
 
-# params = ['epochs', 'patience_coef']
+params = ['epochs', 'patience_coef']
 # params = ['dropout', 'recurrent_dropout']
 # params = ['validation_size']
 # params = ['n_steps_in']
 # params = ['batch_size', 'is_stateful']
 # params = ['units_coef']
-params = ['train_window']
-path = ['_simple/twless']
-dirs1 = finddirs(path)
+# params = ['train_window']
+_folder_path = '%s/results/_simple/ep' % (parent_dir_path)
+dirs1 = finddirs([_folder_path])
 print(dirs1)
 avgrmse, train_start, avgtime, itis = calcall(dirs1, params)
 # dirs2 = finddirs(dirs1)
 # print(dirs2)
 # avgrmse, train_start, avgtime, itis = calcall(dirs2, params)
 # print('result:train_start=%s, avgrmse=%f, avgtime=%f, itis=%s' % (train_start, avgrmse, avgtime, itis))
+
+# def parseLSTM():
