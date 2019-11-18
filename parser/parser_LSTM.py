@@ -5,11 +5,21 @@ import json
 
 
 def calcavg(path, params):
-    files = [f for f in listdir(path) if isfile(join(path, f))]
-    # print(files)
     ar = []
     ti = []
     train_start = ''
+
+    files = []
+    for first_layer_folder in listdir(path):
+        first_current_folder = join(path, first_layer_folder)
+        for second_layer_folder in first_current_folder:
+            second_current_folder = join(first_current_folder, second_layer_folder)
+            for file in second_current_folder:
+                file_path = join(second_current_folder, file)
+                if isfile(file_path):
+                    files.append(file_path)
+    print('files ', files)
+
     for i in range(0, len(files)):
         # print(files[i])
         fullname = '%s/%s' % (path, files[i])
