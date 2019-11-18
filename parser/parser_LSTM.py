@@ -8,34 +8,22 @@ parent_dir_path = Path(__file__).parents[1]
 
 
 def calcavg(path, params):
+    print(listdir(path))
+    files = [f for f in listdir(path) if isfile(join(path, f))]
+
     ar = []
     ti = []
     train_start = ''
 
-    files = []
-    for first_layer_folder in listdir(path):
-        first_current_folder = join(path, first_layer_folder)
-        for second_layer_folder in first_current_folder:
-            second_current_folder = join(first_current_folder, second_layer_folder)
-            for file in second_current_folder:
-                file_path = join(second_current_folder, file)
-                if isfile(file_path):
-                    files.append(file_path)
-    print('files ', files)
-
     for i in range(0, len(files)):
-        # print(files[i])
         fullname = '%s/%s' % (path, files[i])
-        # print(fullname)
         with open(fullname) as json_file:
             data = json.load(json_file)
             tw = data.get('train_start')
             if i < 1:
                 train_start = tw
-            # print(tw)
             results = data.get('results')
             rmses = []
-            # times = []
             times = data.get('time')
             model = data.get('model')
             itis = ''
@@ -45,26 +33,15 @@ def calcavg(path, params):
                 itis += param + '=' + str(pv) + ','
             for obj in results:
                 accuracy = obj.get('accuracy')
-                # time = obj.get('time')
                 rmse = float(accuracy.get('rmse'))
-                # print('time=%f' % time)
-                # times.append(time)
-                # print(rmse)
                 rmses.append(rmse)
-            # eacc = obj.get('each_sample_accuracy')
-            # print(eacc)
-            # print('detail:tw=%s, rmse=%f,times=%f' % (tw, rmse, times))
-        # alltimes = round(sum(times)/len(times), 3)
         allrmse = round(sum(rmses) / len(rmses), 3)
 
-        # print('allrmse=%d' % allrmse)
         ar.append(allrmse)
         ti.append(times)
         print('=%s:tw=%s, allrmse=%f, times=%f' % (fullname, tw, allrmse, times))
-    # print(ar)
     avgrmse = round(sum(ar) / len(ar), 3)
     avgtime = round(sum(ti) / len(ti), 3)
-    # print('train_window=%d, avgrmse=%f' % (train_window, avgrmse))
     print('calcavg:avgrmse=%f, train_start=%s, avgtime=%f, itis=%s' % (avgrmse, train_start, avgtime, itis))
     return avgrmse, train_start, avgtime, itis
 
@@ -77,13 +54,15 @@ def calcall(pathes, params):
     its = []
 
     for path in pathes:
-        avgrmse, train_start, avgtime, itis = calcavg(path, params)
-        print('>%s:train_start=%s, avgrmse=%f, avgtime=%f, itis=%s' % (path, train_start, avgrmse, avgtime, itis))
-        print('>======================================================')
-        avgrmses.append(avgrmse)
-        train_starts.append(train_start)
-        fits.append(avgtime)
-        its.append(itis)
+        for inner_dir in find_folders(path):
+            inner_dir_path = join(path, inner_dir)
+            avgrmse, train_start, avgtime, itis = calcavg(inner_dir_path, params)
+            print('>%s:train_start=%s, avgrmse=%f, avgtime=%f, itis=%s' % (inner_dir_path, train_start, avgrmse, avgtime, itis))
+            print('>======================================================')
+            avgrmses.append(avgrmse)
+            train_starts.append(train_start)
+            fits.append(avgtime)
+            its.append(itis)
     minrmse = min(avgrmses)
     j = 0
     for j in range(0, len(avgrmses)):
@@ -95,16 +74,13 @@ def calcall(pathes, params):
     print('callall:best_train_start=%s, minrmse=%f, fit=%f, asis=%s' % (best_train_start, minrmse, fit, asis))
     return minrmse, best_train_start, fit, asis
 
-
-# pathes = ['./_lstm/0', './_lstm/1000']#	, './_lstm/2000'	, './_lstm/3000'	, './_lstm/4000'	, './_lstm/5000'	, './_lstm/6000'	, './_lstm/7000'	, './_lstm/8000'
-
-def finddirs(path):
+def find_folders(path):
     alldirs = []
-    for k in range(0, len(path)):
-        dirs = [f for f in listdir(path[k]) if isdir(join(path[k], f))]
-        for n in range(0, len(dirs)):
-            alldirs.append(path[k] + '/' + dirs[n])
+    dirs = [f for f in listdir(path) if isdir(join(path, f))]
+    for n in range(0, len(dirs)):
+        alldirs.append(path + '/' + dirs[n])
     return alldirs
+
 
 
 params = ['epochs', 'patience_coef']
@@ -115,12 +91,10 @@ params = ['epochs', 'patience_coef']
 # params = ['units_coef']
 # params = ['train_window']
 _folder_path = '%s/results/_simple/ep' % (parent_dir_path)
-dirs1 = finddirs([_folder_path])
-print(dirs1)
-avgrmse, train_start, avgtime, itis = calcall(dirs1, params)
+# dirs = finddirs([_folder_path])
+dirs = [join(_folder_path, f) for f in find_folders(_folder_path)]
+avgrmse, train_start, avgtime, itis = calcall(dirs, params)
 # dirs2 = finddirs(dirs1)
 # print(dirs2)
 # avgrmse, train_start, avgtime, itis = calcall(dirs2, params)
 # print('result:train_start=%s, avgrmse=%f, avgtime=%f, itis=%s' % (train_start, avgrmse, avgtime, itis))
-
-# def parseLSTM():

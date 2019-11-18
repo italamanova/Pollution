@@ -51,7 +51,7 @@ analyze(path_to_file_prepared)
 # print('\n ES')
 # exponential_smoothing_from_file(path_to_file_prepared)
 # print('\n ARIMA')
-# my_auto_arima(path_to_file_prepared, 24)
+my_auto_arima(path_to_file_prepared, 24)
 # print('\n LSTM')
 # my_lstm(path_to_file)
 
