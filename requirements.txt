@@ -3,7 +3,7 @@ plotly
 chart_studio
 matplotlib
 statsmodels
-scipy==1.2
+scipy==1.10.0
 sklearn
 tqdm
 seaborn
